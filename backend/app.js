@@ -6,6 +6,9 @@ const allusers = require("./api/allusers");
 const allschools = require("./api/web/allschools");
 const validate = require("./api/web/validate");
 const check = require("./api/web/check");
+const newschool = require("./api/web/newschool");
+const adduserapp = require("./api/web/adduserapp");
+const addoperator = require("./api/web/addoperator");
 /* end of ROUTES and how to import routes */
 
 const app = express();
@@ -35,6 +38,9 @@ app.use(baseurl + "/allusers", allusers);
 app.use(baseurl + "/web/allschools", allschools);
 app.use(baseurl + "/web/validate", validate);
 app.use(baseurl + "/web/check", check);
+app.use(baseurl + "/web/adduserapp", adduserapp);
+app.use(baseurl + "/web/addoperator", addoperator);
+app.use(baseurl + "/web/newschool", newschool);
 // /*End of routes used by our project */
 
 // In case of an endpoint does not exist

@@ -6,7 +6,7 @@ GRANT ALL PRIVILEGES ON libraries.* TO 'softenguser'@'localhost';
 USE libraries;
 
 CREATE TABLE school(
-    school_id integer(10) NOT NULL,
+    school_id integer(10) NOT NULL auto_increment,
     school_name varchar(50) NOT NULL,
     address varchar(255) NOT NULL,
     city varchar(30) NOT NULL,
