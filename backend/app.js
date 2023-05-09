@@ -7,14 +7,17 @@ const allschools = require("./api/web/allschools");
 const validate = require("./api/web/validate");
 const check = require("./api/web/check");
 const adduserapp = require("./api/web/adduserapp");
+const changeuser = require("./api/web/changeuser");
 const approveuser = require("./api/web/approveuser");
 const addoperator = require("./api/web/addoperator");
 const approvedops = require("./api/web/approvedops");
 const notapprovedops = require("./api/web/notapprovedops");
+const opschool = require("./api/web/opschool");
 const addprofessor = require("./api/web/addprofessor");
 const addstudent = require("./api/web/addstudent");
 const userinfo = require("./api/web/userinfo");
 const newschool = require("./api/web/newschool");
+const changeschool = require("./api/web/changeschool");
 const schlinfo = require("./api/web/schlinfo");
 /* end of ROUTES and how to import routes */
 
@@ -47,13 +50,16 @@ app.use(baseurl + "/web/validate", validate);
 app.use(baseurl + "/web/check", check);
 app.use(baseurl + "/web/adduserapp", adduserapp);
 app.use(baseurl + "/web/approveuser", approveuser);
+app.use(baseurl + "/web/changeuser", changeuser);
 app.use(baseurl + "/web/addoperator", addoperator);
 app.use(baseurl + "/web/approvedops", approvedops);
 app.use(baseurl + "/web/notapprovedops", notapprovedops);
+app.use(baseurl + "/web/opschool", opschool);
 app.use(baseurl + "/web/addprofessor", addprofessor);
 app.use(baseurl + "/web/addstudent", addstudent);
 app.use(baseurl + "/web/userinfo", userinfo);
 app.use(baseurl + "/web/newschool", newschool);
+app.use(baseurl + "/web/changeschool", changeschool);
 app.use(baseurl + "/web/schlinfo", schlinfo);
 // /*End of routes used by our project */
 
