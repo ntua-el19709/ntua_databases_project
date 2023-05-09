@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const allusers = require("./api/allusers");
 const allschools = require("./api/web/allschools");
 const validate = require("./api/web/validate");
+const check = require("./api/web/check");
 /* end of ROUTES and how to import routes */
 
 const app = express();
@@ -33,6 +34,7 @@ const baseurl = "/libraries";
 app.use(baseurl + "/allusers", allusers);
 app.use(baseurl + "/web/allschools", allschools);
 app.use(baseurl + "/web/validate", validate);
+app.use(baseurl + "/web/check", check);
 // /*End of routes used by our project */
 
 // In case of an endpoint does not exist

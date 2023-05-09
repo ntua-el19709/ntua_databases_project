@@ -66,7 +66,7 @@ CREATE TABLE book_category(
 );
 
 CREATE TABLE users(
-	user_id integer(10) NOT NULL,
+	user_id integer(10) NOT NULL auto_increment,
     username varchar(30) NOT NULL,
     passwrd varchar(30) NOT NULL,
     user_fullname varchar(30) NOT NULL,
@@ -153,5 +153,5 @@ CREATE TABLE review(
 	PRIMARY KEY (review_id)
 );
 
-insert into users values (0,'topoperator','password','TOP OPERATOR',DATE '2000-01-01',1);
-insert into top_operator values (0);
+insert into users (username,passwrd,user_fullname,date_of_birth,approved) values ('topoperator','password','TOP OPERATOR',DATE '2000-01-01',1);
+insert into top_operator values ((select user_id from users where username = 'topoperator'));
