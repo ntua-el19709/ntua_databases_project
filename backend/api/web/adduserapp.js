@@ -16,7 +16,7 @@ router.get("/:username/:password/:fullname/:dob", async (req, res) => {
           req.params.password,
           req.params.fullname,
           req.params.dob,
-          0,
+          false,
         ]
       );
     }

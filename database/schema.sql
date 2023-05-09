@@ -71,7 +71,7 @@ CREATE TABLE users(
     passwrd varchar(30) NOT NULL,
     user_fullname varchar(30) NOT NULL,
     date_of_birth date NOT NULL,
-    approved bit NOT NULL,
+    approved boolean NOT NULL,
     PRIMARY KEY (user_id)
 );
 
@@ -153,5 +153,5 @@ CREATE TABLE review(
 	PRIMARY KEY (review_id)
 );
 
-insert into users (username,passwrd,user_fullname,date_of_birth,approved) values ('topoperator','password','TOP OPERATOR',DATE '2000-01-01',1);
+insert into users (username,passwrd,user_fullname,date_of_birth,approved) values ('topoperator','password','TOP OPERATOR',DATE '2000-01-01',true);
 insert into top_operator values ((select user_id from users where username = 'topoperator'));

@@ -9,6 +9,9 @@ const check = require("./api/web/check");
 const newschool = require("./api/web/newschool");
 const adduserapp = require("./api/web/adduserapp");
 const addoperator = require("./api/web/addoperator");
+const addprofessor = require("./api/web/addprofessor");
+const addstudent = require("./api/web/addstudent");
+const userinfo = require("./api/web/userinfo");
 /* end of ROUTES and how to import routes */
 
 const app = express();
@@ -40,6 +43,9 @@ app.use(baseurl + "/web/validate", validate);
 app.use(baseurl + "/web/check", check);
 app.use(baseurl + "/web/adduserapp", adduserapp);
 app.use(baseurl + "/web/addoperator", addoperator);
+app.use(baseurl + "/web/addprofessor", addprofessor);
+app.use(baseurl + "/web/addstudent", addstudent);
+app.use(baseurl + "/web/userinfo", userinfo);
 app.use(baseurl + "/web/newschool", newschool);
 // /*End of routes used by our project */
 
