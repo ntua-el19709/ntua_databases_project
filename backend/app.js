@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 
 /* ROUTES and how to import routes */
 const allusers = require("./api/allusers");
+const allschools = require("./api/web/allschools");
 /* end of ROUTES and how to import routes */
 
 const app = express();
@@ -29,6 +30,7 @@ app.use((req, res, next) => {
 const baseurl = "/libraries";
 
 app.use(baseurl + "/allusers", allusers);
+app.use(baseurl + "/web/allschools", allschools);
 // /*End of routes used by our project */
 
 // In case of an endpoint does not exist
