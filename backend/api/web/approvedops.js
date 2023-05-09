@@ -3,27 +3,28 @@ const apiutils = require("../../apiutils");
 const Parser = require("@json2csv/plainjs").Parser;
 const router = express.Router();
 
-router.get("/:username", async (req, res) => {
+router.get("/", async (req, res) => {
   await apiutils.requestWrapper(
     true,
     req,
     res,
-    "Successful retrieval of user!",
+    "Successful retrieval of approved operators!",
     async (conn) => {
       const results = await conn.query(
-        `SELECT * FROM users
-            WHERE users.username = ?`,
-        [req.params.username]
+        `SELECT * FROM users,operator
+            WHERE users.user_id = operator.user_id AND users.approved=true`
       );
 
       let json_q = {
-        userID: results[0].user_id,
-        username: req.params.username,
-        password: results[0].passwrd,
-        fullname: results[0].user_fullname,
-        dob: results[0].date_of_birth,
-        approved: results[0].approved,
+        approvedOperators: [],
       };
+
+      for (elem of results) {
+        json_q.approvedOperators.push({
+          userID: elem.user_id,
+          username: elem.username,
+        });
+      }
 
       if (req.query.format == "csv") {
         return new Parser().parse(json_q);
