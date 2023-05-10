@@ -49,7 +49,7 @@ CREATE TABLE book_author(
 );
 
 CREATE TABLE category(
-	category_id integer(10) NOT NULL,
+	category_id integer(10) NOT NULL auto_increment,
     category_name varchar(30) NOT NULL,
     PRIMARY KEY (category_id)
 );
