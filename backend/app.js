@@ -20,6 +20,12 @@ const userinfo = require("./api/web/userinfo");
 const newschool = require("./api/web/newschool");
 const changeschool = require("./api/web/changeschool");
 const schlinfo = require("./api/web/schlinfo");
+const addauthor = require("./api/web/addauthor");
+const addauthorofbook = require("./api/web/addauthorofbook");
+const newbook = require("./api/web/newbook");
+const allbooks = require("./api/web/allbooks");
+const bookinfo = require("./api/web/bookinfo");
+//const { controleer } = require("./api/web/skotinos_arxontas");
 /* end of ROUTES and how to import routes */
 
 const app = express();
@@ -44,7 +50,7 @@ app.use((req, res, next) => {
 
 // /* Routes used by our project */
 const baseurl = "/libraries";
-
+//app.route(`${baseurl}/demo`).get(controleer);
 app.use(baseurl + "/allusers", allusers);
 app.use(baseurl + "/web/allschools", allschools);
 app.use(baseurl + "/web/validate", validate);
@@ -63,6 +69,11 @@ app.use(baseurl + "/web/userinfo", userinfo);
 app.use(baseurl + "/web/newschool", newschool);
 app.use(baseurl + "/web/changeschool", changeschool);
 app.use(baseurl + "/web/schlinfo", schlinfo);
+app.use(baseurl + "/web/addauthor", addauthor);
+app.use(baseurl + "/web/addauthorofbook", addauthorofbook);
+app.use(baseurl + "/web/newbook", newbook);
+app.use(baseurl + "/web/allbooks", allbooks);
+app.use(baseurl + "/web/bookinfo", bookinfo);
 // /*End of routes used by our project */
 
 // In case of an endpoint does not exist

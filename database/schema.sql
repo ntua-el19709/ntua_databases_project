@@ -32,7 +32,7 @@ CREATE TABLE book(
 );
 
 CREATE TABLE author(
-	author_id integer(10) NOT NULL,
+	author_id integer(10) NOT NULL auto_increment,
     author_fullname varchar(30) NOT NULL,
     PRIMARY KEY (author_id)
 );

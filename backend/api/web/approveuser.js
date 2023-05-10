@@ -8,8 +8,8 @@ router.post("/:username", async (req, res) => {
     req,
     res,
     "User Approved!",
-    async (conn1, conn2) => {
-      await conn1.query(
+    async (conn) => {
+      await conn.query(
         "UPDATE users SET approved=true where users.username = ?",
         [req.params.username]
       );
