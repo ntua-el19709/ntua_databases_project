@@ -2,16 +2,17 @@ const express = require("express");
 const apiutils = require("../../apiutils");
 const router = express.Router();
 
-router.post("/:username", async (req, res) => {
+router.post("/:schlid/:isbn", async (req, res) => {
   await apiutils.requestWrapper(
     false,
     req,
     res,
-    "User deleted!",
+    "Book deleted!",
     async (conn1, conn2) => {
-      await conn1.query("DELETE from users where users.username = ?", [
-        req.params.username,
-      ]);
+      await conn1.query(
+        "DELETE from book where book.school_id = ? AND book.isbn=?",
+        [req.params.schlid, req.params.isbn]
+      );
     }
   );
 });

@@ -29,6 +29,8 @@ const addcategoryofbook = require("./api/web/addcategoryofbook");
 const newbook = require("./api/web/newbook");
 const allbooks = require("./api/web/allbooks");
 const bookinfo = require("./api/web/bookinfo");
+const changebook = require("./api/web/changebook");
+const deletebook = require("./api/web/deletebook");
 //const { controleer } = require("./api/web/skotinos_arxontas");
 /* end of ROUTES and how to import routes */
 
@@ -82,6 +84,8 @@ app.use(baseurl + "/web/addcategoryofbook", addcategoryofbook);
 app.use(baseurl + "/web/newbook", newbook);
 app.use(baseurl + "/web/allbooks", allbooks);
 app.use(baseurl + "/web/bookinfo", bookinfo);
+app.use(baseurl + "/web/changebook", changebook);
+app.use(baseurl + "/web/deletebook", deletebook);
 // /*End of routes used by our project */
 
 // In case of an endpoint does not exist
