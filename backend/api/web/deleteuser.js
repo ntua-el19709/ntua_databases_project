@@ -2,9 +2,9 @@ const express = require("express");
 const apiutils = require("../../apiutils");
 const router = express.Router();
 
-router.get("/:username", async (req, res) => {
+router.post("/:username", async (req, res) => {
   await apiutils.requestWrapper(
-    true,
+    post,
     req,
     res,
     "User deleted!",

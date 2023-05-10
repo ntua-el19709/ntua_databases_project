@@ -2,11 +2,11 @@ const express = require("express");
 const apiutils = require("../../apiutils");
 const router = express.Router();
 
-router.get(
+router.post(
   "/:name/:address/:city/:telephone/:email/:principal",
   async (req, res) => {
     await apiutils.requestWrapper(
-      true,
+      false,
       req,
       res,
       "School Added!",

@@ -2,9 +2,9 @@ const express = require("express");
 const apiutils = require("../../apiutils");
 const router = express.Router();
 
-router.get("/:username/:schlunit", async (req, res) => {
+router.post("/:username/:schlunit", async (req, res) => {
   await apiutils.requestWrapper(
-    true,
+    false,
     req,
     res,
     "Student Added!",

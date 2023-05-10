@@ -2,9 +2,9 @@ const express = require("express");
 const apiutils = require("../../apiutils");
 const router = express.Router();
 
-router.get("/:username/:password/:fullname/:dob", async (req, res) => {
+router.post("/:username/:password/:fullname/:dob", async (req, res) => {
   await apiutils.requestWrapper(
-    true,
+    false,
     req,
     res,
     "Successful application!",
