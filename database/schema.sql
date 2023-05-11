@@ -113,7 +113,7 @@ CREATE TABLE student(
 );
 
 CREATE TABLE rental(
-	rental_id integer(10) NOT NULL,
+	rental_id integer(10) NOT NULL auto_increment,
     user_id integer(10) NOT NULL,
     isbn char(10) NOT NULL,
     school_id integer(10) NOT NULL,
@@ -126,7 +126,7 @@ CREATE TABLE rental(
 );
 
 CREATE TABLE reservation(
-	reservation_id integer(10) NOT NULL,
+	reservation_id integer(10) NOT NULL auto_increment,
     user_id integer(10) NOT NULL,
     isbn char(10) NOT NULL,
     school_id integer(10) NOT NULL,
@@ -139,7 +139,7 @@ CREATE TABLE reservation(
 );
 
 CREATE TABLE review(
-	review_id integer(10) NOT NULL,
+	review_id integer(10) NOT NULL auto_increment,
     user_id integer(10) NOT NULL,
     isbn char(10) NOT NULL,
     school_id integer(10) NOT NULL,
