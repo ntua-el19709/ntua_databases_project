@@ -34,6 +34,10 @@ const allbooks = require("./api/web/allbooks");
 const bookinfo = require("./api/web/bookinfo");
 const changebook = require("./api/web/changebook");
 const deletebook = require("./api/web/deletebook");
+const makereservation = require("./api/web/makereservation");
+const deletereservation = require("./api/web/deletereservation");
+const schoolreservations = require("./api/web/schoolreservations");
+const userreservations = require("./api/web/userreservations");
 //const { controleer } = require("./api/web/skotinos_arxontas");
 /* end of ROUTES and how to import routes */
 
@@ -92,6 +96,10 @@ app.use(baseurl + "/web/allbooks", allbooks);
 app.use(baseurl + "/web/bookinfo", bookinfo);
 app.use(baseurl + "/web/changebook", changebook);
 app.use(baseurl + "/web/deletebook", deletebook);
+app.use(baseurl + "/web/makereservation", makereservation);
+app.use(baseurl + "/web/deletereservation", deletereservation);
+app.use(baseurl + "/web/schoolreservations", schoolreservations);
+app.use(baseurl + "/web/userreservations", userreservations);
 // /*End of routes used by our project */
 
 // In case of an endpoint does not exist

@@ -117,6 +117,7 @@ CREATE TABLE rental(
     user_id integer(10) NOT NULL,
     isbn char(10) NOT NULL,
     school_id integer(10) NOT NULL,
+    returned boolean NOT NULL,
     rental_datetime timestamp NOT NULL,
 		CONSTRAINT person_who_rent FOREIGN KEY (user_id)
         REFERENCES users(user_id) ON  DELETE CASCADE ON UPDATE CASCADE,
@@ -130,7 +131,8 @@ CREATE TABLE reservation(
     user_id integer(10) NOT NULL,
     isbn char(10) NOT NULL,
     school_id integer(10) NOT NULL,
-    reservtion_datetime timestamp NOT NULL,
+    isold boolean NOT NULL,
+    reservation_datetime timestamp NOT NULL,
 		CONSTRAINT person_who_reserved FOREIGN KEY (user_id)
         REFERENCES users(user_id) ON  DELETE CASCADE ON UPDATE CASCADE,
         CONSTRAINT book_resrved FOREIGN KEY (isbn,school_id)
