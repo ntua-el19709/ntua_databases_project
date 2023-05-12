@@ -48,6 +48,12 @@ const ongoingschoolrentals = require("./api/web/ongoingschoolrentals");
 const ongoinguserrentals = require("./api/web/ongoinguserrentals");
 const oldschoolrentals = require("./api/web/oldschoolrentals");
 const olduserrentals = require("./api/web/olduserrentals");
+const makereview = require("./api/web/makereview");
+const approvereview = require("./api/web/approvereview");
+const deletereview = require("./api/web/deletereview");
+const notapprovedreviews = require("./api/web/notapprovedreviews");
+const bookreviews = require("./api/web/bookreviews");
+const booklikert = require("./api/web/booklikert");
 //const { controleer } = require("./api/web/skotinos_arxontas");
 /* end of ROUTES and how to import routes */
 
@@ -120,6 +126,12 @@ app.use(baseurl + "/web/ongoingschoolrentals", ongoingschoolrentals);
 app.use(baseurl + "/web/ongoinguserrentals", ongoinguserrentals);
 app.use(baseurl + "/web/oldschoolrentals", oldschoolrentals);
 app.use(baseurl + "/web/olduserrentals", olduserrentals);
+app.use(baseurl + "/web/makereview", makereview);
+app.use(baseurl + "/web/approvereview", approvereview);
+app.use(baseurl + "/web/deletereview", deletereview);
+app.use(baseurl + "/web/notapprovedreviews", notapprovedreviews);
+app.use(baseurl + "/web/bookreviews", bookreviews);
+app.use(baseurl + "/web/booklikert", booklikert);
 // /*End of routes used by our project */
 
 // In case of an endpoint does not exist
