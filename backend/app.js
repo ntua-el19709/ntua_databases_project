@@ -39,6 +39,15 @@ const reservationinfo = require("./api/web/reservationinfo");
 const deletereservation = require("./api/web/deletereservation");
 const schoolreservations = require("./api/web/schoolreservations");
 const userreservations = require("./api/web/userreservations");
+const makerental = require("./api/web/makerental");
+const rentalinfo = require("./api/web/rentalinfo");
+const rentalreturn = require("./api/web/rentalreturn");
+const lateschoolrentals = require("./api/web/lateschoolrentals");
+const lateuserrentals = require("./api/web/lateuserrentals");
+const ongoingschoolrentals = require("./api/web/ongoingschoolrentals");
+const ongoinguserrentals = require("./api/web/ongoinguserrentals");
+const oldschoolrentals = require("./api/web/oldschoolrentals");
+const olduserrentals = require("./api/web/olduserrentals");
 //const { controleer } = require("./api/web/skotinos_arxontas");
 /* end of ROUTES and how to import routes */
 
@@ -102,6 +111,15 @@ app.use(baseurl + "/web/reservationinfo", reservationinfo);
 app.use(baseurl + "/web/deletereservation", deletereservation);
 app.use(baseurl + "/web/schoolreservations", schoolreservations);
 app.use(baseurl + "/web/userreservations", userreservations);
+app.use(baseurl + "/web/makerental", makerental);
+app.use(baseurl + "/web/rentalinfo", rentalinfo);
+app.use(baseurl + "/web/rentalreturn", rentalreturn);
+app.use(baseurl + "/web/lateschoolrentals", lateschoolrentals);
+app.use(baseurl + "/web/lateuserrentals", lateuserrentals);
+app.use(baseurl + "/web/ongoingschoolrentals", ongoingschoolrentals);
+app.use(baseurl + "/web/ongoinguserrentals", ongoinguserrentals);
+app.use(baseurl + "/web/oldschoolrentals", oldschoolrentals);
+app.use(baseurl + "/web/olduserrentals", olduserrentals);
 // /*End of routes used by our project */
 
 // In case of an endpoint does not exist
