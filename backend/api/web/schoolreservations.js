@@ -8,7 +8,7 @@ router.get("/:schlid", async (req, res) => {
     true,
     req,
     res,
-    "Successful retrieval of reservations!",
+    "Successful retrieval of reservations!!",
     async (conn) => {
       const results = await conn.query(
         `SELECT * FROM reservation,users
