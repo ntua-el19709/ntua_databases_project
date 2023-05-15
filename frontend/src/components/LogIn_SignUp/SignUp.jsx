@@ -135,39 +135,6 @@ class SignUp extends Component {
               }
             );
         });
-      /*
-      fetch(
-        `http://localhost:9103/libraries/web/adduserapp/${this.state.username}/${this.state.password}/${this.state.fullname}/${dob}`,
-        {
-          method: "POST",
-          mode: "cors",
-        }
-      );
-      if (this.state.type === "1")
-        fetch(
-          `http://localhost:9103/libraries/web/addoperator/${this.state.username}/${this.state.schlid}`,
-          {
-            method: "POST",
-            mode: "cors",
-          }
-        );
-      else if (this.state.type === "2")
-        fetch(
-          `http://localhost:9103/libraries/web/addprofessor/${this.state.username}/${this.state.schlid}`,
-          {
-            method: "POST",
-            mode: "cors",
-          }
-        );
-      else if (this.state.type === "3")
-        fetch(
-          `http://localhost:9103/libraries/web/addstudent/${this.state.username}/${this.state.schlid}`,
-          {
-            method: "POST",
-            mode: "cors",
-          }
-        );
-        */
     }
   };
 
@@ -308,46 +275,6 @@ class SignUp extends Component {
         <div>{this.state.message}</div>
       </div>
     );
-  }
-
-  formatbutton() {
-    if (this.props.option.opttxt === "<open string>")
-      return (
-        <input
-          type="text"
-          onChange={(val) =>
-            this.props.onPress(val.target.value, this.props.option.nextqID)
-          }
-        />
-      );
-    if (this.props.selected === 0)
-      return (
-        <button
-          onClick={() =>
-            this.props.onPress(
-              this.props.option.optID,
-              this.props.option.nextqID
-            )
-          }
-          className="btn btn-outline-primary m-2"
-        >
-          {this.props.option.opttxt}
-        </button>
-      );
-    else
-      return (
-        <button
-          onClick={() =>
-            this.props.onPress(
-              this.props.option.optID,
-              this.props.option.nextqID
-            )
-          }
-          className="btn btn-primary m-2"
-        >
-          {this.props.option.opttxt}
-        </button>
-      );
   }
 }
 

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import LogIn from "./LogIn_SignUp/LogIn";
 import SignUp from "./LogIn_SignUp/SignUp";
+import Profile from "./Profile";
 
 class Home extends Component {
   constructor() {
@@ -44,6 +45,29 @@ class Home extends Component {
     this.setState({ page: 1 }); //Log in Page
   };
 
+  login = (username) => {
+    //just logged in, go to profile page
+    /*
+    fetch(`http://localhost:9103/libraries/web/userinfo/${username}`)
+      .then((response) => response.json())
+      .then((obj) => {
+        console.log(obj);
+        this.setState({
+          ...this.state,
+          page: 3,
+          username: username,
+          userID: obj.userID,
+        });
+      });
+      */
+    this.setState({
+      ...this.state,
+      page: 3,
+      username: username,
+      type: "1",
+    });
+  };
+
   render() {
     return <div>{this.formatPage()}</div>;
   }
@@ -54,9 +78,10 @@ class Home extends Component {
         <LogIn
           headerSignUpPress={this.headerSignUp}
           headerLogInPress={this.headerLogIn}
+          LoggedIn={this.login}
         />
       );
-    if (this.state.page === 2)
+    else if (this.state.page === 2)
       //Sign Up page
       return (
         <SignUp
@@ -64,30 +89,10 @@ class Home extends Component {
           headerLogInPress={this.headerLogIn}
         />
       );
+    else if (this.state.page === 3)
+      //Profile page
+      return <Profile username={this.state.username} />;
   }
 }
 
-/*
-function Home() {
-  return (
-    <div>
-      <h1> IntelliQ - The webpage for all the Questionnaires</h1>
-      <div>
-        <h2> For questionnaire completion enter:</h2>
-        <ul>
-          <li>localhost:3000/ans/:questionnaireID</li>
-        </ul>
-      </div>
-      <div>
-        <h2> For questionnaire statistics click:</h2>
-        <ul>
-          <li>
-            <Link to="/stats">localhost:3000/stats</Link>
-          </li>
-        </ul>
-      </div>
-    </div>
-  );
-}
-*/
 export default Home;
