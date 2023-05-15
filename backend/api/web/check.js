@@ -8,7 +8,7 @@ router.get("/:username", async (req, res) => {
     true,
     req,
     res,
-    "User validation",
+    "Username checked",
     async (conn) => {
       const results = await conn.query(
         `SELECT * FROM users
