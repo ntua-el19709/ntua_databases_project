@@ -28,7 +28,7 @@ router.get("/:username/:password", async (req, res) => {
         }
         if (results[0].approved === 0) {
           validated = false;
-          message = "User Not Found!";
+          message = "User Not Approved!";
         }
       }
 
