@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import Menu from "./Menu";
 
-class Profile extends Component {
+class SchoolUnits extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      schools: [],
       fullname: "",
       dob: "",
       schlID: this.props.schlID,
@@ -16,16 +17,17 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    fetch(`http://localhost:9103/libraries/web/userinfo/${this.state.username}`)
+    fetch(`http://localhost:9103/libraries/web/allschools`)
       .then((response) => response.json())
       .then((obj) => {
         this.setState({
           ...this.state,
-          fullname: obj.fullname,
-          password: obj.password,
-          dob: obj.dob,
+          schools: obj.map((school) => {
+            return school;
+          }),
         });
       });
+    console.log(this.state.type);
   }
 
   onLogIn = () => {
@@ -50,7 +52,7 @@ class Profile extends Component {
   };
 
   render() {
-    console.log("Now at Profile");
+    console.log("Now at SchoolUnits");
     return (
       <div>
         <Menu
@@ -58,31 +60,13 @@ class Profile extends Component {
           profile={() => this.props.gotoprofile()}
           schools={() => this.props.gotoschools()}
         />
-        <table>
-          <tr>
-            <th>Full Name:</th>
-            <td>{this.state.fullname}</td>
-          </tr>
-          <tr>
-            <th>Date of Birth:</th>
-            <td>{this.state.dob.substring(0, 10)}</td>
-          </tr>
-          <tr>
-            <th>Username:</th>
-            <td>
-              <td>{this.state.username}</td>
-            </td>
-          </tr>
-          <tr>
-            <th>Password:</th>
-            <td>
-              <td>{this.state.password}</td>
-            </td>
-          </tr>
-        </table>
-        <button onClick={() => this.props.EditProfile()}>Edit Profile</button>
-        {this.backuprestore()}
-        <button onClick={() => this.props.LoggedOut()}>Log Out</button>
+        <button onClick={() => this.props.addschool()}>Add School Unit</button>
+        <div>All School Units:</div>
+        <ul>
+          {this.state.schools.map((school) => (
+            <li key={school.schoolID}>{school.schoolname}</li>
+          ))}
+        </ul>
       </div>
     );
   }
@@ -100,4 +84,4 @@ class Profile extends Component {
   }
 }
 
-export default Profile;
+export default SchoolUnits;

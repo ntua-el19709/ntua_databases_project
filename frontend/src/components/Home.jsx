@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import LogIn from "./LogIn_SignUp/LogIn";
 import SignUp from "./LogIn_SignUp/SignUp";
 import Profile from "./Profile";
+import EditProfile from "./EditProfile";
+import SchoolUnits from "./SchoolUnits";
+import AddSchool from "./AddSchool";
 
 class Home extends Component {
   constructor() {
@@ -12,37 +15,29 @@ class Home extends Component {
       page: 1, // Log in Page
     };
   }
-  /*
-  componentDidMount() {
-    fetch(`http://localhost:9103/intelliq_api/admin/getallquestionnaires`)
-      .then((response) => response.json())
-      .then((result) => {
-        if (result.status === "failed") {
-          this.setState({
-            ...this.state,
-            exist: 0,
-          });
-        } else {
-          this.setState({
-            ...this.state,
-            questionnaires: result,
-            exist: 1,
-          });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        this.setState({
-          ...this.state,
-          exist: 0,
-        });
-      });
-  }*/
   headerSignUp = () => {
     this.setState({ page: 2 }); //Sign up Page
   };
   headerLogIn = () => {
     this.setState({ page: 1 }); //Log in Page
+  };
+  goToProfile = () => {
+    this.setState({
+      ...this.state,
+      page: 3, //Profile Page
+    });
+  };
+  goToSchools = () => {
+    this.setState({
+      ...this.state,
+      page: 5,
+    });
+  };
+  addSchool = () => {
+    this.setState({
+      ...this.state,
+      page: 6,
+    });
   };
 
   login = (username) => {
@@ -71,11 +66,12 @@ class Home extends Component {
   };
 
   editprofile = () => {
-    //just logged out, go to Edit Profile page
+    //pressed edit profile, go to Edit Profile page
     this.setState({
       ...this.state,
       page: 4,
     });
+    console.log(this.state);
   };
 
   render() {
@@ -109,11 +105,39 @@ class Home extends Component {
           type={this.state.type}
           LoggedOut={this.logout}
           EditProfile={this.editprofile}
+          gotoprofile={this.goToProfile}
+          gotoschools={this.goToSchools}
         />
       );
     else if (this.state.page === 4)
       //Edit Profile page
-      return <div />;
+      return (
+        <EditProfile
+          username={this.state.username}
+          type={this.state.type}
+          gotoprofile={this.goToProfile}
+        />
+      );
+    else if (this.state.page === 5)
+      //Scool Units page
+      return (
+        <SchoolUnits
+          username={this.state.username}
+          type={this.state.type}
+          gotoprofile={this.goToProfile}
+          gotoschools={this.goToSchools}
+          addschool={this.addSchool}
+        />
+      );
+    else if (this.state.page === 6)
+      //Add Scool page
+      return (
+        <AddSchool
+          username={this.state.username}
+          type={this.state.type}
+          gotoschools={this.goToSchools}
+        />
+      );
   }
 }
 

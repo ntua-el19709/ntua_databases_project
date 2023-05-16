@@ -17,8 +17,8 @@ class Menu extends Component {
       //topoperator
       return (
         <div>
-          <button>Profile</button>
-          <button>School Units</button>
+          <button onClick={() => this.props.profile()}>Profile</button>
+          <button onClick={() => this.props.schools()}>School Units</button>
           <button>Operators</button>
         </div>
       );
@@ -26,7 +26,7 @@ class Menu extends Component {
       //operator
       return (
         <div>
-          <button>Profile</button>
+          <button onClick={() => this.props.profile()}>Profile</button>
           <button>Books</button>
           <button>Users</button>
           <button>Reservations</button>
@@ -37,7 +37,7 @@ class Menu extends Component {
     else
       return (
         <div>
-          <button>Profile</button>
+          <button onClick={() => this.props.profile()}>Profile</button>
           <button>Books</button>
           <button>Reservations</button>
           <button>Rentals</button>

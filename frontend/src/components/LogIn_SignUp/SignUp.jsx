@@ -230,6 +230,7 @@ class SignUp extends Component {
               <input
                 type="text"
                 size="4"
+                placeholder="YYYY"
                 onChange={(val) =>
                   this.setState({ ...this.state, year: val.target.value })
                 }
@@ -238,6 +239,7 @@ class SignUp extends Component {
               <input
                 type="text"
                 size="2"
+                placeholder="MM"
                 onChange={(val) =>
                   this.setState({ ...this.state, month: val.target.value })
                 }
@@ -246,11 +248,11 @@ class SignUp extends Component {
               <input
                 type="text"
                 size="2"
+                placeholder="DD"
                 onChange={(val) =>
                   this.setState({ ...this.state, day: val.target.value })
                 }
               />
-              (YYYY-MM-DD)
             </td>
           </tr>
           <tr>
