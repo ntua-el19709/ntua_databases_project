@@ -47,8 +47,7 @@ class Home extends Component {
 
   login = (username) => {
     //just logged in, go to profile page
-    /*
-    fetch(`http://localhost:9103/libraries/web/userinfo/${username}`)
+    fetch(`http://localhost:9103/libraries/web/findtype/${username}`)
       .then((response) => response.json())
       .then((obj) => {
         console.log(obj);
@@ -57,14 +56,25 @@ class Home extends Component {
           page: 3,
           username: username,
           userID: obj.userID,
+          schlID: obj.schlID,
+          type: obj.type,
         });
       });
-      */
+  };
+
+  logout = () => {
+    //just logged out, go to Log in page
     this.setState({
       ...this.state,
-      page: 3,
-      username: username,
-      type: "1",
+      page: 1,
+    });
+  };
+
+  editprofile = () => {
+    //just logged out, go to Edit Profile page
+    this.setState({
+      ...this.state,
+      page: 4,
     });
   };
 
@@ -91,7 +101,19 @@ class Home extends Component {
       );
     else if (this.state.page === 3)
       //Profile page
-      return <Profile username={this.state.username} />;
+      return (
+        <Profile
+          username={this.state.username}
+          userID={this.state.userID}
+          schlID={this.state.schlID}
+          type={this.state.type}
+          LoggedOut={this.logout}
+          EditProfile={this.editprofile}
+        />
+      );
+    else if (this.state.page === 4)
+      //Edit Profile page
+      return <div />;
   }
 }
 
