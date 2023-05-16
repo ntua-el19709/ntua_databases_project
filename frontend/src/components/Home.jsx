@@ -6,6 +6,8 @@ import Profile from "./Profile";
 import EditProfile from "./EditProfile";
 import SchoolUnits from "./SchoolUnits";
 import AddSchool from "./AddSchool";
+import School from "./School";
+import EditSchool from "./EditSchool";
 
 class Home extends Component {
   constructor() {
@@ -37,6 +39,20 @@ class Home extends Component {
     this.setState({
       ...this.state,
       page: 6,
+    });
+  };
+  goToSchool = (schlid) => {
+    this.setState({
+      ...this.state,
+      schlID: schlid,
+      page: 7, //School Page (one specific school)
+    });
+  };
+  editSchool = (schlid) => {
+    this.setState({
+      ...this.state,
+      schlID: schlid,
+      page: 8, //Edit School Page (one specific school)
     });
   };
 
@@ -127,15 +143,34 @@ class Home extends Component {
           gotoprofile={this.goToProfile}
           gotoschools={this.goToSchools}
           addschool={this.addSchool}
+          gotoschool={this.goToSchool}
         />
       );
     else if (this.state.page === 6)
-      //Add Scool page
+      //Add School page
       return (
         <AddSchool
           username={this.state.username}
           type={this.state.type}
           gotoschools={this.goToSchools}
+        />
+      );
+    else if (this.state.page === 7)
+      //Add School page
+      return (
+        <School
+          schlID={this.state.schlID}
+          gotoschools={this.goToSchools}
+          editschool={this.editSchool}
+        />
+      );
+    else if (this.state.page === 8)
+      //Edit School page
+      return (
+        <EditSchool
+          schlID={this.state.schlID}
+          gotoschools={this.goToSchools}
+          gotoschool={this.goToSchool}
         />
       );
   }

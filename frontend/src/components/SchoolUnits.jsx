@@ -64,7 +64,12 @@ class SchoolUnits extends Component {
         <div>All School Units:</div>
         <ul>
           {this.state.schools.map((school) => (
-            <li key={school.schoolID}>{school.schoolname}</li>
+            <li key={school.schoolID}>
+              {school.schoolname}
+              <button onClick={() => this.props.gotoschool(school.schoolID)}>
+                {"->"}
+              </button>
+            </li>
           ))}
         </ul>
       </div>
