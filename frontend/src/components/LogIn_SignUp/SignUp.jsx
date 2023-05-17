@@ -106,35 +106,32 @@ class SignUp extends Component {
           method: "POST",
           mode: "cors",
         }
-      )
-        //)
-        .then()
-        .then(() => {
-          if (this.state.type === "1")
-            fetch(
-              `http://localhost:9103/libraries/web/addoperator/${this.state.username}/${this.state.schlid}`,
-              {
-                method: "POST",
-                mode: "cors",
-              }
-            );
-          else if (this.state.type === "2")
-            fetch(
-              `http://localhost:9103/libraries/web/addprofessor/${this.state.username}/${this.state.schlid}`,
-              {
-                method: "POST",
-                mode: "cors",
-              }
-            );
-          else if (this.state.type === "3")
-            fetch(
-              `http://localhost:9103/libraries/web/addstudent/${this.state.username}/${this.state.schlid}`,
-              {
-                method: "POST",
-                mode: "cors",
-              }
-            );
-        });
+      ).then(() => {
+        if (this.state.type === "1")
+          fetch(
+            `http://localhost:9103/libraries/web/addoperator/${this.state.username}/${this.state.schlid}`,
+            {
+              method: "POST",
+              mode: "cors",
+            }
+          );
+        else if (this.state.type === "2")
+          fetch(
+            `http://localhost:9103/libraries/web/addprofessor/${this.state.username}/${this.state.schlid}`,
+            {
+              method: "POST",
+              mode: "cors",
+            }
+          );
+        else if (this.state.type === "3")
+          fetch(
+            `http://localhost:9103/libraries/web/addstudent/${this.state.username}/${this.state.schlid}`,
+            {
+              method: "POST",
+              mode: "cors",
+            }
+          );
+      });
     }
   };
 

@@ -57,6 +57,7 @@ class Profile extends Component {
           type={this.state.type}
           profile={() => this.props.gotoprofile()}
           schools={() => this.props.gotoschools()}
+          operators={() => this.props.gotooperators()}
         />
         <table>
           <tr>

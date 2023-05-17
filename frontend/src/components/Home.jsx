@@ -8,6 +8,8 @@ import SchoolUnits from "./SchoolUnits";
 import AddSchool from "./AddSchool";
 import School from "./School";
 import EditSchool from "./EditSchool";
+import Operators from "./Operators";
+import Operator from "./Operator";
 
 class Home extends Component {
   constructor() {
@@ -53,6 +55,20 @@ class Home extends Component {
       ...this.state,
       schlID: schlid,
       page: 8, //Edit School Page (one specific school)
+    });
+  };
+  goToOperators = () => {
+    this.setState({
+      ...this.state,
+      page: 9, //Operators Page
+    });
+  };
+  goToOperator = (username, userID) => {
+    this.setState({
+      ...this.state,
+      username: username,
+      opuserID: userID,
+      page: 10, //Operator Page
     });
   };
 
@@ -123,6 +139,7 @@ class Home extends Component {
           EditProfile={this.editprofile}
           gotoprofile={this.goToProfile}
           gotoschools={this.goToSchools}
+          gotooperators={this.goToOperators}
         />
       );
     else if (this.state.page === 4)
@@ -144,6 +161,7 @@ class Home extends Component {
           gotoschools={this.goToSchools}
           addschool={this.addSchool}
           gotoschool={this.goToSchool}
+          gotooperators={this.goToOperators}
         />
       );
     else if (this.state.page === 6)
@@ -171,6 +189,27 @@ class Home extends Component {
           schlID={this.state.schlID}
           gotoschools={this.goToSchools}
           gotoschool={this.goToSchool}
+        />
+      );
+    else if (this.state.page === 9)
+      //Operators page
+      return (
+        <Operators
+          type={this.state.type}
+          gotoprofile={this.goToProfile}
+          gotoschools={this.goToSchools}
+          gotooperators={this.goToOperators}
+          gotooperator={this.goToOperator}
+        />
+      );
+    else if (this.state.page === 10)
+      //Operators page
+      return (
+        <Operator
+          type={this.state.type}
+          username={this.state.username}
+          userID={this.state.opuserID}
+          gotooperators={this.goToOperators}
         />
       );
   }

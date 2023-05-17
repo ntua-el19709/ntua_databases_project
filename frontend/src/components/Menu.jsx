@@ -19,7 +19,7 @@ class Menu extends Component {
         <div>
           <button onClick={() => this.props.profile()}>Profile</button>
           <button onClick={() => this.props.schools()}>School Units</button>
-          <button>Operators</button>
+          <button onClick={() => this.props.operators()}>Operators</button>
         </div>
       );
     else if (this.state.type === "1")
