@@ -27,7 +27,7 @@ class Menu extends Component {
       return (
         <div>
           <button onClick={() => this.props.profile()}>Profile</button>
-          <button>Books</button>
+          <button onClick={() => this.props.books()}>Books</button>
           <button>Users</button>
           <button>Reservations</button>
           <button>Rentals</button>
@@ -38,7 +38,7 @@ class Menu extends Component {
       return (
         <div>
           <button onClick={() => this.props.profile()}>Profile</button>
-          <button>Books</button>
+          <button onClick={() => this.props.books()}>Books</button>
           <button>Reservations</button>
           <button>Rentals</button>
         </div>

@@ -10,6 +10,9 @@ import School from "./School";
 import EditSchool from "./EditSchool";
 import Operators from "./Operators";
 import Operator from "./Operator";
+import Books from "./Books";
+import AddBook from "./AddBook";
+import Book from "./Book";
 
 class Home extends Component {
   constructor() {
@@ -69,6 +72,25 @@ class Home extends Component {
       username: username,
       opuserID: userID,
       page: 10, //Operator Page
+    });
+  };
+  goToBooks = () => {
+    this.setState({
+      ...this.state,
+      page: 11,
+    });
+  };
+  addBook = () => {
+    this.setState({
+      ...this.state,
+      page: 12,
+    });
+  };
+  goToBook = (ISBN) => {
+    this.setState({
+      ...this.state,
+      ISBN: ISBN,
+      page: 13, 
     });
   };
 
@@ -210,6 +232,36 @@ class Home extends Component {
           username={this.state.username}
           userID={this.state.opuserID}
           gotooperators={this.goToOperators}
+        />
+      );
+      else if (this.state.page === 11)
+      //Books page
+      return (
+        <Books
+          username={this.state.username}
+          type={this.state.type}
+          gotoprofile={this.goToProfile}
+          gotobooks={this.goToBooks}
+          addbook={this.addBook}
+          gotobook={this.goToBook}
+        />
+      );
+    else if (this.state.page === 12)
+      //Add Book page
+      return (
+        <AddBook
+          username={this.state.username}
+          type={this.state.type}
+          gotobooks={this.goToBooks}
+        />
+      );
+    else if (this.state.page === 13)
+      //Add Book page
+      return (
+        <Book
+          ISBN={this.state.ISBN}
+          gotobooks={this.goToBooks}
+          editbook={this.editBook}
         />
       );
   }
