@@ -7,11 +7,12 @@ class Books extends Component {
     this.state = {
       books: [],
       type: this.props.type,
+      schlID: this.props.schlID,
     };
   }
 
   componentDidMount() {
-    fetch(`http://localhost:9103/libraries/web/allbooks`)
+    fetch(`http://localhost:9103/libraries/web/allbooks/${this.state.schlID}`)
       .then((response) => response.json())
       .then((obj) => {
         this.setState({

@@ -90,7 +90,7 @@ class Home extends Component {
     this.setState({
       ...this.state,
       ISBN: ISBN,
-      page: 13, 
+      page: 13,
     });
   };
 
@@ -235,12 +235,13 @@ class Home extends Component {
           gotooperators={this.goToOperators}
         />
       );
-      else if (this.state.page === 11)
+    else if (this.state.page === 11)
       //Books page
       return (
         <Books
           username={this.state.username}
           type={this.state.type}
+          schlID={this.state.schlID}
           gotoprofile={this.goToProfile}
           gotobooks={this.goToBooks}
           addbook={this.addBook}
@@ -257,7 +258,7 @@ class Home extends Component {
         />
       );
     else if (this.state.page === 13)
-      //Add Book page
+      // Book page
       return (
         <Book
           ISBN={this.state.ISBN}
