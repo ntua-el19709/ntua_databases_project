@@ -16,8 +16,8 @@ class Books extends Component {
       .then((obj) => {
         this.setState({
           ...this.state,
-          books: obj.map((book) => {
-            return book;
+          books: obj.map((schlID) => {
+            return schlID;
           }),
         });
       });
@@ -33,7 +33,7 @@ class Books extends Component {
           profile={() => this.props.gotoprofile()}
           books={() => this.props.gotobooks()}
         />
-        <button onClick={() => this.props.addbook()}>New Book</button>
+        {this.AddBook()}
         <div>All Books:</div>
         <ul>
           {this.state.books.map((book) => (
@@ -47,6 +47,16 @@ class Books extends Component {
         </ul>
       </div>
     );
+  }
+  AddBook() {
+    if (this.state.type === "1") {
+      //operator
+      return (
+        <div>
+          <button onClick={() => this.props.addbook()}>Add Book</button>
+        </div>
+      );
+    }
   }
 }
 

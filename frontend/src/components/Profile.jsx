@@ -56,6 +56,7 @@ class Profile extends Component {
         <Menu
           type={this.state.type}
           profile={() => this.props.gotoprofile()}
+          books={() => this.props.gotobooks()}
           schools={() => this.props.gotoschools()}
           operators={() => this.props.gotooperators()}
         />

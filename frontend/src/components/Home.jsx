@@ -161,6 +161,7 @@ class Home extends Component {
           EditProfile={this.editprofile}
           gotoprofile={this.goToProfile}
           gotoschools={this.goToSchools}
+          gotobooks={this.goToBooks}
           gotooperators={this.goToOperators}
         />
       );

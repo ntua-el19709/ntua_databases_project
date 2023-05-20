@@ -18,7 +18,7 @@ class Book extends Component {
   }
 
   componentDidMount() {
-    fetch(`http://localhost:9103/libraries/web/bookinfo/${this.state.ISBN}`)
+    fetch(`http://localhost:9103/libraries/web/bookinfo/${this.state.schlID}`)
       .then((response) => response.json())
       .then((obj) => {
         this.setState({
