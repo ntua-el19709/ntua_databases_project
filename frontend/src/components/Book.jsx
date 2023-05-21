@@ -4,6 +4,7 @@ class Book extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      schlID: this.props.schlID,
       ISBN: this.props.ISBN,
       title: "",
       author: "",
@@ -18,7 +19,7 @@ class Book extends Component {
   }
 
   componentDidMount() {
-    fetch(`http://localhost:9103/libraries/web/bookinfo/${this.state.schlID}`)
+    fetch(`http://localhost:9103/libraries/web/bookinfo/${this.state.schlID}/${this.state.ISBN}`)
       .then((response) => response.json())
       .then((obj) => {
         this.setState({

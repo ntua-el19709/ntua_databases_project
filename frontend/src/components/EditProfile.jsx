@@ -78,12 +78,40 @@ class EditProfile extends Component {
         <table>
           <tr>
             <th>Full Name:</th>
-            <td>{this.allowfullname()}</td>
+            <input
+            type="text"
+            placeholder={this.state.fullname}
+            onChange={(val) =>
+            this.setState({ ...this.state, fullname: val.target.value })
+          }
+          />
           </tr>
           <tr>
-            <th>Date of Birth:</th>
-
-            <td>{this.allowdob()}</td>
+            <th>Date of Birth:</th> 
+            <input
+            type="text"
+            size="4"
+            placeholder={this.state.year}
+            onChange={(val) =>
+              this.setState({ ...this.state, year: val.target.value })
+            }
+            />
+            <input
+            type="text"
+            size="2"
+            placeholder={this.state.month}
+            onChange={(val) =>
+              this.setState({ ...this.state, month: val.target.value })
+            }
+            />
+            <input
+            type="text"
+            size="2"
+            placeholder={this.state.day}
+            onChange={(val) =>
+              this.setState({ ...this.state, day: val.target.value })
+            } 
+            />
           </tr>
           <tr>
             <th>Username:</th>
@@ -109,54 +137,6 @@ class EditProfile extends Component {
         </button>
       </div>
     );
-  }
-  allowfullname() {
-    if (this.state.type === "3") return this.state.fullname; //student
-    else
-      return (
-        <input
-          type="text"
-          placeholder={this.state.fullname}
-          onChange={(val) =>
-            this.setState({ ...this.state, fullname: val.target.value })
-          }
-        />
-      );
-  }
-  allowdob() {
-    if (this.state.type === "3")
-      return this.state.dob.substring(0, 10); //student
-    else
-      return (
-        <div>
-          <input
-            type="text"
-            size="4"
-            placeholder={this.state.year}
-            onChange={(val) =>
-              this.setState({ ...this.state, year: val.target.value })
-            }
-          />
-          -
-          <input
-            type="text"
-            size="2"
-            placeholder={this.state.month}
-            onChange={(val) =>
-              this.setState({ ...this.state, month: val.target.value })
-            }
-          />
-          -
-          <input
-            type="text"
-            size="2"
-            placeholder={this.state.day}
-            onChange={(val) =>
-              this.setState({ ...this.state, day: val.target.value })
-            }
-          />
-        </div>
-      );
   }
 }
 

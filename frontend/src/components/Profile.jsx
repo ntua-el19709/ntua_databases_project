@@ -82,11 +82,33 @@ class Profile extends Component {
             </td>
           </tr>
         </table>
-        <button onClick={() => this.props.EditProfile()}>Edit Profile</button>
+        {this.editprofile()}
+        {this.changepassword()}
         {this.backuprestore()}
         <button onClick={() => this.props.LoggedOut()}>Log Out</button>
       </div>
     );
+  }
+  editprofile() {
+    if (this.state.type !== "3") {
+      //TopOperator, Operator, Professor
+      return (
+        <div>
+          <button onClick={() => this.props.EditProfile()}>Edit Profile</button>
+        </div>
+      );
+    }
+  }
+
+  changepassword() {
+    if (this.state.type === "3") {
+      //student
+      return (
+        <div>
+          <button onClick={() => this.props.ChangePassword()}>Change Password</button>
+        </div>
+      );
+    }
   }
 
   backuprestore() {

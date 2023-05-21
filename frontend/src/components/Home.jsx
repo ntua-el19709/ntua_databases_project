@@ -13,6 +13,8 @@ import Operator from "./Operator";
 import Books from "./Books";
 import AddBook from "./AddBook";
 import Book from "./Book";
+import EditBook from "./EditBook";
+import ChangePassword from "./ChangePassword";
 
 class Home extends Component {
   constructor() {
@@ -93,6 +95,13 @@ class Home extends Component {
       page: 13,
     });
   };
+  editBook = (ISBN) => {
+    this.setState({
+      ...this.state,
+      ISBN: ISBN,
+      page: 14,
+    });
+  };
 
   login = (username) => {
     //just logged in, go to profile page
@@ -128,6 +137,15 @@ class Home extends Component {
     console.log(this.state);
   };
 
+  changepassword = () => {
+    //pressed change password, go to Change Password page
+    this.setState({
+      ...this.state,
+      page: 15,
+    });
+    console.log(this.state);
+  };
+
   render() {
     return <div>{this.formatPage()}</div>;
   }
@@ -159,6 +177,7 @@ class Home extends Component {
           type={this.state.type}
           LoggedOut={this.logout}
           EditProfile={this.editprofile}
+          ChangePassword={this.changepassword}
           gotoprofile={this.goToProfile}
           gotoschools={this.goToSchools}
           gotobooks={this.goToBooks}
@@ -261,9 +280,29 @@ class Home extends Component {
       // Book page
       return (
         <Book
+          schlID={this.state.schlID}
           ISBN={this.state.ISBN}
           gotobooks={this.goToBooks}
           editbook={this.editBook}
+        />
+      );
+    else if (this.state.page === 14)
+      //Edit Book page
+      return (
+        <EditBook
+          schlID={this.state.schlID}
+          ISBN={this.state.ISBN}
+          gotobooks={this.goToBooks}
+          gotobook={this.goToBook}
+        />
+      );
+    else if (this.state.page === 15)
+      //Change Password page
+      return (
+        <ChangePassword
+          username={this.state.username}
+          type={this.state.type}
+          gotoprofile={this.goToProfile}
         />
       );
   }
