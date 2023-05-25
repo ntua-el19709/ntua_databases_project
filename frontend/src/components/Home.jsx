@@ -15,6 +15,13 @@ import AddBook from "./AddBook";
 import Book from "./Book";
 import EditBook from "./EditBook";
 import ChangePassword from "./ChangePassword";
+import Reservations from "./Reservations";
+import Reservation from "./Reservation";
+import AddReservation from "./AddReservation";
+import Rentals from "./Rentals";
+import Rental from "./Rental";
+import AddRental from "./AddRental";
+import MakeReview from "./MakeReview";
 
 class Home extends Component {
   constructor() {
@@ -102,6 +109,52 @@ class Home extends Component {
       page: 14,
     });
   };
+  goToReservations = () => {
+    this.setState({
+      ...this.state,
+      page: 16,
+    });
+  };
+  goToReservation = (placedat) => {
+    this.setState({
+      ...this.state,
+      placedat: placedat,
+      page: 17,
+    });
+  };
+  addReservation = () => {
+    this.setState({
+      ...this.state,
+      page: 18,
+    });
+  };
+  goToRentals = () => {
+    this.setState({
+      ...this.state,
+      page: 19,
+    });
+  };
+  goToRental = (rentat) => {
+    this.setState({
+      ...this.state,
+      rentat: rentat,
+      page: 20,
+    });
+  };
+  addRental = () => {
+    this.setState({
+      ...this.state,
+      page: 21,
+    });
+  };
+  makeReview = (username, title) => {
+    this.setState({
+      ...this.state,
+      username: username,
+      title: title,
+      page: 22,
+    });
+  };
 
   login = (username) => {
     //just logged in, go to profile page
@@ -181,6 +234,8 @@ class Home extends Component {
           gotoprofile={this.goToProfile}
           gotoschools={this.goToSchools}
           gotobooks={this.goToBooks}
+          gotoreservations={this.goToReservations}
+          gotorentals={this.goToRentals}
           gotooperators={this.goToOperators}
         />
       );
@@ -280,10 +335,12 @@ class Home extends Component {
       // Book page
       return (
         <Book
+          type={this.state.type}
           schlID={this.state.schlID}
           ISBN={this.state.ISBN}
           gotobooks={this.goToBooks}
           editbook={this.editBook}
+          makereview={this.makeReview}
         />
       );
     else if (this.state.page === 14)
@@ -303,6 +360,78 @@ class Home extends Component {
           username={this.state.username}
           type={this.state.type}
           gotoprofile={this.goToProfile}
+        />
+      );
+      else if (this.state.page === 16)
+      //Reservations page
+      return (
+        <Reservations
+          username={this.state.username}
+          type={this.state.type}
+          schlID={this.state.schlID}
+          gotoprofile={this.goToProfile}
+          gotoreservations={this.goToReservations}
+          gotoreservation={this.goToReservation}
+          addreservation={this.addReservation}
+        />
+      );
+      else if (this.state.page === 17)
+      // Reservation page
+      return (
+        <Reservation
+          schlID={this.state.schlID}
+          placedat={this.state.placedat}
+          gotoreservations={this.goToReservations}
+        />
+      );
+      else if (this.state.page === 18)
+      //Add Reservation page
+      return (
+        <AddReservation
+          username={this.state.username}
+          type={this.state.type}
+          gotoreservations={this.goToReservations}
+        />
+      );
+      else if (this.state.page === 19)
+      //Rentals page
+      return (
+        <Rentals
+          username={this.state.username}
+          type={this.state.type}
+          schlID={this.state.schlID}
+          gotoprofile={this.goToProfile}
+          gotorentals={this.goToRentals}
+          gotorental={this.goToRental}
+          addrental={this.addRental}
+        />
+      );
+      else if (this.state.page === 20)
+      // Rental page
+      return (
+        <Rental
+          schlID={this.state.schlID}
+          rentat={this.staterentat}
+          gotorentals={this.goToRentals}
+        />
+      );
+      else if (this.state.page === 21)
+      //Add Rental page
+      return (
+        <AddRental
+          username={this.state.username}
+          type={this.state.type}
+          gotorentals={this.goToRentals}
+        />
+      );
+      else if (this.state.page === 22)
+      //Make Review page
+      return (
+        <MakeReview
+          username={this.state.username}
+          title={this.state.title}
+          gotobooks={this.goToBooks}
+          gotobook={this.goToBook}
         />
       );
   }

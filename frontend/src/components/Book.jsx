@@ -4,8 +4,10 @@ class Book extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      type: this.props.type,
       schlID: this.props.schlID,
       ISBN: this.props.ISBN,
+      placedat: this.props.placedat,
       title: "",
       author: "",
       categories: "",
@@ -37,11 +39,42 @@ class Book extends Component {
     console.log(this.state.type);
   }
 
-  onEditBook = () => {};
+  //onEditBook = () => {};
+
+  DeleteBook = () => {
+    fetch(
+      `http://localhost:9103/libraries/web/deletebook/${this.state.ISBN}`,
+      {
+        method: "POST",
+        mode: "cors",
+      }
+    ).then(() => {
+      this.setState({
+        ...this.state,
+        message: "Book Deleted",
+      });
+    });
+  };
+
+  ReserveBook = () => {
+    fetch(
+      `http://localhost:9103/libraries/web/userreservations/${this.state.placedat}`,
+      {
+        method: "POST",
+        mode: "cors",
+      }
+    ).then(() => {
+      this.setState({
+        ...this.state,
+        message: "Book Reserved",
+      });
+    });
+  };
+
 
   render() {
     console.log("Now at Book");
-    return (
+    return ( 
       <div>
         <table>
           <tr>
@@ -81,13 +114,25 @@ class Book extends Component {
             <td>{this.state.available_copies}</td>
           </tr>
         </table>
-        <button onClick={() => this.props.editbook(this.state.ISBN)}>
-          Edit Book
-        </button>
+        {this.EditBook()}
+        <button onClick={this.DeleteBook}>Delete Book</button>
+        <button onClick={this.ReserveBook}>Reserve Book</button>
+        <button onClick={() => this.props.makereview()}>Review</button>
         <div>{this.state.message}</div>
         <button onClick={() => this.props.gotobooks()}>{"<-"}</button>
       </div>
     );
+  }
+
+  EditBook() { 
+    if (this.state.type === "1") {
+      //operator
+      return (
+        <div>
+          <button onClick={() => this.props.editbook()}>Edit Book</button>
+        </div>
+      );
+    }
   }
 }
 
