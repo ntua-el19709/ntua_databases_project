@@ -29,23 +29,21 @@ router.get("/:schlid/:isbn", async (req, res) => {
         authors: [],
         categories: [],
       };
-
       fauthor = -1;
       for (elem of results) {
-        if (fauthor === -1) {
+        if (fauthor != elem.author_id) {
           fauthor = elem.author_id;
-        } else if (fauthor === elem.author_id) break;
+        } else continue;
         json_q.authors.push({
           authorID: elem.author_id,
           author_fullname: elem.author_fullname,
         });
       }
-
       fcat = -1;
       for (elem of results) {
-        if (fcat != elem.category_id) {
+        if (fcat === -1) {
           fcat = elem.category_id;
-        } else continue;
+        } else if (fcat === elem.category_id) break;
         json_q.categories.push({
           categoryID: elem.category_id,
           category: elem.category_name,

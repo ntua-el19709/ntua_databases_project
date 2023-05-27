@@ -98,7 +98,7 @@ class Home extends Component {
   goToBook = (ISBN) => {
     this.setState({
       ...this.state,
-      ISBN: ISBN,
+      isbn: ISBN,
       page: 13,
     });
   };
@@ -328,6 +328,7 @@ class Home extends Component {
         <AddBook
           username={this.state.username}
           type={this.state.type}
+          schlID={this.state.schlID}
           gotobooks={this.goToBooks}
         />
       );
@@ -337,7 +338,7 @@ class Home extends Component {
         <Book
           type={this.state.type}
           schlID={this.state.schlID}
-          ISBN={this.state.ISBN}
+          ISBN={this.state.isbn}
           gotobooks={this.goToBooks}
           editbook={this.editBook}
           makereview={this.makeReview}
@@ -362,7 +363,7 @@ class Home extends Component {
           gotoprofile={this.goToProfile}
         />
       );
-      else if (this.state.page === 16)
+    else if (this.state.page === 16)
       //Reservations page
       return (
         <Reservations
@@ -375,7 +376,7 @@ class Home extends Component {
           addreservation={this.addReservation}
         />
       );
-      else if (this.state.page === 17)
+    else if (this.state.page === 17)
       // Reservation page
       return (
         <Reservation
@@ -384,7 +385,7 @@ class Home extends Component {
           gotoreservations={this.goToReservations}
         />
       );
-      else if (this.state.page === 18)
+    else if (this.state.page === 18)
       //Add Reservation page
       return (
         <AddReservation
@@ -393,7 +394,7 @@ class Home extends Component {
           gotoreservations={this.goToReservations}
         />
       );
-      else if (this.state.page === 19)
+    else if (this.state.page === 19)
       //Rentals page
       return (
         <Rentals
@@ -406,7 +407,7 @@ class Home extends Component {
           addrental={this.addRental}
         />
       );
-      else if (this.state.page === 20)
+    else if (this.state.page === 20)
       // Rental page
       return (
         <Rental
@@ -415,7 +416,7 @@ class Home extends Component {
           gotorentals={this.goToRentals}
         />
       );
-      else if (this.state.page === 21)
+    else if (this.state.page === 21)
       //Add Rental page
       return (
         <AddRental
@@ -424,7 +425,7 @@ class Home extends Component {
           gotorentals={this.goToRentals}
         />
       );
-      else if (this.state.page === 22)
+    else if (this.state.page === 22)
       //Make Review page
       return (
         <MakeReview

@@ -26,6 +26,7 @@ class Profile extends Component {
           dob: obj.dob,
         });
       });
+    console.log(this.state.type);
   }
 
   onLogIn = () => {
@@ -107,7 +108,9 @@ class Profile extends Component {
       //student
       return (
         <div>
-          <button onClick={() => this.props.ChangePassword()}>Change Password</button>
+          <button onClick={() => this.props.ChangePassword()}>
+            Change Password
+          </button>
         </div>
       );
     }

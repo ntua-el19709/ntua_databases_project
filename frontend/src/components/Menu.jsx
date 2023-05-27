@@ -28,9 +28,12 @@ class Menu extends Component {
         <div>
           <button onClick={() => this.props.profile()}>Profile</button>
           <button onClick={() => this.props.books()}>Books</button>
-          <button onClick={() => this.props.reservations()}>Reservations</button>
-          <button onClick={() => this.props.rentals()}>Rentals</button>
           <button>Users</button>
+          <button onClick={() => this.props.reservations()}>
+            Reservations
+          </button>
+          <button onClick={() => this.props.rentals()}>Rentals</button>
+
           <button>Reviews</button>
         </div>
       );
@@ -39,7 +42,9 @@ class Menu extends Component {
         <div>
           <button onClick={() => this.props.profile()}>Profile</button>
           <button onClick={() => this.props.books()}>Books</button>
-          <button onClick={() => this.props.reservations()}>Reservations</button>
+          <button onClick={() => this.props.reservations()}>
+            Reservations
+          </button>
           <button onClick={() => this.props.rentals()}>Rentals</button>
         </div>
       );

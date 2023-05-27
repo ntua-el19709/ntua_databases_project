@@ -17,8 +17,8 @@ class Books extends Component {
       .then((obj) => {
         this.setState({
           ...this.state,
-          books: obj.map((schlID) => {
-            return schlID;
+          books: obj.map((book) => {
+            return book;
           }),
         });
       });
@@ -40,7 +40,7 @@ class Books extends Component {
           {this.state.books.map((book) => (
             <li key={book.ISBN}>
               {book.title}
-              <button onClick={() => this.props.gotobook(book.ISBN)}>
+              <button onClick={() => this.props.gotobook(book.isbn)}>
                 {"->"}
               </button>
             </li>

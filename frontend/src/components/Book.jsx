@@ -9,8 +9,8 @@ class Book extends Component {
       ISBN: this.props.ISBN,
       placedat: this.props.placedat,
       title: "",
-      author: "",
-      categories: "",
+      authors: [],
+      categories: [],
       publisher: "",
       pages: "",
       summary: "",
@@ -21,19 +21,25 @@ class Book extends Component {
   }
 
   componentDidMount() {
-    fetch(`http://localhost:9103/libraries/web/bookinfo/${this.state.schlID}/${this.state.ISBN}`)
+    fetch(
+      `http://localhost:9103/libraries/web/bookinfo/${this.state.schlID}/${this.state.ISBN}`
+    )
       .then((response) => response.json())
       .then((obj) => {
         this.setState({
           ...this.state,
           title: obj.title,
-          author: obj.author,
-          categories: obj.categories,
+          authors: obj.authors.map((author) => {
+            return author;
+          }),
+          categories: obj.categories.map((category) => {
+            return category;
+          }),
           publisher: obj.publisher,
           pages: obj.pages,
-          summary: obj.summary,
+          summary: obj.sumary,
           language: obj.language,
-          available_copies: obj.available_copies,
+          available_copies: obj.copies,
         });
       });
     console.log(this.state.type);
@@ -43,7 +49,7 @@ class Book extends Component {
 
   DeleteBook = () => {
     fetch(
-      `http://localhost:9103/libraries/web/deletebook/${this.state.ISBN}`,
+      `http://localhost:9103/libraries/web/deletebook/${this.state.schlID}/${this.state.ISBN}`,
       {
         method: "POST",
         mode: "cors",
@@ -71,10 +77,9 @@ class Book extends Component {
     });
   };
 
-
   render() {
     console.log("Now at Book");
-    return ( 
+    return (
       <div>
         <table>
           <tr>
@@ -86,12 +91,24 @@ class Book extends Component {
             <td>{this.state.title}</td>
           </tr>
           <tr>
-            <th>Author:</th>
-            <td>{this.state.author}</td>
+            <th>{"Author(s)"}:</th>
+            <td>
+              <ul>
+                {this.state.authors.map((author) => (
+                  <li>{author.author_fullname}</li>
+                ))}
+              </ul>
+            </td>
           </tr>
           <tr>
-            <th>Categories:</th>
-            <td>{this.state.categories}</td>
+            <th>{"Category(/ies):"}</th>
+            <td>
+              <ul>
+                {this.state.categories.map((category) => (
+                  <li>{category.category}</li>
+                ))}
+              </ul>
+            </td>
           </tr>
           <tr>
             <th>Publisher:</th>
@@ -124,7 +141,7 @@ class Book extends Component {
     );
   }
 
-  EditBook() { 
+  EditBook() {
     if (this.state.type === "1") {
       //operator
       return (
