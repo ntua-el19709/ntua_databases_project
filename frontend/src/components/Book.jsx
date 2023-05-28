@@ -186,22 +186,12 @@ class Book extends Component {
         <div>
           <button onClick={this.addCopy}>Add Copy</button>
           <button onClick={this.DeleteBook}>Delete Book</button>
-          <button>Rent Book</button>
+          <button onClick={() => this.props.addrental()}>Rent Book</button>
         </div>
       );
     }
   }
 
-  deleteBook() {
-    if (this.state.type === "1") {
-      //operator
-      return (
-        <div>
-          <button onClick={this.DeleteBook}>Delete Book</button>
-        </div>
-      );
-    }
-  }
   reserveBook() {
     if (this.state.type !== "1")
       return <button onClick={this.ReserveBook}>Reserve Book</button>;

@@ -157,7 +157,7 @@ class Home extends Component {
   addRental = () => {
     this.setState({
       ...this.state,
-      page: 21,
+      page: 21, //Add Rental page
     });
   };
   goToReviews = () => {
@@ -382,6 +382,7 @@ class Home extends Component {
           makereview={this.makeReview}
           userID={this.state.userID}
           gotoreviewsofbook={this.goToReviewsOfBook}
+          addrental={this.addRental}
         />
       );
     else if (this.state.page === 14)
@@ -479,8 +480,11 @@ class Home extends Component {
       return (
         <AddRental
           username={this.state.username}
+          isbn={this.state.isbn}
+          schlID={this.state.schlID}
           type={this.state.type}
           gotorentals={this.goToRentals}
+          gotobook={this.goToBook}
         />
       );
     else if (this.state.page === 22)
