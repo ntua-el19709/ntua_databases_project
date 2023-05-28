@@ -77,6 +77,42 @@ class Book extends Component {
     });
   };
 
+  addCopy = () => {
+    let newcopiesnum = Number(this.state.available_copies);
+    newcopiesnum = newcopiesnum + 1;
+    let newcopies = newcopiesnum.toString();
+    console.log(newcopiesnum, newcopies);
+    fetch(
+      `http://localhost:9103/libraries/web/changebook/${this.state.ISBN}/${this.state.schlID}/${this.state.title}/${this.state.publisher}/${this.state.pages}/${this.state.summary}/${this.state.language}/${newcopies}`,
+      {
+        method: "POST",
+        mode: "cors",
+      }
+    ).then(() => {
+      fetch(
+        `http://localhost:9103/libraries/web/bookinfo/${this.state.schlID}/${this.state.ISBN}`
+      )
+        .then((response) => response.json())
+        .then((obj) => {
+          this.setState({
+            ...this.state,
+            title: obj.title,
+            authors: obj.authors.map((author) => {
+              return author;
+            }),
+            categories: obj.categories.map((category) => {
+              return category;
+            }),
+            publisher: obj.publisher,
+            pages: obj.pages,
+            summary: obj.sumary,
+            language: obj.language,
+            available_copies: obj.copies,
+          });
+        });
+    });
+  };
+
   render() {
     console.log("Now at Book");
     return (
@@ -134,7 +170,7 @@ class Book extends Component {
         {this.EditBook()}
         <button onClick={this.DeleteBook}>Delete Book</button>
         <button onClick={this.ReserveBook}>Reserve Book</button>
-        <button onClick={() => this.props.makereview()}>Review</button>
+        {this.MakeReview()}
         <div>{this.state.message}</div>
         <button onClick={() => this.props.gotobooks()}>{"<-"}</button>
       </div>
@@ -146,7 +182,18 @@ class Book extends Component {
       //operator
       return (
         <div>
-          <button onClick={() => this.props.editbook()}>Edit Book</button>
+          <button onClick={this.addCopy}>Add Copy</button>
+        </div>
+      );
+    }
+  }
+
+  MakeReview() {
+    if (this.state.type !== "1") {
+      //student or professor
+      return (
+        <div>
+          <button onClick={() => this.props.makereview()}>Review</button>
         </div>
       );
     }
