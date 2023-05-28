@@ -63,6 +63,7 @@ class Profile extends Component {
           schools={() => this.props.gotoschools()}
           operators={() => this.props.gotooperators()}
           users={() => this.props.gotousers()}
+          reviews={() => this.props.gotoreviews()}
         />
         <table>
           <tr>

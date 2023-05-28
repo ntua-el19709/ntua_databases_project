@@ -54,6 +54,7 @@ class Reservations extends Component {
           users={() => this.props.gotousers()}
           reservations={() => this.props.gotoreservations()}
           rentals={() => this.props.gotorentals()}
+          reviews={() => this.props.gotoreviews()}
         />
         {this.restext()}
         <ul>

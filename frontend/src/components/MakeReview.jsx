@@ -4,12 +4,28 @@ class MakeReview extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: this.props.username,
-      title: this.props.title,
+      userID: this.props.userID,
+      isbn: this.props.isbn,
+      schlID: this.props.schlID,
+      title: "",
       likert: "",
       description: "",
       message: "",
     };
+    console.log(this.state);
+  }
+
+  componentDidMount() {
+    fetch(
+      `http://localhost:9103/libraries/web/bookinfo/${this.state.schlID}/${this.state.isbn}`
+    )
+      .then((response) => response.json())
+      .then((obj) => {
+        this.setState({
+          ...this.state,
+          title: obj.title,
+        });
+      });
   }
 
   check() {
@@ -25,7 +41,7 @@ class MakeReview extends Component {
         message: `Description is blank!`,
       });
       return 0;
-      }
+    }
     this.setState({ ...this.state, message: "Review Added!" });
     return 1;
   }
@@ -34,7 +50,7 @@ class MakeReview extends Component {
     let okay = this.check();
     if (okay === 1) {
       fetch(
-        `http://localhost:9103/libraries/web/makereview/${this.state.likert}/${this.state.description}`,
+        `http://localhost:9103/libraries/web/makereview/${this.state.userID}/${this.state.isbn}/${this.state.schlID}/${this.state.likert}/${this.state.description}`,
         {
           method: "POST",
           mode: "cors",
@@ -48,12 +64,8 @@ class MakeReview extends Component {
     return (
       <div>
         <table>
-        <tr>
-            <th>Username:</th>
-            <td>{this.state.username}</td>
-          </tr>
           <tr>
-            <th>Title:</th>
+            <th>Book:</th>
             <td>{this.state.title}</td>
           </tr>
           <tr>
@@ -73,7 +85,10 @@ class MakeReview extends Component {
               <input
                 type="text"
                 onChange={(val) =>
-                  this.setState({ ...this.state, description: val.target.value })
+                  this.setState({
+                    ...this.state,
+                    description: val.target.value,
+                  })
                 }
               />
             </td>
@@ -81,7 +96,7 @@ class MakeReview extends Component {
         </table>
         <button onClick={this.onMakeReview}>Make Review</button>
         <div>{this.state.message}</div>
-        <button onClick={() => this.props.gotobook()}>{"<-"}</button>
+        <button onClick={() => this.props.gotoreviewsofbook()}>{"<-"}</button>
       </div>
     );
   }

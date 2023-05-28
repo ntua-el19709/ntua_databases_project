@@ -23,6 +23,9 @@ import AddReservation from "./AddReservation";
 import Rentals from "./Rentals";
 import Rental from "./Rental";
 import AddRental from "./AddRental";
+import Reviews from "./Reviews";
+import Review from "./Review";
+import ReviewsOfBook from "./ReviewsOfBook";
 import MakeReview from "./MakeReview";
 
 class Home extends Component {
@@ -157,12 +160,29 @@ class Home extends Component {
       page: 21,
     });
   };
-  makeReview = (username, title) => {
+  goToReviews = () => {
     this.setState({
       ...this.state,
-      username: username,
-      title: title,
-      page: 22,
+      page: 22, //Reviews page
+    });
+  };
+  goToReviewsOfBook = () => {
+    this.setState({
+      ...this.state,
+      page: 23, // Reviews of book page
+    });
+  };
+  goToMakeReview = () => {
+    this.setState({
+      ...this.state,
+      page: 24, //Make Review page
+    });
+  };
+  goToReview = (review) => {
+    this.setState({
+      ...this.state,
+      review: review,
+      page: 25, //Review page
     });
   };
 
@@ -249,6 +269,7 @@ class Home extends Component {
           gotorentals={this.goToRentals}
           gotooperators={this.goToOperators}
           gotousers={this.goToUsers}
+          gotoreviews={this.goToReviews}
         />
       );
     else if (this.state.page === 4)
@@ -335,6 +356,7 @@ class Home extends Component {
           gotousers={this.goToUsers}
           gotoreservations={this.goToReservations}
           gotorentals={this.goToRentals}
+          gotoreviews={this.goToReviews}
         />
       );
     else if (this.state.page === 12)
@@ -359,6 +381,7 @@ class Home extends Component {
           editbook={this.editBook}
           makereview={this.makeReview}
           userID={this.state.userID}
+          gotoreviewsofbook={this.goToReviewsOfBook}
         />
       );
     else if (this.state.page === 14)
@@ -373,6 +396,7 @@ class Home extends Component {
           gotouser={this.goToUser}
           gotoreservations={this.goToReservations}
           gotorentals={this.goToRentals}
+          gotoreviews={this.goToReviews}
         />
       );
     else if (this.state.page === 15)
@@ -400,6 +424,7 @@ class Home extends Component {
           gotobooks={this.goToBooks}
           gotousers={this.goToUsers}
           gotorentals={this.goToRentals}
+          gotoreviews={this.goToReviews}
         />
       );
     else if (this.state.page === 17)
@@ -436,6 +461,7 @@ class Home extends Component {
           gotoreservations={this.goToReservations}
           gotobooks={this.goToBooks}
           gotousers={this.goToUsers}
+          gotoreviews={this.goToReviews}
         />
       );
     else if (this.state.page === 20)
@@ -458,14 +484,59 @@ class Home extends Component {
         />
       );
     else if (this.state.page === 22)
+      //Reviews page
+      return (
+        <Reviews
+          type={this.state.type}
+          schlID={this.state.schlID}
+          gotoprofile={this.goToProfile}
+          gotorentals={this.goToRentals}
+          gotoreservations={this.goToReservations}
+          gotobooks={this.goToBooks}
+          gotousers={this.goToUsers}
+          gotoreviews={this.goToReviews}
+          gotoreview={this.goToReview}
+        />
+      );
+    else if (this.state.page === 23)
+      //Reviews of book page
+      return (
+        <ReviewsOfBook
+          type={this.state.type}
+          schlID={this.state.schlID}
+          gotoprofile={this.goToProfile}
+          gotorentals={this.goToRentals}
+          gotoreservations={this.goToReservations}
+          gotobooks={this.goToBooks}
+          gotousers={this.goToUsers}
+          gotoreviews={this.goToReviews}
+          isbn={this.state.isbn}
+          userId={this.state.userID}
+          gotobook={this.goToBook}
+          gotomakereview={this.goToMakeReview}
+        />
+      );
+    else if (this.state.page === 24)
       //Make Review page
       return (
         <MakeReview
-          username={this.state.username}
-          title={this.state.title}
-          gotobooks={this.goToBooks}
-          gotobook={this.goToBook}
+          type={this.state.type}
+          gotoreviewsofbook={this.goToReviewsOfBook}
+          schlID={this.state.schlID}
+          isbn={this.state.isbn}
+          userID={this.state.userID}
         />
+      );
+    else if (this.state.page === 25)
+      //Review page
+      return (
+        <div>
+          <Review
+            schlID={this.state.schlId}
+            gotoreviews={this.goToReviews}
+            review={this.state.review}
+          />
+        </div>
       );
   }
 }

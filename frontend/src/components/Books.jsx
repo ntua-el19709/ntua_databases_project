@@ -36,6 +36,7 @@ class Books extends Component {
           users={() => this.props.gotousers()}
           reservations={() => this.props.gotoreservations()}
           rentals={() => this.props.gotorentals()}
+          reviews={() => this.props.gotoreviews()}
         />
         {this.AddBook()}
         <div>All Books:</div>

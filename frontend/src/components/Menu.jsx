@@ -34,7 +34,7 @@ class Menu extends Component {
           </button>
           <button onClick={() => this.props.rentals()}>Rentals</button>
 
-          <button>Reviews</button>
+          <button onClick={() => this.props.reviews()}>Reviews</button>
         </div>
       );
     else

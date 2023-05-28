@@ -46,7 +46,7 @@ class Book extends Component {
     console.log(this.state.type);
   }
 
-  //onEditBook = () => {};
+  //onopButtons = () => {};
 
   DeleteBook = () => {
     fetch(
@@ -170,22 +170,23 @@ class Book extends Component {
             <td>{this.state.available_copies}</td>
           </tr>
         </table>
-        {this.EditBook()}
-        {this.deleteBook()}
-        <button onClick={this.ReserveBook}>Reserve Book</button>
-        {this.MakeReview()}
+        {this.opButtons()}
+        {this.reserveBook()}
+        <button onClick={() => this.props.gotoreviewsofbook()}>Reviews</button>
         <div>{this.state.message}</div>
         <button onClick={() => this.props.gotobooks()}>{"<-"}</button>
       </div>
     );
   }
 
-  EditBook() {
+  opButtons() {
     if (this.state.type === "1") {
       //operator
       return (
         <div>
           <button onClick={this.addCopy}>Add Copy</button>
+          <button onClick={this.DeleteBook}>Delete Book</button>
+          <button>Rent Book</button>
         </div>
       );
     }
@@ -200,6 +201,10 @@ class Book extends Component {
         </div>
       );
     }
+  }
+  reserveBook() {
+    if (this.state.type !== "1")
+      return <button onClick={this.ReserveBook}>Reserve Book</button>;
   }
 
   MakeReview() {

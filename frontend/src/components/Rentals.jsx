@@ -105,6 +105,7 @@ class Rentals extends Component {
           users={() => this.props.gotousers()}
           reservations={() => this.props.gotoreservations()}
           rentals={() => this.props.gotorentals()}
+          reviews={() => this.props.gotoreviews()}
         />
         <div>Late Rentals:</div>
         <ul>
