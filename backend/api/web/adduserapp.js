@@ -10,7 +10,7 @@ router.post("/:username/:password/:fullname/:dob", async (req, res) => {
     "Successful application!",
     async (conn1, conn2) => {
       await conn1.query(
-        "INSERT INTO users (username, passwrd, user_fullname, date_of_birth, approved) VALUES (?, ?, ?, DATE ?, ?)",
+        "INSERT INTO users (username, passwrd, user_fullname, date_of_birth, approved) VALUES (?, ?, ?, date_add(DATE ?,interval 1 day), ?)",
         [
           req.params.username,
           req.params.password,
