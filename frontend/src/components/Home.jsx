@@ -144,10 +144,10 @@ class Home extends Component {
       page: 19,
     });
   };
-  goToRental = (rentat) => {
+  goToRental = (renID) => {
     this.setState({
       ...this.state,
-      rentat: rentat,
+      renID: renID,
       page: 20,
     });
   };
@@ -334,6 +334,7 @@ class Home extends Component {
           gotobook={this.goToBook}
           gotousers={this.goToUsers}
           gotoreservations={this.goToReservations}
+          gotorentals={this.goToRentals}
         />
       );
     else if (this.state.page === 12)
@@ -371,6 +372,7 @@ class Home extends Component {
           gotousers={this.goToUsers}
           gotouser={this.goToUser}
           gotoreservations={this.goToReservations}
+          gotorentals={this.goToRentals}
         />
       );
     else if (this.state.page === 15)
@@ -397,6 +399,7 @@ class Home extends Component {
           addreservation={this.addReservation}
           gotobooks={this.goToBooks}
           gotousers={this.goToUsers}
+          gotorentals={this.goToRentals}
         />
       );
     else if (this.state.page === 17)
@@ -405,6 +408,7 @@ class Home extends Component {
         <Reservation
           schlID={this.state.schlID}
           resID={this.state.resID}
+          type={this.state.type}
           gotoreservations={this.goToReservations}
         />
       );
@@ -424,18 +428,23 @@ class Home extends Component {
           username={this.state.username}
           type={this.state.type}
           schlID={this.state.schlID}
+          userID={this.state.userID}
           gotoprofile={this.goToProfile}
           gotorentals={this.goToRentals}
           gotorental={this.goToRental}
           addrental={this.addRental}
+          gotoreservations={this.goToReservations}
+          gotobooks={this.goToBooks}
+          gotousers={this.goToUsers}
         />
       );
     else if (this.state.page === 20)
       // Rental page
       return (
         <Rental
+          type={this.state.type}
           schlID={this.state.schlID}
-          rentat={this.staterentat}
+          renID={this.state.renID}
           gotorentals={this.goToRentals}
         />
       );

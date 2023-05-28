@@ -51,6 +51,7 @@ class Users extends Component {
           books={() => this.props.gotobooks()}
           users={() => this.props.gotousers()}
           reservations={() => this.props.gotoreservations()}
+          rentals={() => this.props.gotorentals()}
         />
         <div>Not Approved Users:</div>
         <ul>

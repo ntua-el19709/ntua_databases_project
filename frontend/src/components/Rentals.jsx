@@ -5,22 +5,92 @@ class Rentals extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      rentals: [],
+      laterentals: [],
+      ongoingrentals: [],
+      oldrentals: [],
       type: this.props.type,
+      schlID: this.props.schlID,
+      userID: this.props.userID,
     };
   }
 
   componentDidMount() {
-    fetch(`http://localhost:9103/libraries/web/makerental/${this.state.rentat}`)
-      .then((response) => response.json())
-      .then((obj) => {
-        this.setState({
-          ...this.state,
-            rentals: obj.map((rental) => {
-            return rental;
-          }),
+    if (this.state.type === "1") {
+      //operator
+      fetch(
+        `http://localhost:9103/libraries/web/lateschoolrentals/${this.state.schlID}`
+      )
+        .then((response) => response.json())
+        .then((obj) => {
+          this.setState({
+            ...this.state,
+            laterentals: obj.lateSchoolRentals.map((rental) => {
+              return rental;
+            }),
+          });
         });
-      });
+      fetch(
+        `http://localhost:9103/libraries/web/ongoingschoolrentals/${this.state.schlID}`
+      )
+        .then((response) => response.json())
+        .then((obj) => {
+          this.setState({
+            ...this.state,
+            ongoingrentals: obj.ongoingSchoolRentals.map((rental) => {
+              return rental;
+            }),
+          });
+        });
+      fetch(
+        `http://localhost:9103/libraries/web/oldschoolrentals/${this.state.schlID}`
+      )
+        .then((response) => response.json())
+        .then((obj) => {
+          this.setState({
+            ...this.state,
+            oldrentals: obj.oldSchoolRentals.map((rental) => {
+              return rental;
+            }),
+          });
+        });
+    } else {
+      fetch(
+        `http://localhost:9103/libraries/web/lateuserrentals/${this.state.userID}`
+      )
+        .then((response) => response.json())
+        .then((obj) => {
+          this.setState({
+            ...this.state,
+            laterentals: obj.lateUserRentals.map((rental) => {
+              return rental;
+            }),
+          });
+        });
+      fetch(
+        `http://localhost:9103/libraries/web/ongoinguserrentals/${this.state.userID}`
+      )
+        .then((response) => response.json())
+        .then((obj) => {
+          this.setState({
+            ...this.state,
+            ongoingrentals: obj.ongoingeUserRentals.map((rental) => {
+              return rental;
+            }),
+          });
+        });
+      fetch(
+        `http://localhost:9103/libraries/web/olduserrentals/${this.state.userID}`
+      )
+        .then((response) => response.json())
+        .then((obj) => {
+          this.setState({
+            ...this.state,
+            oldrentals: obj.oldUserRentals.map((rental) => {
+              return rental;
+            }),
+          });
+        });
+    }
     console.log(this.state.type);
   }
 
@@ -31,14 +101,39 @@ class Rentals extends Component {
         <Menu
           type={this.state.type}
           profile={() => this.props.gotoprofile()}
+          books={() => this.props.gotobooks()}
+          users={() => this.props.gotousers()}
+          reservations={() => this.props.gotoreservations()}
           rentals={() => this.props.gotorentals()}
         />
-        {this.AddRental()}
-        <div>All Rentals:</div>
+        <div>Late Rentals:</div>
         <ul>
-          {this.state.rentals.map((rental) => (
-            <li key={rental.rentat}>
-              <button onClick={() => this.props.gotorental(rental.rentat)}>
+          {this.state.laterentals.map((rental) => (
+            <li key={rental.renID}>
+              {this.rentalinfo(rental)}
+              <button onClick={() => this.props.gotorental(rental.renID)}>
+                {"->"}
+              </button>
+            </li>
+          ))}
+        </ul>
+        <div>Ongoing Rentals:</div>
+        <ul>
+          {this.state.ongoingrentals.map((rental) => (
+            <li key={rental.renID}>
+              {this.rentalinfo(rental)}
+              <button onClick={() => this.props.gotorental(rental.renID)}>
+                {"->"}
+              </button>
+            </li>
+          ))}
+        </ul>
+        <div>Old Rentals:</div>
+        <ul>
+          {this.state.oldrentals.map((rental) => (
+            <li key={rental.renID}>
+              {this.rentalinfo(rental)}
+              <button onClick={() => this.props.gotorental(rental.renID)}>
                 {"->"}
               </button>
             </li>
@@ -46,6 +141,12 @@ class Rentals extends Component {
         </ul>
       </div>
     );
+  }
+  rentalinfo(rental) {
+    if (this.state.type === "1")
+      //operator
+      return "Rental no " + rental.renID + " made by " + rental.username;
+    else return rental.book;
   }
   AddRental() {
     if (this.state.type === "1") {

@@ -23,6 +23,8 @@ router.get("/:renID", async (req, res) => {
         book: results[0].title,
         rent_at: results[0].rental_datetime,
         returned: results[0].returned,
+        userID: results[0].user_id,
+        isbn: results[0].isbn,
       };
 
       if (req.query.format == "csv") {

@@ -21,6 +21,8 @@ router.get("/:resID", async (req, res) => {
         username: results[0].username,
         book: results[0].title,
         placed_at: results[0].reservation_datetime,
+        isbn: results[0].isbn,
+        userID: results[0].user_id,
       };
 
       if (req.query.format == "csv") {
