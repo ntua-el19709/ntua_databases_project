@@ -8,6 +8,7 @@ class Book extends Component {
       schlID: this.props.schlID,
       ISBN: this.props.ISBN,
       placedat: this.props.placedat,
+      userID: this.props.userID,
       title: "",
       authors: [],
       categories: [],
@@ -63,18 +64,20 @@ class Book extends Component {
   };
 
   ReserveBook = () => {
-    fetch(
-      `http://localhost:9103/libraries/web/userreservations/${this.state.placedat}`,
-      {
-        method: "POST",
-        mode: "cors",
-      }
-    ).then(() => {
-      this.setState({
-        ...this.state,
-        message: "Book Reserved",
+    if (this.state.type !== "1")
+      //not operator
+      fetch(
+        `http://localhost:9103/libraries/web/makereservation/${this.state.userID}/${this.state.ISBN}/${this.state.schlID}`,
+        {
+          method: "POST",
+          mode: "cors",
+        }
+      ).then(() => {
+        this.setState({
+          ...this.state,
+          message: "Book Reserved",
+        });
       });
-    });
   };
 
   addCopy = () => {
@@ -168,7 +171,7 @@ class Book extends Component {
           </tr>
         </table>
         {this.EditBook()}
-        <button onClick={this.DeleteBook}>Delete Book</button>
+        {this.deleteBook()}
         <button onClick={this.ReserveBook}>Reserve Book</button>
         {this.MakeReview()}
         <div>{this.state.message}</div>
@@ -183,6 +186,17 @@ class Book extends Component {
       return (
         <div>
           <button onClick={this.addCopy}>Add Copy</button>
+        </div>
+      );
+    }
+  }
+
+  deleteBook() {
+    if (this.state.type === "1") {
+      //operator
+      return (
+        <div>
+          <button onClick={this.DeleteBook}>Delete Book</button>
         </div>
       );
     }

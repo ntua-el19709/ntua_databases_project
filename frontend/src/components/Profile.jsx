@@ -62,6 +62,7 @@ class Profile extends Component {
           rentals={() => this.props.gotorentals()}
           schools={() => this.props.gotoschools()}
           operators={() => this.props.gotooperators()}
+          users={() => this.props.gotousers()}
         />
         <table>
           <tr>
@@ -85,8 +86,7 @@ class Profile extends Component {
             </td>
           </tr>
         </table>
-        {this.editprofile()}
-        {this.changepassword()}
+        <button onClick={() => this.props.EditProfile()}>Edit Profile</button>
         {this.backuprestore()}
         <button onClick={() => this.props.LoggedOut()}>Log Out</button>
       </div>

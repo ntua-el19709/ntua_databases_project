@@ -6,22 +6,41 @@ class Reservations extends Component {
     super(props);
     this.state = {
       reservations: [],
+      userID: this.props.userID,
+      username: this.props.username,
+      schlID: this.props.schlID,
       type: this.props.type,
     };
   }
 
   componentDidMount() {
-    fetch(`http://localhost:9103/libraries/web/makereservation/${this.state.placedat}`)
-      .then((response) => response.json())
-      .then((obj) => {
-        this.setState({
-          ...this.state,
-          reservations: obj.map((reservation) => {
-            return reservation;
-          }),
+    if (this.state.type !== "1")
+      //not operator
+      fetch(
+        `http://localhost:9103/libraries/web/userreservations/${this.state.schlID}/${this.state.userID}`
+      )
+        .then((response) => response.json())
+        .then((obj) => {
+          this.setState({
+            ...this.state,
+            reservations: obj.reservation.map((reservation) => {
+              return reservation;
+            }),
+          });
         });
-      });
-    console.log(this.state.type);
+    else
+      fetch(
+        `http://localhost:9103/libraries/web/schoolreservations/${this.state.schlID}`
+      )
+        .then((response) => response.json())
+        .then((obj) => {
+          this.setState({
+            ...this.state,
+            reservations: obj.reservation.map((reservation) => {
+              return reservation;
+            }),
+          });
+        });
   }
 
   render() {
@@ -31,14 +50,20 @@ class Reservations extends Component {
         <Menu
           type={this.state.type}
           profile={() => this.props.gotoprofile()}
+          books={() => this.props.gotobooks()}
+          users={() => this.props.gotousers()}
           reservations={() => this.props.gotoreservations()}
         />
-        {this.AddReservation()}
-        <div>All Reservations:</div>
+        {this.restext()}
         <ul>
           {this.state.reservations.map((reservation) => (
-            <li key={reservation.placedat}>
-              <button onClick={() => this.props.gotoreservation(reservation.placedat)}>
+            <li key={reservation.reservationID}>
+              {this.resinfo(reservation)}
+              <button
+                onClick={() =>
+                  this.props.gotoreservation(reservation.reservationID)
+                }
+              >
                 {"->"}
               </button>
             </li>
@@ -47,15 +72,19 @@ class Reservations extends Component {
       </div>
     );
   }
-  AddReservation() {
-    if (this.state.type === "1") {
-      //operator
+  resinfo(reservation) {
+    if (this.state.type === "1")
       return (
-        <div>
-          <button onClick={() => this.props.addreservation()}>Add Reservation</button>
-        </div>
+        "Reservation no " +
+        reservation.reservationID +
+        " made by " +
+        reservation.username
       );
-    }
+    else return reservation.book;
+  }
+  restext() {
+    if (this.state.type === "1") return <div>All Reservations:</div>;
+    else return <div>My Reservations:</div>;
   }
 }
 

@@ -4,8 +4,9 @@ class Reservation extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      placedat: this.props.placedat,
+      resID: this.props.resID,
       schlID: this.props.schlID,
+      placedat: "",
       username: "",
       userID: this.props.userID,
       schlname: "",
@@ -16,16 +17,21 @@ class Reservation extends Component {
   }
 
   componentDidMount() {
-    fetch(`http://localhost:9103/libraries/web/reservationinfo/${this.state.placedat}`)
+    fetch(
+      `http://localhost:9103/libraries/web/reservationinfo/${this.state.resID}`
+    )
       .then((response) => response.json())
       .then((obj) => {
         this.setState({
           ...this.state,
           book: obj.book,
           username: obj.username,
+          placedat: obj.placed_at,
         });
       });
-    fetch(`http://localhost:9103/libraries/web/schoolreservations/${this.state.userID}`)
+    fetch(
+      `http://localhost:9103/libraries/web/schoolreservations/${this.state.userID}`
+    )
       .then((response) => response.json())
       .then((obj) => {
         this.setState({
@@ -37,7 +43,7 @@ class Reservation extends Component {
 
   DeleteReservation = () => {
     fetch(
-      `http://localhost:9103/libraries/web/deletereservation/${this.state.placedat}`,
+      `http://localhost:9103/libraries/web/deletereservation/${this.state.resID}`,
       {
         method: "POST",
         mode: "cors",

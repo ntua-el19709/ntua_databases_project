@@ -13,6 +13,8 @@ import Operator from "./Operator";
 import Books from "./Books";
 import AddBook from "./AddBook";
 import Book from "./Book";
+import Users from "./Users";
+import User from "./User";
 import EditBook from "./EditBook";
 import ChangePassword from "./ChangePassword";
 import Reservations from "./Reservations";
@@ -78,11 +80,12 @@ class Home extends Component {
   goToOperator = (username, userID) => {
     this.setState({
       ...this.state,
-      username: username,
+      opusername: username,
       opuserID: userID,
       page: 10, //Operator Page
     });
   };
+
   goToBooks = () => {
     this.setState({
       ...this.state,
@@ -102,23 +105,30 @@ class Home extends Component {
       page: 13,
     });
   };
-  editBook = (ISBN) => {
+  goToUsers = () => {
     this.setState({
       ...this.state,
-      ISBN: ISBN,
-      page: 14,
+      page: 14, //Users page
+    });
+  };
+  goToUser = (username, userID) => {
+    this.setState({
+      ...this.state,
+      opusername: username,
+      opuserID: userID,
+      page: 15, //User Page
     });
   };
   goToReservations = () => {
     this.setState({
       ...this.state,
-      page: 16,
+      page: 16, //Reservation Page
     });
   };
-  goToReservation = (placedat) => {
+  goToReservation = (resID) => {
     this.setState({
       ...this.state,
-      placedat: placedat,
+      resID: resID,
       page: 17,
     });
   };
@@ -190,6 +200,7 @@ class Home extends Component {
     console.log(this.state);
   };
 
+  /*
   changepassword = () => {
     //pressed change password, go to Change Password page
     this.setState({
@@ -198,7 +209,7 @@ class Home extends Component {
     });
     console.log(this.state);
   };
-
+*/
   render() {
     return <div>{this.formatPage()}</div>;
   }
@@ -237,6 +248,7 @@ class Home extends Component {
           gotoreservations={this.goToReservations}
           gotorentals={this.goToRentals}
           gotooperators={this.goToOperators}
+          gotousers={this.goToUsers}
         />
       );
     else if (this.state.page === 4)
@@ -300,11 +312,11 @@ class Home extends Component {
         />
       );
     else if (this.state.page === 10)
-      //Operators page
+      //Operator page
       return (
         <Operator
           type={this.state.type}
-          username={this.state.username}
+          username={this.state.opusername}
           userID={this.state.opuserID}
           gotooperators={this.goToOperators}
         />
@@ -320,6 +332,8 @@ class Home extends Component {
           gotobooks={this.goToBooks}
           addbook={this.addBook}
           gotobook={this.goToBook}
+          gotousers={this.goToUsers}
+          gotoreservations={this.goToReservations}
         />
       );
     else if (this.state.page === 12)
@@ -330,6 +344,7 @@ class Home extends Component {
           type={this.state.type}
           schlID={this.state.schlID}
           gotobooks={this.goToBooks}
+          userID={this.state.userID}
         />
       );
     else if (this.state.page === 13)
@@ -342,25 +357,30 @@ class Home extends Component {
           gotobooks={this.goToBooks}
           editbook={this.editBook}
           makereview={this.makeReview}
+          userID={this.state.userID}
         />
       );
     else if (this.state.page === 14)
-      //Edit Book page
+      //Users page
       return (
-        <EditBook
+        <Users
+          type={this.state.type}
           schlID={this.state.schlID}
-          ISBN={this.state.ISBN}
           gotobooks={this.goToBooks}
-          gotobook={this.goToBook}
+          gotoprofile={this.goToProfile}
+          gotousers={this.goToUsers}
+          gotouser={this.goToUser}
+          gotoreservations={this.goToReservations}
         />
       );
     else if (this.state.page === 15)
-      //Change Password page
+      //User page
       return (
-        <ChangePassword
-          username={this.state.username}
+        <User
           type={this.state.type}
-          gotoprofile={this.goToProfile}
+          username={this.state.opusername}
+          userID={this.state.opuserID}
+          gotousers={this.goToUsers}
         />
       );
     else if (this.state.page === 16)
@@ -368,12 +388,15 @@ class Home extends Component {
       return (
         <Reservations
           username={this.state.username}
+          userID={this.state.userID}
           type={this.state.type}
           schlID={this.state.schlID}
           gotoprofile={this.goToProfile}
           gotoreservations={this.goToReservations}
           gotoreservation={this.goToReservation}
           addreservation={this.addReservation}
+          gotobooks={this.goToBooks}
+          gotousers={this.goToUsers}
         />
       );
     else if (this.state.page === 17)
@@ -381,7 +404,7 @@ class Home extends Component {
       return (
         <Reservation
           schlID={this.state.schlID}
-          placedat={this.state.placedat}
+          resID={this.state.resID}
           gotoreservations={this.goToReservations}
         />
       );
