@@ -55,6 +55,8 @@ const deletereview = require("./api/web/deletereview");
 const notapprovedreviews = require("./api/web/notapprovedreviews");
 const bookreviews = require("./api/web/bookreviews");
 const booklikert = require("./api/web/booklikert");
+const backup = require("./api/web/backup");
+const restore = require("./api/web/restore");
 //const { controleer } = require("./api/web/skotinos_arxontas");
 /* end of ROUTES and how to import routes */
 
@@ -134,6 +136,8 @@ app.use(baseurl + "/web/deletereview", deletereview);
 app.use(baseurl + "/web/notapprovedreviews", notapprovedreviews);
 app.use(baseurl + "/web/bookreviews", bookreviews);
 app.use(baseurl + "/web/booklikert", booklikert);
+app.use(baseurl + "/web/backup", backup);
+app.use(baseurl + "/web/restore", restore);
 // /*End of routes used by our project */
 
 // In case of an endpoint does not exist

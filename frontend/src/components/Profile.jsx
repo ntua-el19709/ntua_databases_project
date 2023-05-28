@@ -12,6 +12,7 @@ class Profile extends Component {
       userID: this.props.userID,
       password: "",
       type: this.props.type,
+      message: "",
     };
   }
 
@@ -29,27 +30,38 @@ class Profile extends Component {
     console.log(this.state.type);
   }
 
-  onLogIn = () => {
-    if (this.state.username.length === 0) {
-      this.setState({
-        ...this.state,
-        message: "Username is blank",
+  BackUp = () => {
+    fetch(`http://localhost:9103/libraries/web/backup`)
+      .then((response) => response.json())
+      .then((obj) => {
+        if (obj.message === "OK")
+          this.setState({
+            ...this.state,
+            message: "Database Backed Up!",
+          });
+        else
+          this.setState({
+            ...this.state,
+            message: "Database Failed to Back Up!",
+          });
       });
-    } else if (this.state.password.length === 0) {
-      this.setState({
-        ...this.state,
-        message: "Password is blank",
-      });
-    } else if (this.state.unmessage !== "Validated") {
-      this.setState({
-        ...this.state,
-        message: this.state.unmessage,
-      });
-    } else if (this.state.unmessage === "Validated") {
-      this.props.LoggedIn(this.state.username);
-    }
   };
-
+  Restore = () => {
+    fetch(`http://localhost:9103/libraries/web/restore`)
+      .then((response) => response.json())
+      .then((obj) => {
+        if (obj.message === "OK")
+          this.setState({
+            ...this.state,
+            message: "Database Restored!",
+          });
+        else
+          this.setState({
+            ...this.state,
+            message: "Database has not been restored successfully!",
+          });
+      });
+  };
   render() {
     console.log("Now at Profile");
     return (
@@ -122,8 +134,10 @@ class Profile extends Component {
       //topoperator
       return (
         <div>
-          <button>Back Up</button>
-          <button>Restore</button>
+          <button onClick={this.BackUp}>Back Up</button>
+          <button onClick={this.Restore}>Restore</button>
+          <br></br>
+          {this.state.message}
         </div>
       );
     }
