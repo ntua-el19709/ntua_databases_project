@@ -10,6 +10,8 @@ class Reservations extends Component {
       username: this.props.username,
       schlID: this.props.schlID,
       type: this.props.type,
+      users: [],
+      selected: 0,
     };
   }
 
@@ -28,7 +30,20 @@ class Reservations extends Component {
             }),
           });
         });
-    else
+    else {
+      fetch(
+        `http://localhost:9103/libraries/web/approvedusersofschl/${this.state.schlID}`
+      )
+        .then((response) => response.json())
+        .then((obj) => {
+          console.log(obj);
+          this.setState({
+            ...this.state,
+            users: obj.approvedUsers.map((user) => {
+              return user;
+            }),
+          });
+        });
       fetch(
         `http://localhost:9103/libraries/web/schoolreservations/${this.state.schlID}`
       )
@@ -41,7 +56,55 @@ class Reservations extends Component {
             }),
           });
         });
+    }
   }
+
+  clear = () => {
+    this.setState(
+      {
+        ...this.state,
+        selected: 0,
+      },
+      () => {
+        fetch(
+          `http://localhost:9103/libraries/web/schoolreservations/${this.state.schlID}`
+        )
+          .then((response) => response.json())
+          .then((obj) => {
+            this.setState({
+              ...this.state,
+              reservations: obj.reservation.map((reservation) => {
+                return reservation;
+              }),
+            });
+          });
+      }
+    );
+  };
+
+  selectUser = (val) => {
+    this.setState(
+      {
+        ...this.state,
+        userID: val.target.value,
+        selected: 1,
+      },
+      () => {
+        fetch(
+          `http://localhost:9103/libraries/web/userreservations/${this.state.schlID}/${this.state.userID}`
+        )
+          .then((response) => response.json())
+          .then((obj) => {
+            this.setState({
+              ...this.state,
+              reservations: obj.reservation.map((reservation) => {
+                return reservation;
+              }),
+            });
+          });
+      }
+    );
+  };
 
   render() {
     console.log("Now at Reservations");
@@ -57,6 +120,21 @@ class Reservations extends Component {
           reviews={() => this.props.gotoreviews()}
           queries={() => this.props.gotoqueries()}
         />
+        <table>
+          <tr>
+            <th>Filter by username:</th>
+            <td>
+              <form>
+                <select multiple name="username" onChange={this.selectUser}>
+                  {this.state.users.map((user) => (
+                    <option value={user.userID}>{user.username}</option>
+                  ))}
+                </select>
+              </form>
+              <button onClick={this.clear}>Clear</button>
+            </td>
+          </tr>
+        </table>
         {this.restext()}
         <ul>
           {this.state.reservations.map((reservation) => (
@@ -76,17 +154,25 @@ class Reservations extends Component {
     );
   }
   resinfo(reservation) {
-    if (this.state.type === "1")
+    if (this.state.type === "1" && this.state.selected === 0)
       return (
         "Reservation no " +
         reservation.reservationID +
         " made by " +
         reservation.username
       );
+    else if (this.state.type === "1")
+      return (
+        "Reservation no " +
+        reservation.reservationID +
+        " of book '" +
+        reservation.book +
+        "' "
+      );
     else return reservation.book;
   }
   restext() {
-    if (this.state.type === "1") return <div>All Reservations:</div>;
+    if (this.state.type === "1") return <div>Reservations:</div>;
     else return <div>My Reservations:</div>;
   }
 }
