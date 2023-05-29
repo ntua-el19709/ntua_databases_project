@@ -151,10 +151,38 @@ class SignUp extends Component {
   };
 
   selectType = (val) => {
-    this.setState({
-      ...this.state,
-      type: val.target.value, //1 for operator, 2 for professor, 3 for student
-    });
+    this.setState(
+      {
+        ...this.state,
+        type: val.target.value, //1 for operator, 2 for professor, 3 for student
+      },
+      () => {
+        if (this.state.type === "1")
+          fetch(`http://localhost:9103/libraries/web/allschoolswithoutop`)
+            .then((response) => response.json())
+            .then((obj) => {
+              this.setState({
+                ...this.state,
+                schools: obj.map((school) => {
+                  //option.selected = 0;
+                  return school;
+                }),
+              });
+            });
+        else
+          fetch(`http://localhost:9103/libraries/web/allschools`)
+            .then((response) => response.json())
+            .then((obj) => {
+              this.setState({
+                ...this.state,
+                schools: obj.map((school) => {
+                  //option.selected = 0;
+                  return school;
+                }),
+              });
+            });
+      }
+    );
   };
 
   selectSchool = (val) => {
