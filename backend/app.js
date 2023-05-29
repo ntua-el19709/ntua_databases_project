@@ -58,6 +58,8 @@ const bookreviews = require("./api/web/bookreviews");
 const booklikert = require("./api/web/booklikert");
 const backup = require("./api/web/backup");
 const restore = require("./api/web/restore");
+//Queries
+const query311 = require("./api/queries/query311");
 //const { controleer } = require("./api/web/skotinos_arxontas");
 /* end of ROUTES and how to import routes */
 
@@ -140,6 +142,8 @@ app.use(baseurl + "/web/bookreviews", bookreviews);
 app.use(baseurl + "/web/booklikert", booklikert);
 app.use(baseurl + "/web/backup", backup);
 app.use(baseurl + "/web/restore", restore);
+//Queries
+app.use(baseurl + "/queries/query311", query311);
 // /*End of routes used by our project */
 
 // In case of an endpoint does not exist
