@@ -10,7 +10,10 @@ router.get("/", async (req, res) => {
     res,
     "Successful retrieval of all schools!",
     async (conn) => {
-      const ans_list = await conn.query("SELECT * FROM school");
+      const ans_list = await conn.query(
+        `SELECT * FROM school WHERE (school_id) 
+          NOT IN (SELECT (school_id) from operator)`
+      );
 
       json_res = [];
       for (elem of ans_list) {
