@@ -20,6 +20,7 @@ class Menu extends Component {
           <button onClick={() => this.props.profile()}>Profile</button>
           <button onClick={() => this.props.schools()}>School Units</button>
           <button onClick={() => this.props.operators()}>Operators</button>
+          <button onClick={() => this.props.queries()}>Queries</button>
         </div>
       );
     else if (this.state.type === "1")
@@ -35,6 +36,7 @@ class Menu extends Component {
           <button onClick={() => this.props.rentals()}>Rentals</button>
 
           <button onClick={() => this.props.reviews()}>Reviews</button>
+          <button onClick={() => this.props.queries()}>Queries</button>
         </div>
       );
     else
@@ -46,6 +48,7 @@ class Menu extends Component {
             Reservations
           </button>
           <button onClick={() => this.props.rentals()}>Rentals</button>
+          <button onClick={() => this.props.queries()}>Queries</button>
         </div>
       );
   }

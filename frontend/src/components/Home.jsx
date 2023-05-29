@@ -27,6 +27,7 @@ import Reviews from "./Reviews";
 import Review from "./Review";
 import ReviewsOfBook from "./ReviewsOfBook";
 import MakeReview from "./MakeReview";
+import Queries from "./Queries";
 
 class Home extends Component {
   constructor() {
@@ -185,6 +186,12 @@ class Home extends Component {
       page: 25, //Review page
     });
   };
+  goToQueries = () => {
+    this.setState({
+      ...this.state,
+      page: 26, //Queries page
+    });
+  };
 
   login = (username) => {
     //just logged in, go to profile page
@@ -261,7 +268,6 @@ class Home extends Component {
           type={this.state.type}
           LoggedOut={this.logout}
           EditProfile={this.editprofile}
-          ChangePassword={this.changepassword}
           gotoprofile={this.goToProfile}
           gotoschools={this.goToSchools}
           gotobooks={this.goToBooks}
@@ -270,6 +276,7 @@ class Home extends Component {
           gotooperators={this.goToOperators}
           gotousers={this.goToUsers}
           gotoreviews={this.goToReviews}
+          gotoqueries={this.goToQueries}
         />
       );
     else if (this.state.page === 4)
@@ -292,6 +299,7 @@ class Home extends Component {
           addschool={this.addSchool}
           gotoschool={this.goToSchool}
           gotooperators={this.goToOperators}
+          gotoqueries={this.goToQueries}
         />
       );
     else if (this.state.page === 6)
@@ -330,6 +338,7 @@ class Home extends Component {
           gotoschools={this.goToSchools}
           gotooperators={this.goToOperators}
           gotooperator={this.goToOperator}
+          gotoqueries={this.goToQueries}
         />
       );
     else if (this.state.page === 10)
@@ -357,6 +366,7 @@ class Home extends Component {
           gotoreservations={this.goToReservations}
           gotorentals={this.goToRentals}
           gotoreviews={this.goToReviews}
+          gotoqueries={this.goToQueries}
         />
       );
     else if (this.state.page === 12)
@@ -398,6 +408,7 @@ class Home extends Component {
           gotoreservations={this.goToReservations}
           gotorentals={this.goToRentals}
           gotoreviews={this.goToReviews}
+          gotoqueries={this.goToQueries}
         />
       );
     else if (this.state.page === 15)
@@ -426,6 +437,7 @@ class Home extends Component {
           gotousers={this.goToUsers}
           gotorentals={this.goToRentals}
           gotoreviews={this.goToReviews}
+          gotoqueries={this.goToQueries}
         />
       );
     else if (this.state.page === 17)
@@ -463,6 +475,7 @@ class Home extends Component {
           gotobooks={this.goToBooks}
           gotousers={this.goToUsers}
           gotoreviews={this.goToReviews}
+          gotoqueries={this.goToQueries}
         />
       );
     else if (this.state.page === 20)
@@ -500,6 +513,7 @@ class Home extends Component {
           gotousers={this.goToUsers}
           gotoreviews={this.goToReviews}
           gotoreview={this.goToReview}
+          gotoqueries={this.goToQueries}
         />
       );
     else if (this.state.page === 23)
@@ -541,6 +555,22 @@ class Home extends Component {
             review={this.state.review}
           />
         </div>
+      );
+    else if (this.state.page === 26)
+      //Queries page
+      return (
+        <Queries
+          type={this.state.type}
+          gotoprofile={this.goToProfile}
+          gotoreservations={this.goToReservations}
+          gotobooks={this.goToBooks}
+          gotousers={this.goToUsers}
+          gotorentals={this.goToRentals}
+          gotoreviews={this.goToReviews}
+          gotoqueries={this.goToQueries}
+          gotoschools={this.goToSchools}
+          gotooperators={this.goToOperators}
+        />
       );
   }
 }

@@ -33,6 +33,7 @@ class SchoolUnits extends Component {
           profile={() => this.props.gotoprofile()}
           schools={() => this.props.gotoschools()}
           operators={() => this.props.gotooperators()}
+          queries={() => this.props.gotoqueries()}
         />
         <button onClick={() => this.props.addschool()}>Add School Unit</button>
         <div>All School Units:</div>
