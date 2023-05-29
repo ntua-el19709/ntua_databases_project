@@ -121,6 +121,7 @@ class User extends Component {
         </table>
         {this.approveornot()}
         <button onClick={this.DeleteUser}>Delete User</button>
+        {this.printcard()}
         <div>{this.state.message}</div>
         <button onClick={() => this.props.gotousers()}>{"<-"}</button>
       </div>
@@ -133,6 +134,11 @@ class User extends Component {
       return <button onClick={this.UnapproveUser}>Unapprove User</button>;
     }
     return;
+  }
+  printcard() {
+    if (this.state.type === "1")
+      //operator
+      return <button>Print Card</button>;
   }
 }
 

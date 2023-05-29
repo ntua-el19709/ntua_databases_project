@@ -1,6 +1,17 @@
 import React, { Component } from "react";
 import Menu from "./Menu";
 import Query311 from "./Queries/Query311";
+import Query312 from "./Queries/Query312";
+import Query313 from "./Queries/Query313";
+import Query314 from "./Queries/Query314";
+import Query315 from "./Queries/Query315";
+import Query316 from "./Queries/Query316";
+import Query317 from "./Queries/Query317";
+import Query321 from "./Queries/Query321";
+import Query322 from "./Queries/Query322";
+import Query323 from "./Queries/Query323";
+import Query331 from "./Queries/Query331";
+import Query332 from "./Queries/Query332";
 
 class Queries extends Component {
   constructor(props) {
@@ -17,6 +28,72 @@ class Queries extends Component {
     this.setState({
       ...this.state,
       query: "311",
+    });
+  };
+  query312 = () => {
+    this.setState({
+      ...this.state,
+      query: "312",
+    });
+  };
+  query313 = () => {
+    this.setState({
+      ...this.state,
+      query: "313",
+    });
+  };
+  query314 = () => {
+    this.setState({
+      ...this.state,
+      query: "314",
+    });
+  };
+  query315 = () => {
+    this.setState({
+      ...this.state,
+      query: "315",
+    });
+  };
+  query316 = () => {
+    this.setState({
+      ...this.state,
+      query: "316",
+    });
+  };
+  query317 = () => {
+    this.setState({
+      ...this.state,
+      query: "317",
+    });
+  };
+  query321 = () => {
+    this.setState({
+      ...this.state,
+      query: "321",
+    });
+  };
+  query322 = () => {
+    this.setState({
+      ...this.state,
+      query: "322",
+    });
+  };
+  query323 = () => {
+    this.setState({
+      ...this.state,
+      query: "323",
+    });
+  };
+  query331 = () => {
+    this.setState({
+      ...this.state,
+      query: "331",
+    });
+  };
+  query332 = () => {
+    this.setState({
+      ...this.state,
+      query: "332",
     });
   };
 
@@ -47,35 +124,46 @@ class Queries extends Component {
       return (
         <div>
           <button onClick={this.query311}>Query 3.1.1</button>
-          <button>Query 3.1.2</button>
-          <button>Query 3.1.3</button>
-          <button>Query 3.1.4</button>
-          <button>Query 3.1.5</button>
-          <button>Query 3.1.6</button>
-          <button>Query 3.1.7</button>
+          <button onClick={this.query312}>Query 3.1.2</button>
+          <button onClick={this.query313}>Query 3.1.3</button>
+          <button onClick={this.query314}>Query 3.1.4</button>
+          <button onClick={this.query315}>Query 3.1.5</button>
+          <button onClick={this.query316}>Query 3.1.6</button>
+          <button onClick={this.query317}>Query 3.1.7</button>
         </div>
       );
     else if (this.state.type === "1")
       //operator
       return (
         <div>
-          <button>Query 3.2.1</button>
-          <button>Query 3.2.2</button>
-          <button>Query 3.2.3</button>
+          <button onClick={this.query321}>Query 3.2.1</button>
+          <button onClick={this.query322}>Query 3.2.2</button>
+          <button onClick={this.query323}>Query 3.2.3</button>
         </div>
       );
     //student or professor
     else
       return (
         <div>
-          <button>Query 3.3.1</button>
-          <button>Query 3.3.2</button>
+          <button onClick={this.query331}>Query 3.3.1</button>
+          <button onClick={this.query332}>Query 3.3.2</button>
         </div>
       );
   }
   query() {
     if (this.state.query === "Select Query") return <div>Select Query</div>;
     else if (this.state.query === "311") return <Query311 />;
+    else if (this.state.query === "312") return <Query312 />;
+    else if (this.state.query === "313") return <Query313 />;
+    else if (this.state.query === "314") return <Query314 />;
+    else if (this.state.query === "315") return <Query315 />;
+    else if (this.state.query === "316") return <Query316 />;
+    else if (this.state.query === "317") return <Query317 />;
+    else if (this.state.query === "321") return <Query321 />;
+    else if (this.state.query === "322") return <Query322 />;
+    else if (this.state.query === "323") return <Query323 />;
+    else if (this.state.query === "331") return <Query331 />;
+    else if (this.state.query === "332") return <Query332 />;
   }
 }
 
