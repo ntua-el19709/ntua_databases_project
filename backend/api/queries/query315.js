@@ -10,7 +10,7 @@ router.get("/", async (req, res) => {
     res,
     "Query 3.1.5 executed succesfully!",
     async (conn) => {
-      let min_no_of_rents = 20;
+      let min_no_of_rents = 0;
       let min_no_of_ops = 1;
       const ans_list = await conn.query(
         `SELECT operator, num_of_rents
@@ -27,7 +27,8 @@ router.get("/", async (req, res) => {
                         WHERE Q1.num_of_rents > ?) AS Q2
                     WHERE users.user_id=Q2.user_id
                     GROUP BY Q2.num_of_rents) as Q3
-                WHERE Q3.num_of_ops>?)`,
+                WHERE Q3.num_of_ops>?)
+            ORDER BY num_of_rents DESC`,
         [min_no_of_rents, min_no_of_ops]
       );
 
