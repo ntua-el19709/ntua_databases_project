@@ -274,7 +274,7 @@ class Rentals extends Component {
       //operator
       return "Rental no " + rental.renID + " made by " + rental.username;
     else if (this.state.type === "1")
-      return "Rental no " + rental.renID + " made by '" + rental.book + "' ";
+      return "Rental no " + rental.renID + " of book '" + rental.book + "' ";
     else return rental.book;
   }
   AddRental() {
