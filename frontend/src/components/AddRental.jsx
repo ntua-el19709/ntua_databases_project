@@ -10,6 +10,11 @@ class AddRental extends Component {
       title: "",
       userID: "",
       message: "",
+      publisher: "",
+      pages: "",
+      summary: "",
+      language: "",
+      available_copies: "",
       rmade: 0,
     };
   }
@@ -22,6 +27,11 @@ class AddRental extends Component {
         this.setState({
           ...this.state,
           title: obj.title,
+          publisher: obj.publisher,
+          pages: obj.pages,
+          summary: obj.sumary,
+          language: obj.language,
+          available_copies: obj.copies,
         });
       });
     fetch(
@@ -56,6 +66,17 @@ class AddRental extends Component {
     if (okay === 1) {
       fetch(
         `http://localhost:9103/libraries/web/makerental/${this.state.userID}/${this.state.isbn}/${this.state.schlID}`,
+        {
+          method: "POST",
+          mode: "cors",
+        }
+      );
+      let newcopiesnum = Number(this.state.available_copies);
+      newcopiesnum = newcopiesnum - 1;
+      let newcopies = newcopiesnum.toString();
+      console.log(newcopiesnum, newcopies);
+      fetch(
+        `http://localhost:9103/libraries/web/changebook/${this.state.isbn}/${this.state.schlID}/${this.state.title}/${this.state.publisher}/${this.state.pages}/${this.state.summary}/${this.state.language}/${newcopies}`,
         {
           method: "POST",
           mode: "cors",

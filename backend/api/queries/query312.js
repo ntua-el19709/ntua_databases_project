@@ -8,7 +8,7 @@ router.get("/:catID", async (req, res) => {
     true,
     req,
     res,
-    "Query 3.1.1 executed succesfully!",
+    "Query 3.1.2 executed succesfully!",
     async (conn) => {
       let year = "%";
       if (req.params.year !== "none") year = req.params.year + year;
