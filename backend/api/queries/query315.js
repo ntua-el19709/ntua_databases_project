@@ -10,7 +10,7 @@ router.get("/", async (req, res) => {
     res,
     "Query 3.1.5 executed succesfully!",
     async (conn) => {
-      let min_no_of_rents = 0;
+      let min_no_of_rents = 20;
       let min_no_of_ops = 1;
       const ans_list = await conn.query(
         `SELECT operator, num_of_rents
