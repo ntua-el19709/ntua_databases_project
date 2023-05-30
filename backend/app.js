@@ -61,6 +61,16 @@ const restore = require("./api/web/restore");
 //Queries
 const query311 = require("./api/queries/query311");
 const query312 = require("./api/queries/query312");
+const query313 = require("./api/queries/query313");
+const query314 = require("./api/queries/query314");
+const query315 = require("./api/queries/query315");
+const query316 = require("./api/queries/query316");
+const query317 = require("./api/queries/query317");
+const query321 = require("./api/queries/query321");
+const query322 = require("./api/queries/query322");
+const query323 = require("./api/queries/query323");
+const query331 = require("./api/queries/query331");
+const query332 = require("./api/queries/query332");
 //const { controleer } = require("./api/web/skotinos_arxontas");
 /* end of ROUTES and how to import routes */
 
@@ -146,6 +156,16 @@ app.use(baseurl + "/web/restore", restore);
 //Queries
 app.use(baseurl + "/queries/query311", query311);
 app.use(baseurl + "/queries/query312", query312);
+app.use(baseurl + "/queries/query313", query313);
+app.use(baseurl + "/queries/query314", query314);
+app.use(baseurl + "/queries/query315", query315);
+app.use(baseurl + "/queries/query316", query316);
+app.use(baseurl + "/queries/query317", query317);
+app.use(baseurl + "/queries/query321", query321);
+app.use(baseurl + "/queries/query322", query322);
+app.use(baseurl + "/queries/query323", query323);
+app.use(baseurl + "/queries/query331", query331);
+app.use(baseurl + "/queries/query332", query332);
 // /*End of routes used by our project */
 
 // In case of an endpoint does not exist
