@@ -60,6 +60,7 @@ const backup = require("./api/web/backup");
 const restore = require("./api/web/restore");
 //Queries
 const query311 = require("./api/queries/query311");
+const query312 = require("./api/queries/query312");
 //const { controleer } = require("./api/web/skotinos_arxontas");
 /* end of ROUTES and how to import routes */
 
@@ -144,6 +145,7 @@ app.use(baseurl + "/web/backup", backup);
 app.use(baseurl + "/web/restore", restore);
 //Queries
 app.use(baseurl + "/queries/query311", query311);
+app.use(baseurl + "/queries/query312", query312);
 // /*End of routes used by our project */
 
 // In case of an endpoint does not exist

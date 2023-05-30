@@ -15,7 +15,6 @@ router.get("/:renID", async (req, res) => {
             WHERE rental.rental_id = ? AND rental.isbn=book.isbn AND rental.school_id=book.school_id AND rental.user_id=users.user_id`,
         [req.params.renID]
       );
-      console.log(results);
 
       let json_q = {
         renID: results[0].rental_id,

@@ -35,14 +35,7 @@ router.get("/:year/:month", async (req, res) => {
         });
       }
 
-      if (req.query.format == "csv") {
-        const opts = {
-          fields: ["schoolID", "schoolname"],
-        };
-        return new Parser(opts).parse(json_res);
-      } else {
-        return json_res;
-      }
+      return json_res;
     }
   );
 });
