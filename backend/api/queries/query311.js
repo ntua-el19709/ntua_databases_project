@@ -17,15 +17,16 @@ router.get("/:year/:month", async (req, res) => {
       if (month[0] == "0") month = month[1];
 
       const ans_list = await conn.query(
-        `(SELECT school_name,COUNT(rental_id) AS num_of_rents FROM school,rental 
-            WHERE school.school_id = rental.school_id AND CAST(YEAR(rental.rental_datetime) AS CHAR(4)) LIKE ? AND CAST(MONTH(rental.rental_datetime) AS CHAR(4)) LIKE ?
-            GROUP BY school.school_id)
-        UNION
-        (SELECT school_name,0 AS num_of_rents from school
-            WHERE school_id NOT IN (SELECT (school_id) from rental
-                                        WHERE school.school_id = rental.school_id AND CAST(YEAR(rental.rental_datetime) AS CHAR(4)) LIKE ? AND CAST(MONTH(rental.rental_datetime) AS CHAR(4)) LIKE ?))`,
+        `SELECT school.school_name, COUNT(rental.rental_id) AS num_of_rents
+        FROM school
+        LEFT JOIN rental ON school.school_id = rental.school_id
+        AND CAST(YEAR(rental.rental_datetime) AS CHAR(4)) LIKE ? 
+        AND CAST(MONTH(rental.rental_datetime) AS CHAR(4)) LIKE ?
+        GROUP BY school.school_id`,
         [year, month, year, month]
       );
+
+      console.log(ans_list);
 
       json_res = [];
       for (elem of ans_list) {

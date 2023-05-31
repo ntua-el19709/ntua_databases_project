@@ -14,21 +14,40 @@ router.get("/", async (req, res) => {
       let min_no_of_ops = 1;
       const ans_list = await conn.query(
         `SELECT operator, num_of_rents
-            FROM (SELECT users.user_fullname AS operator, COUNT(rental.rental_id) AS num_of_rents FROM rental,users,operator
-                WHERE rental.school_id=operator.school_id AND users.user_id=operator.user_id AND TIMESTAMPDIFF(YEAR,rental.rental_datetime,NOW()) < 1
-                GROUP BY operator.user_id ORDER BY num_of_rents DESC) AS Q4
-            WHERE Q4.num_of_rents IN
-                (SELECT num_of_rents FROM
-                    (SELECT num_of_rents, COUNT(Q2.user_id) as num_of_ops FROM users,
-                        (SELECT operator, num_of_rents,user_id
-                        FROM (SELECT users.user_fullname AS operator, COUNT(rental.rental_id) AS num_of_rents, operator.user_id AS user_id FROM rental,users,operator
-                            WHERE rental.school_id=operator.school_id AND users.user_id=operator.user_id AND TIMESTAMPDIFF(YEAR,rental.rental_datetime,NOW()) < 1
-                            GROUP BY operator.user_id ORDER BY num_of_rents DESC) AS Q1
-                        WHERE Q1.num_of_rents > ?) AS Q2
-                    WHERE users.user_id=Q2.user_id
-                    GROUP BY Q2.num_of_rents) as Q3
-                WHERE Q3.num_of_ops>?)
-            ORDER BY num_of_rents DESC`,
+        FROM (
+            SELECT users.user_fullname AS operator, COUNT(rental.rental_id) AS num_of_rents
+            FROM rental
+            INNER JOIN users ON rental.user_id = users.user_id
+            INNER JOIN operator ON rental.school_id = operator.school_id
+                                AND operator.user_id = users.user_id
+            WHERE TIMESTAMPDIFF(YEAR, rental.rental_datetime, NOW()) < 1
+            GROUP BY operator.user_id
+            ORDER BY num_of_rents DESC
+        ) AS Q4
+        WHERE Q4.num_of_rents IN (
+            SELECT num_of_rents
+            FROM (
+                SELECT num_of_rents, COUNT(Q2.user_id) AS num_of_ops
+                FROM users
+                INNER JOIN (
+                    SELECT operator, num_of_rents, user_id
+                    FROM (
+                        SELECT users.user_fullname AS operator, COUNT(rental.rental_id) AS num_of_rents, operator.user_id AS user_id
+                        FROM rental
+                        INNER JOIN users ON rental.user_id = users.user_id
+                        INNER JOIN operator ON rental.school_id = operator.school_id
+                                            AND operator.user_id = users.user_id
+                        WHERE TIMESTAMPDIFF(YEAR, rental.rental_datetime, NOW()) < 1
+                        GROUP BY operator.user_id
+                        ORDER BY num_of_rents DESC
+                    ) AS Q1
+                    WHERE Q1.num_of_rents > ?
+                ) AS Q2 ON users.user_id = Q2.user_id
+                GROUP BY Q2.num_of_rents
+            ) AS Q3
+            WHERE Q3.num_of_ops > ?
+        )
+        ORDER BY num_of_rents DESC`,
         [min_no_of_rents, min_no_of_ops]
       );
 
