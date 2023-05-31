@@ -7,13 +7,12 @@ router.post("/:isbn/:schlid/:author_id", async (req, res) => {
     false,
     req,
     res,
-    "Author of book Added!",
+    "Author of book Deleted!",
     async (conn1) => {
-      await conn1.query("INSERT INTO book_author VALUES (?,?, ?)", [
-        req.params.isbn,
-        req.params.schlid,
-        req.params.author_id,
-      ]);
+      await conn1.query(
+        "DELETE from book_author where book_author.isbn=? AND book_author.school_id = ? AND book_author.author_id = ?",
+        [req.params.isbn, req.params.schlid, req.params.author_id]
+      );
     }
   );
 });

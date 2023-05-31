@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import LogIn from "./LogIn_SignUp/LogIn";
 import SignUp from "./LogIn_SignUp/SignUp";
 import Profile from "./Profile";
@@ -16,7 +15,6 @@ import Book from "./Book";
 import Users from "./Users";
 import User from "./User";
 import EditBook from "./EditBook";
-import ChangePassword from "./ChangePassword";
 import Reservations from "./Reservations";
 import Reservation from "./Reservation";
 import AddReservation from "./AddReservation";
@@ -106,7 +104,13 @@ class Home extends Component {
     this.setState({
       ...this.state,
       isbn: ISBN,
-      page: 13,
+      page: 13, //Book page
+    });
+  };
+  goToEditBook = () => {
+    this.setState({
+      ...this.state,
+      page: 18, //Edit Book page
     });
   };
   goToUsers = () => {
@@ -134,12 +138,6 @@ class Home extends Component {
       ...this.state,
       resID: resID,
       page: 17,
-    });
-  };
-  addReservation = () => {
-    this.setState({
-      ...this.state,
-      page: 18,
     });
   };
   goToRentals = () => {
@@ -388,7 +386,7 @@ class Home extends Component {
           schlID={this.state.schlID}
           ISBN={this.state.isbn}
           gotobooks={this.goToBooks}
-          editbook={this.editBook}
+          gotoeditbook={this.goToEditBook}
           makereview={this.makeReview}
           userID={this.state.userID}
           gotoreviewsofbook={this.goToReviewsOfBook}
@@ -432,7 +430,6 @@ class Home extends Component {
           gotoprofile={this.goToProfile}
           gotoreservations={this.goToReservations}
           gotoreservation={this.goToReservation}
-          addreservation={this.addReservation}
           gotobooks={this.goToBooks}
           gotousers={this.goToUsers}
           gotorentals={this.goToRentals}
@@ -451,12 +448,12 @@ class Home extends Component {
         />
       );
     else if (this.state.page === 18)
-      //Add Reservation page
+      //Edit Book Page
       return (
-        <AddReservation
-          username={this.state.username}
-          type={this.state.type}
-          gotoreservations={this.goToReservations}
+        <EditBook
+          schlID={this.state.schlID}
+          ISBN={this.state.isbn}
+          gotobook={this.goToBook}
         />
       );
     else if (this.state.page === 19)

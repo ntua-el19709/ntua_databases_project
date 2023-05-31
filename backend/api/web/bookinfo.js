@@ -3,6 +3,17 @@ const apiutils = require("../../apiutils");
 const Parser = require("@json2csv/plainjs").Parser;
 const router = express.Router();
 
+function containsObject(obj, list) {
+  var i;
+  for (i = 0; i < list.length; i++) {
+    if (JSON.stringify(list[i]) === JSON.stringify(obj)) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 router.get("/:schlid/:isbn", async (req, res) => {
   await apiutils.requestWrapper(
     true,
@@ -20,7 +31,6 @@ router.get("/:schlid/:isbn", async (req, res) => {
         WHERE book.school_id = ? AND book.isbn = ?`,
         [req.params.schlid, req.params.isbn]
       );
-
       let json_q = {
         isbn: req.params.isbn,
         schoolID: req.params.schlid,
@@ -34,25 +44,28 @@ router.get("/:schlid/:isbn", async (req, res) => {
         authors: [],
         categories: [],
       };
-      fauthor = -1;
+
+      var authors = [];
       for (elem of results) {
-        if (fauthor != elem.author_id) {
-          fauthor = elem.author_id;
-        } else continue;
-        json_q.authors.push({
+        authors.push({
           authorID: elem.author_id,
           author_fullname: elem.author_fullname,
         });
       }
-      fcat = -1;
+      for (elem of authors) {
+        if (containsObject(elem, json_q.authors) === false)
+          json_q.authors.push(elem);
+      }
+      var cats = [];
       for (elem of results) {
-        if (fcat === -1) {
-          fcat = elem.category_id;
-        } else if (fcat === elem.category_id) break;
-        json_q.categories.push({
+        cats.push({
           categoryID: elem.category_id,
           category: elem.category_name,
         });
+      }
+      for (elem of cats) {
+        if (containsObject(elem, json_q.categories) === false)
+          json_q.categories.push(elem);
       }
 
       if (req.query.format == "csv") {

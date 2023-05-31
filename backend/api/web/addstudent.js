@@ -8,7 +8,7 @@ router.post("/:username/:schlunit", async (req, res) => {
     req,
     res,
     "Student Added!",
-    async (conn1, conn2) => {
+    async (conn1) => {
       await conn1.query(
         "INSERT INTO student VALUES ((select user_id from users where username = ?), ?)",
         [req.params.username, req.params.schlunit, 0]
