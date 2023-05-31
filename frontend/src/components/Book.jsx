@@ -18,10 +18,56 @@ class Book extends Component {
       language: "",
       available_copies: "",
       message: "",
+      ok1: 0, //there are no late rentals
+      ok2: 0, //there are no ongoing rentals
+      ok3: 0, //the reservation restrictions are met
     };
   }
 
   componentDidMount() {
+    if (this.state.type !== "1") {
+      //not operator
+      fetch(
+        `http://localhost:9103/libraries/web/lateuserrentals/${this.state.userID}`
+      )
+        .then((response) => response.json())
+        .then((obj) => {
+          let ok = 0;
+          if (obj.lateUserRentals.length === 0) ok = 1;
+          this.setState({
+            ...this.state,
+            ok1: ok,
+          });
+        });
+      fetch(
+        `http://localhost:9103/libraries/web/ongoinguserrentals/${this.state.userID}`
+      )
+        .then((response) => response.json())
+        .then((obj) => {
+          let ok = 0;
+          if (obj.ongoingeUserRentals.length === 0) ok = 1;
+          this.setState({
+            ...this.state,
+            ok2: ok,
+          });
+        });
+      fetch(
+        `http://localhost:9103/libraries/web/userreservations/${this.state.schlID}/${this.state.userID}`
+      )
+        .then((response) => response.json())
+        .then((obj) => {
+          console.log(obj);
+          let ok = 0;
+          if (obj.reservation.length < 2 && this.state.type === "3")
+            ok = 1; //student
+          else if (obj.reservation.length < 1 && this.state.type === "2")
+            ok = 1; //professor
+          this.setState({
+            ...this.state,
+            ok3: ok,
+          });
+        });
+    }
     fetch(
       `http://localhost:9103/libraries/web/bookinfo/${this.state.schlID}/${this.state.ISBN}`
     )
@@ -64,7 +110,12 @@ class Book extends Component {
   };
 
   ReserveBook = () => {
-    if (this.state.type !== "1")
+    if (
+      this.state.type !== "1" &&
+      this.state.ok1 === 1 &&
+      this.state.ok2 === 1 &&
+      this.state.ok3 === 1
+    )
       //not operator
       fetch(
         `http://localhost:9103/libraries/web/makereservation/${this.state.userID}/${this.state.ISBN}/${this.state.schlID}`,
@@ -77,6 +128,20 @@ class Book extends Component {
           ...this.state,
           message: "Book Reserved",
         });
+      });
+    else if (
+      this.state.type !== "1" &&
+      (this.state.ok1 === 0 || this.state.ok2 === 0)
+    )
+      this.setState({
+        ...this.state,
+        message:
+          "You can not reserve a book, if you do not return the book(s) you have rent!",
+      });
+    else if (this.state.type !== "1" && this.state.ok3 === 0)
+      this.setState({
+        ...this.state,
+        message: "You have reached the maximum number of reservations!",
       });
   };
 

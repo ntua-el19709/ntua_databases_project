@@ -16,6 +16,9 @@ class AddRental extends Component {
       language: "",
       available_copies: "",
       rmade: 0,
+      usertype: "",
+      ok1: 0, //user has not any late rentals
+      ok2: 0, //user has not reached max number of rentals
     };
   }
   componentDidMount() {
@@ -34,6 +37,7 @@ class AddRental extends Component {
           available_copies: obj.copies,
         });
       });
+
     fetch(
       `http://localhost:9103/libraries/web/approvedusersofschl/${this.state.schlID}`
     )
@@ -54,6 +58,24 @@ class AddRental extends Component {
       this.setState({
         ...this.state,
         message: `Choose a user!`,
+      });
+      return 0;
+    } else if (this.state.ok1 === 0) {
+      this.setState({
+        ...this.state,
+        message: `The user has late rentals!`,
+      });
+      return 0;
+    } else if (this.state.ok2 === 0) {
+      this.setState({
+        ...this.state,
+        message: `The user has reached the maximum number of rentals!`,
+      });
+      return 0;
+    } else if (this.state.available_copies === 0) {
+      this.setState({
+        ...this.state,
+        message: `This book is not available right now!`,
       });
       return 0;
     }
@@ -85,10 +107,63 @@ class AddRental extends Component {
     }
   };
   selectuser = (val) => {
-    this.setState({
-      ...this.state,
-      userID: val.target.value,
-    });
+    let full = val.target.value;
+    let myArray = full.split(",");
+    let userID = myArray[0];
+    let username = myArray[1];
+    this.setState(
+      {
+        ...this.state,
+        userID: userID,
+      },
+      () => {
+        fetch(
+          `http://localhost:9103/libraries/web/lateuserrentals/${this.state.userID}`
+        )
+          .then((response) => response.json())
+          .then((obj) => {
+            let ok = 0;
+            if (obj.lateUserRentals.length === 0) ok = 1;
+            this.setState({
+              ...this.state,
+              ok1: ok,
+            });
+          });
+        fetch(`http://localhost:9103/libraries/web/findtype/${username}`)
+          .then((response) => response.json())
+          .then((obj) => {
+            this.setState(
+              {
+                ...this.state,
+                usertype: obj.type,
+              },
+              () => {
+                fetch(
+                  `http://localhost:9103/libraries/web/ongoinguserrentals/${this.state.userID}`
+                )
+                  .then((response) => response.json())
+                  .then((obj) => {
+                    let ok = 0;
+                    if (
+                      obj.ongoingeUserRentals.length === 0 &&
+                      this.state.usertype === "2"
+                    )
+                      ok = 1;
+                    else if (
+                      obj.ongoingeUserRentals.length < 2 &&
+                      this.state.usertype === "3"
+                    )
+                      ok = 1;
+                    this.setState({
+                      ...this.state,
+                      ok2: ok,
+                    });
+                  });
+              }
+            );
+          });
+      }
+    );
   };
   render() {
     console.log("Now at AddRental");
@@ -105,7 +180,9 @@ class AddRental extends Component {
               <form>
                 <select multiple name="username" onChange={this.selectuser}>
                   {this.state.users.map((user) => (
-                    <option value={user.userID}>{user.username}</option>
+                    <option value={[user.userID, user.username]}>
+                      {user.username}
+                    </option>
                   ))}
                 </select>
               </form>

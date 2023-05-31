@@ -120,21 +120,7 @@ class Reservations extends Component {
           reviews={() => this.props.gotoreviews()}
           queries={() => this.props.gotoqueries()}
         />
-        <table>
-          <tr>
-            <th>Filter by username:</th>
-            <td>
-              <form>
-                <select multiple name="username" onChange={this.selectUser}>
-                  {this.state.users.map((user) => (
-                    <option value={user.userID}>{user.username}</option>
-                  ))}
-                </select>
-              </form>
-              <button onClick={this.clear}>Clear</button>
-            </td>
-          </tr>
-        </table>
+        {this.filteruser()}
         {this.restext()}
         <ul>
           {this.state.reservations.map((reservation) => (
@@ -170,6 +156,27 @@ class Reservations extends Component {
         "' "
       );
     else return reservation.book;
+  }
+  filteruser() {
+    if (this.state.type === "1")
+      //operator
+      return (
+        <table>
+          <tr>
+            <th>Filter by username:</th>
+            <td>
+              <form>
+                <select multiple name="username" onChange={this.selectUser}>
+                  {this.state.users.map((user) => (
+                    <option value={user.userID}>{user.username}</option>
+                  ))}
+                </select>
+              </form>
+              <button onClick={this.clear}>Clear</button>
+            </td>
+          </tr>
+        </table>
+      );
   }
   restext() {
     if (this.state.type === "1") return <div>Reservations:</div>;

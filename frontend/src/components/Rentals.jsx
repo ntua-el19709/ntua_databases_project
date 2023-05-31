@@ -218,21 +218,7 @@ class Rentals extends Component {
           reviews={() => this.props.gotoreviews()}
           queries={() => this.props.gotoqueries()}
         />
-        <table>
-          <tr>
-            <th>Filter by username:</th>
-            <td>
-              <form>
-                <select multiple name="username" onChange={this.selectUser}>
-                  {this.state.users.map((user) => (
-                    <option value={user.userID}>{user.username}</option>
-                  ))}
-                </select>
-              </form>
-              <button onClick={this.clear}>Clear</button>
-            </td>
-          </tr>
-        </table>
+        {this.filteruser()}
         <div>Late Rentals:</div>
         <ul>
           {this.state.laterentals.map((rental) => (
@@ -268,6 +254,27 @@ class Rentals extends Component {
         </ul>
       </div>
     );
+  }
+  filteruser() {
+    if (this.state.type === "1")
+      //operator
+      return (
+        <table>
+          <tr>
+            <th>Filter by username:</th>
+            <td>
+              <form>
+                <select multiple name="username" onChange={this.selectUser}>
+                  {this.state.users.map((user) => (
+                    <option value={user.userID}>{user.username}</option>
+                  ))}
+                </select>
+              </form>
+              <button onClick={this.clear}>Clear</button>
+            </td>
+          </tr>
+        </table>
+      );
   }
   rentalinfo(rental) {
     if (this.state.type === "1" && this.state.selected === 0)
