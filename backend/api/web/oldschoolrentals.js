@@ -11,8 +11,10 @@ router.get("/:schlid", async (req, res) => {
     "Successful retrieval of old school rentals!",
     async (conn) => {
       const results = await conn.query(
-        `SELECT * FROM rental,users
-            WHERE rental.school_id=? AND rental.returned=true AND users.user_id = rental.user_id`,
+        `SELECT rental.rental_id, users.username
+        FROM rental
+        INNER JOIN users ON rental.user_id = users.user_id
+        WHERE rental.school_id = ? AND rental.returned = true`,
         [req.params.schlid]
       );
 

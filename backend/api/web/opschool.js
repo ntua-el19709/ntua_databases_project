@@ -11,8 +11,10 @@ router.get("/:opid", async (req, res) => {
     "Successful retrieval of school!",
     async (conn) => {
       const results = await conn.query(
-        `SELECT * FROM school,operator
-            WHERE operator.user_id = ? `,
+        `SELECT school.school_id,school.school_name
+        FROM school
+        INNER JOIN operator ON operator.school_id = school.school_id
+        WHERE operator.user_id = ?`,
         [req.params.opid]
       );
 

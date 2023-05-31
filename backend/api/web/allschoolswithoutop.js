@@ -12,7 +12,8 @@ router.get("/", async (req, res) => {
     async (conn) => {
       const ans_list = await conn.query(
         `SELECT * FROM school WHERE (school_id) 
-          NOT IN (SELECT (school_id) from operator)`
+          NOT IN (SELECT (school_id) FROM operator
+          JOIN users ON operator.user_id=users.user_id WHERE users.approved=true)`
       );
 
       json_res = [];

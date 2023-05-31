@@ -11,8 +11,10 @@ router.get("/:schlid", async (req, res) => {
     "Successful retrieval of late school rentals!",
     async (conn) => {
       const results = await conn.query(
-        `SELECT * FROM rental,users
-            WHERE rental.school_id=? AND rental.returned=false AND users.user_id = rental.user_id AND returned=false AND TIMESTAMPDIFF(DAY,rental.rental_datetime,NOW()) > 6 `,
+        `SELECT rental.rental_id,users.username
+        FROM rental
+        JOIN users ON rental.user_id = users.user_id
+        WHERE rental.school_id = ? AND rental.returned = false AND users.user_id = rental.user_id AND TIMESTAMPDIFF(DAY, rental.rental_datetime, NOW()) > 6`,
         [req.params.schlid]
       );
 

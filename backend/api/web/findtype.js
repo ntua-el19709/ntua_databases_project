@@ -11,14 +11,20 @@ router.get("/:username", async (req, res) => {
     "User type found!",
     async (conn) => {
       const results = await conn.query(
-        `(SELECT users.user_id,school_id,'1' as type FROM operator,users
-            WHERE operator.user_id=users.user_id AND users.username = ?)
-            UNION
-            (SELECT users.user_id,school_id,'2' as type FROM professor,users
-            WHERE professor.user_id=users.user_id AND users.username = ?)
-            UNION
-            (SELECT users.user_id,school_id,'3' as type FROM student,users
-            WHERE student.user_id=users.user_id AND users.username = ?)`,
+        `SELECT users.user_id, operator.school_id, '1' AS type
+        FROM operator
+        JOIN users ON operator.user_id = users.user_id
+        WHERE users.username = ?
+        UNION
+        SELECT users.user_id, professor.school_id, '2' AS type
+        FROM professor
+        JOIN users ON professor.user_id = users.user_id
+        WHERE users.username = ?
+        UNION
+        SELECT users.user_id, student.school_id, '3' AS type
+        FROM student
+        JOIN users ON student.user_id = users.user_id
+        WHERE users.username = ?`,
         [req.params.username, req.params.username, req.params.username]
       );
 

@@ -11,7 +11,7 @@ router.get("/:username/:password", async (req, res) => {
     "User validation",
     async (conn) => {
       const results = await conn.query(
-        `SELECT * FROM users
+        `SELECT users.passwrd,users.approved FROM users
             WHERE users.username = ?`,
         [req.params.username]
       );

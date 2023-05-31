@@ -11,11 +11,15 @@ router.get("/:schlid", async (req, res) => {
     "Successful retrieval of approved users!",
     async (conn) => {
       const results = await conn.query(
-        `(SELECT * FROM users,student
-            WHERE users.user_id = student.user_id AND student.school_id=? AND users.approved=true)
-            UNION 
-         (SELECT * FROM users,professor
-            WHERE users.user_id = professor.user_id AND professor.school_id=? AND users.approved=true)`,
+        `(SELECT users.user_id, users.username
+          FROM users
+          JOIN student ON users.user_id = student.user_id
+          WHERE student.school_id = ? AND users.approved = true)
+          UNION
+          (SELECT users.user_id, users.username
+          FROM users
+          JOIN professor ON users.user_id = professor.user_id
+          WHERE professor.school_id = ? AND users.approved = true)`,
         [req.params.schlid, req.params.schlid]
       );
 
