@@ -17,14 +17,24 @@ router.get("/:catID", async (req, res) => {
       if (month[0] == "0") month = month[1];
 
       const ans_list = await conn.query(
-        `(SELECT author.author_fullname AS author,0 AS professor FROM category,book_category,book,book_author,author
-            WHERE category.category_id=? AND category.category_id=book_category.category_id AND book_category.school_id=book.school_id
-            AND book_category.isbn=book.isbn AND book_author.isbn=book.isbn AND book_author.school_id=book.school_id AND book_author.author_id=author.author_id)
-         UNION
-         (SELECT 0 AS author,users.user_fullname AS professor FROM category,book_category,book,rental,users,professor
-            WHERE category.category_id=? AND category.category_id=book_category.category_id AND book_category.school_id=book.school_id AND book_category.isbn=book.isbn
-            AND rental.isbn=book.isbn AND rental.school_id=book.school_id AND rental.user_id=users.user_id AND users.user_id=professor.user_id
-            AND TIMESTAMPDIFF(YEAR,rental.rental_datetime,NOW()) < 1 )`,
+        `SELECT author.author_fullname AS author, 0 AS professor
+        FROM category
+        INNER JOIN book_category ON category.category_id = book_category.category_id
+        INNER JOIN book ON book_category.school_id = book.school_id AND book_category.isbn = book.isbn
+        INNER JOIN book_author ON book.isbn = book_author.isbn AND book.school_id = book_author.school_id
+        INNER JOIN author ON book_author.author_id = author.author_id
+        WHERE category.category_id = ?
+        
+        UNION
+        
+        SELECT 0 AS author, users.user_fullname AS professor
+        FROM category
+        INNER JOIN book_category ON category.category_id = book_category.category_id
+        INNER JOIN book ON book_category.school_id = book.school_id AND book_category.isbn = book.isbn
+        INNER JOIN rental ON book.isbn = rental.isbn AND book.school_id = rental.school_id
+        INNER JOIN users ON rental.user_id = users.user_id
+        INNER JOIN professor ON users.user_id = professor.user_id
+        WHERE category.category_id = ? AND TIMESTAMPDIFF(YEAR, rental.rental_datetime, NOW()) < 1`,
         [req.params.catID, req.params.catID]
       );
 

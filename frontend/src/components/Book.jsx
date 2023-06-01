@@ -7,7 +7,6 @@ class Book extends Component {
       type: this.props.type,
       schlID: this.props.schlID,
       ISBN: this.props.ISBN,
-      placedat: this.props.placedat,
       userID: this.props.userID,
       title: "",
       authors: [],
@@ -250,6 +249,7 @@ class Book extends Component {
       return (
         <div>
           <button onClick={this.addCopy}>Add Copy</button>
+          <button onClick={() => this.props.gotoeditbook()}>Edit Book</button>
           <button onClick={this.DeleteBook}>Delete Book</button>
           <button onClick={() => this.props.addrental()}>Rent Book</button>
         </div>

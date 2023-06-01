@@ -8,7 +8,7 @@ router.post("/:category", async (req, res) => {
     req,
     res,
     "Category added!",
-    async (conn1, conn2) => {
+    async (conn1) => {
       await conn1.query("INSERT INTO category (category_name) VALUES (?)", [
         req.params.category,
       ]);

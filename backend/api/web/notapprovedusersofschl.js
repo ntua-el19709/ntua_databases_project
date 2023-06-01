@@ -11,11 +11,13 @@ router.get("/:schlid", async (req, res) => {
     "Successful retrieval of unapproved users!",
     async (conn) => {
       const results = await conn.query(
-        `(SELECT * FROM users,student
-            WHERE users.user_id = student.user_id AND student.school_id=? AND users.approved=false)
-            UNION 
-         (SELECT * FROM users,professor
-            WHERE users.user_id = professor.user_id AND professor.school_id=? AND users.approved=false)`,
+        `SELECT users.user_id,users.username
+        FROM users
+        INNER JOIN student ON users.user_id = student.user_id AND student.school_id = ? AND users.approved = false
+        UNION
+        SELECT users.user_id,users.username
+        FROM users
+        INNER JOIN professor ON users.user_id = professor.user_id AND professor.school_id = ? AND users.approved = false`,
         [req.params.schlid, req.params.schlid]
       );
 

@@ -11,9 +11,12 @@ router.get("/", async (req, res) => {
     "Query 3.1.4 executed succesfully!",
     async (conn) => {
       const ans_list = await conn.query(
-        `SELECT author.author_fullname AS author FROM author, book_author, book
-              WHERE author.author_id=book_author.author_id AND book_author.isbn=book.isbn AND book_author.school_id=book.school_id
-              AND (book.isbn,book.school_id) NOT IN (SELECT rental.isbn,rental.school_id FROM rental)`
+        `SELECT author.author_fullname AS author
+        FROM author
+        INNER JOIN book_author ON author.author_id = book_author.author_id
+        INNER JOIN book ON book_author.isbn = book.isbn AND book_author.school_id = book.school_id
+        LEFT JOIN rental ON book.isbn = rental.isbn AND book.school_id = rental.school_id
+        WHERE rental.rental_id IS NULL`
       );
 
       json_res = [];

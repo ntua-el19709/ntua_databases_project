@@ -11,8 +11,12 @@ router.get("/:schlid", async (req, res) => {
     "Successful retrieval of reservations!!",
     async (conn) => {
       const results = await conn.query(
-        `SELECT * FROM reservation,users
-            WHERE reservation.school_id = ? AND reservation.user_id = users.user_id AND reservation.isold =false AND (TIMESTAMPDIFF(DAY,reservation.reservation_datetime,NOW()) between 0 and 6)`,
+        `SELECT reservation.reservation_id,users.username
+        FROM reservation
+        INNER JOIN users ON reservation.user_id = users.user_id
+        WHERE reservation.school_id = ? 
+            AND reservation.isold = false 
+            AND TIMESTAMPDIFF(DAY, reservation.reservation_datetime, NOW()) BETWEEN 0 AND 6`,
         [req.params.schlid]
       );
 

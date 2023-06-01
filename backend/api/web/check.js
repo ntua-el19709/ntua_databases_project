@@ -11,7 +11,7 @@ router.get("/:username", async (req, res) => {
     "Username checked",
     async (conn) => {
       const results = await conn.query(
-        `SELECT * FROM users
+        `SELECT users.username FROM users
             WHERE users.username = ?`,
         [req.params.username]
       );

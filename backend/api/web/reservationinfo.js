@@ -11,8 +11,11 @@ router.get("/:resID", async (req, res) => {
     "Successful retrieval of reservation!",
     async (conn) => {
       const results = await conn.query(
-        `SELECT * FROM reservation,book,users
-            WHERE reservation.reservation_id = ? AND reservation.isbn=book.isbn AND reservation.school_id=book.school_id AND reservation.user_id=users.user_id`,
+        `SELECT *
+        FROM reservation
+        INNER JOIN book ON reservation.isbn = book.isbn AND reservation.school_id = book.school_id
+        INNER JOIN users ON reservation.user_id = users.user_id
+        WHERE reservation.reservation_id = ?`,
         [req.params.resID]
       );
 

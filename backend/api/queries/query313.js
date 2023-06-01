@@ -11,9 +11,13 @@ router.get("/", async (req, res) => {
     "Query 3.1.3 executed succesfully!",
     async (conn) => {
       const ans_list = await conn.query(
-        `SELECT users.user_fullname AS fullname,count(rental.rental_id) AS num_of_books FROM rental,users,professor
-            WHERE rental.user_id=users.user_id AND users.user_id=professor.user_id AND TIMESTAMPDIFF(YEAR,users.date_of_birth,NOW()) < 40
-            GROUP BY users.user_id ORDER BY num_of_books DESC`
+        `SELECT users.user_fullname AS fullname, COUNT(rental.rental_id) AS num_of_books
+        FROM rental
+        INNER JOIN users ON rental.user_id = users.user_id
+        INNER JOIN professor ON users.user_id = professor.user_id
+        WHERE TIMESTAMPDIFF(YEAR, users.date_of_birth, NOW()) < 40
+        GROUP BY users.user_id
+        ORDER BY num_of_books DESC`
       );
 
       json_res = [];
