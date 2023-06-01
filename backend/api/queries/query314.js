@@ -11,7 +11,7 @@ router.get("/", async (req, res) => {
     "Query 3.1.4 executed succesfully!",
     async (conn) => {
       const ans_list = await conn.query(
-        `SELECT author.author_fullname AS author
+        `SELECT DISTINCT author.author_fullname AS author
         FROM author
         INNER JOIN book_author ON author.author_id = book_author.author_id
         INNER JOIN book ON book_author.isbn = book.isbn AND book_author.school_id = book.school_id

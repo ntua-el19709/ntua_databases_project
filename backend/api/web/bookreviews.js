@@ -15,7 +15,8 @@ router.get("/:schlid/:isbn", async (req, res) => {
         FROM review
         JOIN book ON review.school_id = book.school_id AND review.isbn = book.isbn
         JOIN users ON review.user_id = users.user_id
-        WHERE review.school_id = ? AND review.isbn = ? AND review.approved = true`,
+        WHERE review.school_id = ? AND review.isbn = ? AND review.approved = true
+        ORDER BY review.liker DESC`,
         [req.params.schlid, req.params.isbn]
       );
       let title = "No Reviews";

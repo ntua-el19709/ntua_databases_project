@@ -11,7 +11,7 @@ router.get("/:schlid", async (req, res) => {
     "Successful retrieval of approved users!",
     async (conn) => {
       const results = await conn.query(
-        `(SELECT users.user_id, users.username
+        `((SELECT users.user_id, users.username
           FROM users
           JOIN student ON users.user_id = student.user_id
           WHERE student.school_id = ? AND users.approved = true)
@@ -19,7 +19,8 @@ router.get("/:schlid", async (req, res) => {
           (SELECT users.user_id, users.username
           FROM users
           JOIN professor ON users.user_id = professor.user_id
-          WHERE professor.school_id = ? AND users.approved = true)`,
+          WHERE professor.school_id = ? AND users.approved = true))
+          ORDER BY username`,
         [req.params.schlid, req.params.schlid]
       );
 

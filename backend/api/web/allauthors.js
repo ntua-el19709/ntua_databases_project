@@ -10,7 +10,9 @@ router.get("/", async (req, res) => {
     res,
     "Successful retrieval of all authors!",
     async (conn) => {
-      const ans_list = await conn.query("SELECT * FROM author");
+      const ans_list = await conn.query(
+        "SELECT * FROM author ORDER BY author_fullname"
+      );
 
       json_res = [];
       for (elem of ans_list) {

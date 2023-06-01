@@ -14,7 +14,8 @@ router.get("/", async (req, res) => {
         `SELECT users.user_id, users.username
         FROM users
         JOIN operator ON users.user_id = operator.user_id
-        WHERE users.approved = true`
+        WHERE users.approved = true
+        ORDER BY users.username`
       );
 
       let json_q = {

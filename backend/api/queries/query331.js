@@ -29,7 +29,7 @@ router.get("/:title/:category/:author/:schlID", async (req, res) => {
             AND (c.category_name LIKE ?)
             AND (a.author_fullname LIKE ?)
             AND (b.school_id = ?)
-            ORDER BY b.isbn`,
+            ORDER BY b.title`,
         [title, category, author, req.params.schlID]
       );
 

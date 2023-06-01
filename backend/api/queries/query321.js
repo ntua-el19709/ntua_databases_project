@@ -31,7 +31,7 @@ router.get("/:title/:category/:author/:copies", async (req, res) => {
             AND (c.category_name LIKE ?)
             AND (a.author_fullname LIKE ?)
             AND (b.copies LIKE ?)
-            ORDER BY b.title DESC`,
+            ORDER BY b.title`,
         [title, category, author, copies]
       );
       json_res = [];

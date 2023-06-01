@@ -11,7 +11,7 @@ router.get("/:schlid", async (req, res) => {
     "Successful retrieval of all books!",
     async (conn) => {
       const ans_list = await conn.query(
-        "SELECT * FROM book Where book.school_id=?",
+        "SELECT * FROM book Where book.school_id=? ORDER BY book.title",
         [req.params.schlid]
       );
 

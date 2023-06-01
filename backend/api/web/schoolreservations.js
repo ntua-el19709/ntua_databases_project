@@ -16,7 +16,8 @@ router.get("/:schlid", async (req, res) => {
         INNER JOIN users ON reservation.user_id = users.user_id
         WHERE reservation.school_id = ? 
             AND reservation.isold = false 
-            AND TIMESTAMPDIFF(DAY, reservation.reservation_datetime, NOW()) BETWEEN 0 AND 6`,
+            AND TIMESTAMPDIFF(DAY, reservation.reservation_datetime, NOW()) BETWEEN 0 AND 6
+        ORDER BY reservation.reservation_id`,
         [req.params.schlid]
       );
 

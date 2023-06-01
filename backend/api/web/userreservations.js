@@ -18,7 +18,8 @@ router.get("/:schlid/:userID", async (req, res) => {
             AND reservation.user_id = ? 
             AND book.school_id = ? 
             AND reservation.isold = false 
-            AND TIMESTAMPDIFF(DAY, reservation.reservation_datetime, NOW()) BETWEEN 0 AND 6`,
+            AND TIMESTAMPDIFF(DAY, reservation.reservation_datetime, NOW()) BETWEEN 0 AND 6
+        ORDER BY reservation.reservation_id`,
         [req.params.schlid, req.params.userID, req.params.schlid]
       );
 

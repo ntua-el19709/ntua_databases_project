@@ -15,7 +15,8 @@ router.get("/:schlid", async (req, res) => {
         FROM review
         INNER JOIN book ON review.school_id = book.school_id AND review.isbn = book.isbn
         INNER JOIN users ON review.user_id = users.user_id
-        WHERE review.school_id = ? AND review.approved = false`,
+        WHERE review.school_id = ? AND review.approved = false
+        ORDER BY users.username`,
         [req.params.schlid]
       );
 

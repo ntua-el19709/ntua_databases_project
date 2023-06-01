@@ -14,7 +14,8 @@ router.get("/:schlid", async (req, res) => {
         `SELECT rental.rental_id, users.username
         FROM rental
         INNER JOIN users ON rental.user_id = users.user_id
-        WHERE rental.school_id = ? AND rental.returned = true`,
+        WHERE rental.school_id = ? AND rental.returned = true
+        ORDER BY rental.rental_id`,
         [req.params.schlid]
       );
 

@@ -14,7 +14,8 @@ router.get("/:userID", async (req, res) => {
         `SELECT rental.rental_id, book.title
         FROM rental
         JOIN book ON book.school_id = rental.school_id AND book.isbn = rental.isbn
-        WHERE rental.user_id = ? AND rental.returned = false AND TIMESTAMPDIFF(DAY, rental.rental_datetime, NOW()) > 6`,
+        WHERE rental.user_id = ? AND rental.returned = false AND TIMESTAMPDIFF(DAY, rental.rental_datetime, NOW()) > 6
+        ORDER BY rental.rental_id`,
         [req.params.userID]
       );
 

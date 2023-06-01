@@ -11,7 +11,7 @@ router.post("/:username/:schlunit", async (req, res) => {
     async (conn1) => {
       await conn1.query(
         "INSERT INTO student VALUES ((select user_id from users where username = ?), ?)",
-        [req.params.username, req.params.schlunit, 0]
+        [req.params.username, req.params.schlunit]
       );
     }
   );

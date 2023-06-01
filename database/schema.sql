@@ -15,11 +15,12 @@ CREATE TABLE school(
     principal_fullname varchar(30) NOT NULL,
     PRIMARY KEY (school_id)
 );
+CREATE INDEX school_index on school(school_id);
 
 CREATE TABLE book(
 	isbn char(10) NOT NULL,
     school_id integer(10) NOT NULL,
-    title varchar(30) NOT NULL,
+    title varchar(50) NOT NULL,
     publisher varchar(30) NOT NULL,
     pages integer(5) NOT NULL,
     summary varchar(255),
@@ -30,12 +31,14 @@ CREATE TABLE book(
         REFERENCES school(school_id) ON DELETE CASCADE ON UPDATE CASCADE,
     PRIMARY KEY (isbn,school_id)
 );
+CREATE INDEX book_index on book(isbn,school_id);
 
 CREATE TABLE author(
 	author_id integer(10) NOT NULL auto_increment,
     author_fullname varchar(30) NOT NULL,
     PRIMARY KEY (author_id)
 );
+CREATE INDEX author_index on author(author_id);
 
 CREATE TABLE book_author(
 	isbn char(10) NOT NULL,
@@ -47,12 +50,14 @@ CREATE TABLE book_author(
         REFERENCES author(author_id) ON  DELETE CASCADE ON UPDATE CASCADE,
     PRIMARY KEY (isbn,school_id,author_id)
 );
+CREATE INDEX book_author_index on book_author(author_id);
 
 CREATE TABLE category(
 	category_id integer(10) NOT NULL auto_increment,
     category_name varchar(30) NOT NULL,
     PRIMARY KEY (category_id)
 );
+CREATE INDEX category_index on category(category_id);
 
 CREATE TABLE book_category(
 	isbn char(10) NOT NULL,
@@ -64,6 +69,7 @@ CREATE TABLE book_category(
         REFERENCES category(category_id) ON  DELETE CASCADE ON UPDATE CASCADE,
     PRIMARY KEY (isbn,school_id,category_id)
 );
+CREATE INDEX book_category_index on book_category(category_id);
 
 CREATE TABLE users(
 	user_id integer(10) NOT NULL auto_increment,
@@ -74,6 +80,7 @@ CREATE TABLE users(
     approved boolean NOT NULL,
     PRIMARY KEY (user_id)
 );
+CREATE INDEX users_index on users(user_id);
 
 CREATE TABLE top_operator(
 	user_id integer(10) NOT NULL,
@@ -91,6 +98,7 @@ CREATE TABLE operator(
         REFERENCES school(school_id) ON  DELETE CASCADE ON UPDATE CASCADE,
 	PRIMARY KEY (user_id,school_id)
 );
+CREATE INDEX operator_index on operator(user_id);
 
 CREATE TABLE professor(
 	user_id integer(10) NOT NULL,
@@ -101,6 +109,7 @@ CREATE TABLE professor(
         REFERENCES school(school_id) ON  DELETE CASCADE ON UPDATE CASCADE,
 	PRIMARY KEY (user_id,school_id)
 );
+CREATE INDEX professor_index on professor(user_id);
 
 CREATE TABLE student(
 	user_id integer(10) NOT NULL,
@@ -111,6 +120,7 @@ CREATE TABLE student(
         REFERENCES school(school_id) ON  DELETE CASCADE ON UPDATE CASCADE,
 	PRIMARY KEY (user_id,school_id)
 );
+CREATE INDEX student_index on student(user_id);
 
 CREATE TABLE rental(
 	rental_id integer(10) NOT NULL auto_increment,
@@ -125,6 +135,7 @@ CREATE TABLE rental(
         REFERENCES book(isbn,school_id) ON  DELETE CASCADE ON UPDATE CASCADE,
 	PRIMARY KEY (rental_id)
 );
+CREATE INDEX rental_index on rental(rental_id);
 
 CREATE TABLE reservation(
 	reservation_id integer(10) NOT NULL auto_increment,
@@ -139,6 +150,7 @@ CREATE TABLE reservation(
         REFERENCES book(isbn,school_id) ON  DELETE CASCADE ON UPDATE CASCADE,
 	PRIMARY KEY (reservation_id)
 );
+CREATE INDEX reservation_index on reservation(reservation_id);
 
 CREATE TABLE review(
 	review_id integer(10) NOT NULL auto_increment,
@@ -154,6 +166,7 @@ CREATE TABLE review(
         REFERENCES book(isbn,school_id) ON  DELETE CASCADE ON UPDATE CASCADE,
 	PRIMARY KEY (review_id)
 );
+CREATE INDEX review_index on review(review_id);
 
 insert into users (username,passwrd,user_fullname,date_of_birth,approved) values ('topoperator','password','TOP OPERATOR',DATE '2000-01-01',true);
 insert into top_operator values ((select user_id from users where username = 'topoperator'));
