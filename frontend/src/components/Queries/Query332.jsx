@@ -5,14 +5,14 @@ class Query332 extends Component {
     super(props);
     this.state = {
       results: [],
-      username: "",
+      userID: this.props.userID,
     };
   }
 
   sendquery = () => {
-    let username = this.state.username;
-    if (username === "") username = "none";
-    fetch(`http://localhost:9103/libraries/queries/query332/${username}`)
+    fetch(
+      `http://localhost:9103/libraries/queries/query332/${this.state.userID}`
+    )
       .then((response) => response.json())
       .then((obj) => {
         console.log(obj);
@@ -38,7 +38,7 @@ class Query332 extends Component {
             <li key={result.title}>
               <table>
                 <tr>
-                  <th>Title:</th>
+                  <th>Book:</th>
                   <td>{result.title}</td>
                 </tr>
               </table>

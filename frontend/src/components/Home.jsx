@@ -17,7 +17,6 @@ import User from "./User";
 import EditBook from "./EditBook";
 import Reservations from "./Reservations";
 import Reservation from "./Reservation";
-import AddReservation from "./AddReservation";
 import Rentals from "./Rentals";
 import Rental from "./Rental";
 import AddRental from "./AddRental";
@@ -567,6 +566,9 @@ class Home extends Component {
           gotoqueries={this.goToQueries}
           gotoschools={this.goToSchools}
           gotooperators={this.goToOperators}
+          schlID={this.state.schlID}
+          gotobook={this.goToBook}
+          userID={this.state.userID}
         />
       );
   }

@@ -8,6 +8,7 @@ class Query331 extends Component {
       title: "",
       category: "",
       author: "",
+      schlID: this.props.schlID,
     };
   }
 
@@ -18,7 +19,9 @@ class Query331 extends Component {
     if (category === "") category = "none";
     let author = this.state.author;
     if (author === "") author = "none";
-    fetch(`http://localhost:9103/libraries/queries/query331/${title}/${category}/${author}`)
+    fetch(
+      `http://localhost:9103/libraries/queries/query331/${title}/${category}/${author}/${this.state.schlID}`
+    )
       .then((response) => response.json())
       .then((obj) => {
         console.log(obj);
@@ -80,12 +83,33 @@ class Query331 extends Component {
             <li key={result.title}>
               <table>
                 <tr>
-                  <th>Title:</th>
-                  <td>{result.title}</td>
+                  <th>Book:</th>
+                  <td>
+                    {result.title}{" "}
+                    <button onClick={() => this.props.gotobook(result.isbn)}>
+                      {"->"}
+                    </button>
+                  </td>
                 </tr>
                 <tr>
-                  <th>Author:</th>
-                  <td>{result.author_fullname}</td>
+                  <th>Author(s):</th>
+                  <td>
+                    <ul>
+                      {result.authors.map((author) => (
+                        <li key={author}>{author}</li>
+                      ))}
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <th>Category(/ies):</th>
+                  <td>
+                    <ul>
+                      {result.categories.map((category) => (
+                        <li key={category}>{category}</li>
+                      ))}
+                    </ul>
+                  </td>
                 </tr>
               </table>
             </li>

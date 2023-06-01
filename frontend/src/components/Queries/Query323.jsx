@@ -15,7 +15,9 @@ class Query323 extends Component {
     if (user === "") user = "none";
     let category = this.state.category;
     if (category === "") category = "none";
-    fetch(`http://localhost:9103/libraries/queries/query323/${user}/${category}`)
+    fetch(
+      `http://localhost:9103/libraries/queries/query323/${user}/${category}`
+    )
       .then((response) => response.json())
       .then((obj) => {
         console.log(obj);
@@ -37,7 +39,7 @@ class Query323 extends Component {
         <h3>Κριτήρια Αναζήτησης</h3>
         <table>
           <tr>
-            <th>User: </th>
+            <th>Username: </th>
             <td>
               <input
                 type="text"
@@ -63,33 +65,22 @@ class Query323 extends Component {
         <h3>Αποτελέσματα:</h3>
         <ul>
           {this.state.results.map((result) => (
-            <li key={result.avguser_rating}>
+            <li key={[result.username, result.category]}>
               <table>
-              <tr>
+                <tr>
                   <th>Username:</th>
                   <td>{result.username}</td>
                 </tr>
                 <tr>
-                  <th>Average reviews per user:</th>
-                  <td>{result.avguser_rating}</td>
+                  <th>Category:</th>
+                  <td>{result.category}</td>
+                </tr>
+                <tr>
+                  <th>Average Rating:</th>
+                  <td>{result.avguser_rating}/5</td>
                 </tr>
               </table>
             </li>
-          ))}</ul>
-           <ul>
-          {this.state.results.map((result) => (
-            <li key={result.avgcategory_rating}>
-              <table> 
-                <tr>
-                <tr>
-                  <th>Category:</th>
-                  <td>{result.category_name}</td>
-                </tr>
-                  <th>Average reviews per category:</th>
-                  <td>{result.avgcategory_rating}</td>
-                </tr>
-                </table>
-                </li>
           ))}
         </ul>
       </div>
@@ -98,3 +89,22 @@ class Query323 extends Component {
 }
 
 export default Query323;
+
+/*
+<ul>
+          {this.state.results.map((result) => (
+            <li key={result.avgcategory_rating}>
+              <table>
+                <tr>
+                  <tr>
+                    <th>Category:</th>
+                    <td>{result.category_name}</td>
+                  </tr>
+                  <th>Average reviews per category:</th>
+                  <td>{result.avgcategory_rating}</td>
+                </tr>
+              </table>
+            </li>
+          ))}
+        </ul>
+        */

@@ -5,60 +5,40 @@ const router = express.Router();
 
 router.get("/:user/:category", async (req, res) => {
   await apiutils.requestWrapper(
-      true,
-      req,
-      res,
-      "Query 3.2.3 executed succesfully!",
-      async (conn) => {
-          let userQuery = '';
-          let categoryQuery = '';
+    true,
+    req,
+    res,
+    "Query 3.2.3 executed succesfully!",
+    async (conn) => {
+      let user = "%";
+      if (req.params.user !== "none") user = req.params.user + user;
+      let category = "%";
+      if (req.params.category !== "none")
+        category = req.params.category + category;
 
-          if (req.params.user !== 'none') {
-              userQuery = `
-                  SELECT users.username, AVG(review.likert) AS avguser_rating
-                  FROM users
-                  JOIN review ON users.user_id = review.user_id
-                  WHERE users.username LIKE ?
-                  GROUP BY users.username;
-              `;
-          }
+      const ans_list = await conn.query(
+        `SELECT users.username, category.category_name AS category, AVG(review.likert) AS avguser_rating
+            FROM users
+            JOIN review ON users.user_id = review.user_id
+            JOIN book_category ON review.isbn = book_category.isbn AND review.school_id = book_category.school_id
+            JOIN category ON book_category.category_id=category.category_id
+            WHERE users.username LIKE ? AND category.category_name LIKE ?
+            GROUP BY users.username, category.category_name`,
+        [user, category]
+      );
 
-          if (req.params.category !== 'none') {
-              categoryQuery = `
-                  SELECT category.category_name, AVG(review.likert) AS avgcategory_rating
-                  FROM category
-                  JOIN book_category ON category.category_id = book_category.category_id
-                  JOIN review ON book_category.isbn = review.isbn AND book_category.school_id = review.school_id
-                  WHERE category.category_name LIKE ?
-                  GROUP BY category.category_name;
-              `;
-          }
+      const json_res = [];
 
-          const userResult = userQuery !== '' ? await conn.query(userQuery, [req.params.user]) : [];
-          const categoryResult = categoryQuery !== '' ? await conn.query(categoryQuery, [req.params.category]) : [];
-
-          const json_res = [];
-
-          if (userResult.length > 0) {
-              for (const user of userResult) {
-                  json_res.push({
-                      username: user.username,
-                      avguser_rating: user.avguser_rating,
-                  });
-              }
-          }
-
-          if (categoryResult.length > 0) {
-              for (const category of categoryResult) {
-                  json_res.push({
-                      category_name: category.category_name,
-                      avgcategory_rating: category.avgcategory_rating,
-                  });
-              }
-          }
-
-          return json_res;
+      for (elem of ans_list) {
+        json_res.push({
+          username: elem.username,
+          category: elem.category,
+          avguser_rating: elem.avguser_rating,
+        });
       }
+
+      return json_res;
+    }
   );
 });
 module.exports = router;

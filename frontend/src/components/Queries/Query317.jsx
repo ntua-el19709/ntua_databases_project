@@ -4,7 +4,7 @@ class Query317 extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        results: [],
+      results: [],
     };
   }
 
@@ -28,28 +28,28 @@ class Query317 extends Component {
       <div>
         <h2>Query 3.1.7</h2>
         <p>
-        Συγγραφείς που έχουν γράψει τουλάχιστον 5 βιβλία λιγότερα από τον συγγραφέα με τα περισσότερα βιβλία.
+          Συγγραφείς που έχουν γράψει τουλάχιστον 5 βιβλία λιγότερα από τον
+          συγγραφέα με τα περισσότερα βιβλία.
         </p>
         <button onClick={this.sendquery}>Send Query</button>
         <h3>Αποτελέσματα:</h3>
-        
-        {this.state.results.length > 0 && (
-      <ul>
-        <li>
-          <table>
-            <tr>
-              <th>Authors:</th>
-            </tr>
-            {this.state.results.map((result) => (
-              <tr key={result.author_fullname}>
-                <td>{result.author_fullname}</td>
-              </tr>
-            ))}
-          </table>
-        </li>
-      </ul>
-    )}
-  </div>
+        <ul>
+          {this.state.results.map((result) => (
+            <li>
+              <table>
+                <tr>
+                  <th>Author:</th>
+                  <td>{result.author_fullname}</td>
+                </tr>
+                <tr>
+                  <th>Number of Books:</th>
+                  <td>{result.num_of_books}</td>
+                </tr>
+              </table>
+            </li>
+          ))}
+        </ul>
+      </div>
     );
   }
 }

@@ -166,7 +166,7 @@ class EditBook extends Component {
   };
 
   onAddAuthorOfBook = () => {
-    if (this.state.selauthor != "") {
+    if (this.state.selauthor !== "") {
       fetch(
         `http://localhost:9103/libraries/web/addauthorofbook/${this.state.ISBN}/${this.state.schlID}/${this.state.selauthor.authorID}`,
         {

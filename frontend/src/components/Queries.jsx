@@ -19,6 +19,8 @@ class Queries extends Component {
     this.state = {
       type: this.props.type,
       query: "Select Query",
+      schlID: this.props.schlID,
+      userID: this.props.userID,
     };
   }
 
@@ -162,8 +164,15 @@ class Queries extends Component {
     else if (this.state.query === "321") return <Query321 />;
     else if (this.state.query === "322") return <Query322 />;
     else if (this.state.query === "323") return <Query323 />;
-    else if (this.state.query === "331") return <Query331 />;
-    else if (this.state.query === "332") return <Query332 />;
+    else if (this.state.query === "331")
+      return (
+        <Query331
+          schlID={this.state.schlID}
+          gotobook={(isbn) => this.props.gotobook(isbn)}
+        />
+      );
+    else if (this.state.query === "332")
+      return <Query332 userID={this.state.userID} />;
   }
 }
 

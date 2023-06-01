@@ -21,7 +21,9 @@ class Query321 extends Component {
     if (author === "") author = "none";
     let copies = this.state.copies;
     if (copies === "") copies = "none";
-    fetch(`http://localhost:9103/libraries/queries/query321/${title}/${category}/${author}/${copies}`)
+    fetch(
+      `http://localhost:9103/libraries/queries/query321/${title}/${category}/${author}/${copies}`
+    )
       .then((response) => response.json())
       .then((obj) => {
         console.log(obj);
@@ -94,12 +96,18 @@ class Query321 extends Component {
             <li key={result.title}>
               <table>
                 <tr>
-                  <th>Title:</th>
+                  <th>Book:</th>
                   <td>{result.title}</td>
                 </tr>
                 <tr>
-                  <th>Author:</th>
-                  <td>{result.author_fullname}</td>
+                  <th>Author(s):</th>
+                  <td>
+                    <ul>
+                      {result.author_fullname.map((author) => (
+                        <li key={author}>{author}</li>
+                      ))}
+                    </ul>
+                  </td>
                 </tr>
               </table>
             </li>
