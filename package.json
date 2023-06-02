@@ -1,0 +1,31 @@
+{
+  "name": "ntua_database_project",
+  "version": "1.0.0",
+  "description": "Group: 54\r Members: el19709, el20608",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "proxy": "http:localhost:9103/",
+  "scripts": {
+    "client": "cd frontend && npm start",
+    "server": "cd backend && npm run devStart",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "installAll": "cd backend && npm install && cd ../cli && npm install && cd ../frontend && npm install && cd .. && npm install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ntua-el19709/ntua_databases_project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ntua-el19709/ntua_databases_project/issues"
+  },
+  "homepage": "https://github.com/ntua-el19709/ntua_databases_project#readme",
+  "dependencies": {
+    "concurrently": "^7.6.0"
+  }
+}
