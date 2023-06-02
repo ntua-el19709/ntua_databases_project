@@ -8,6 +8,7 @@ class Query322 extends Component {
       name: "",
       surname: "",
       delay_days: "",
+      schlID: this.props.schlID,
     };
   }
 
@@ -18,7 +19,9 @@ class Query322 extends Component {
     if (surname === "") surname = "none";
     let delay_days = this.state.delay_days;
     if (delay_days === "") delay_days = "none";
-    fetch(`http://localhost:9103/libraries/queries/query322/${name}/${surname}/${delay_days}`)
+    fetch(
+      `http://localhost:9103/libraries/queries/query322/${name}/${surname}/${delay_days}/${this.state.schlID}`
+    )
       .then((response) => response.json())
       .then((obj) => {
         console.log(obj);
@@ -36,7 +39,10 @@ class Query322 extends Component {
     return (
       <div>
         <h2>Query 3.2.2</h2>
-        <p>Εύρεση όλων των δανειζόμενων που έχουν στην κατοχή τους τουλάχιστον ένα βιβλίο και έχουν καθυστερήσει την επιστροφή του.</p>
+        <p>
+          Εύρεση όλων των δανειζόμενων που έχουν στην κατοχή τους τουλάχιστον
+          ένα βιβλίο και έχουν καθυστερήσει την επιστροφή του.
+        </p>
         <h3>Κριτήρια Αναζήτησης</h3>
         <table>
           <tr>

@@ -4,6 +4,7 @@ class MakeReview extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      type: this.props.type,
       userID: this.props.userID,
       isbn: this.props.isbn,
       schlID: this.props.schlID,
@@ -50,7 +51,7 @@ class MakeReview extends Component {
     let okay = this.check();
     if (okay === 1) {
       fetch(
-        `http://localhost:9103/libraries/web/makereview/${this.state.userID}/${this.state.isbn}/${this.state.schlID}/${this.state.likert}/${this.state.description}`,
+        `http://localhost:9103/libraries/web/makereview/${this.state.userID}/${this.state.isbn}/${this.state.schlID}/${this.state.likert}/${this.state.description}/${this.state.type}`,
         {
           method: "POST",
           mode: "cors",

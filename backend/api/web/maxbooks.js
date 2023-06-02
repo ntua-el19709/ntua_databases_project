@@ -15,14 +15,8 @@ router.get("/", async (req, res) => {
           FROM author a
           JOIN book_author ba ON a.author_id = ba.author_id
           GROUP BY a.author_id, a.author_fullname
-          HAVING num_of_books < (
-              SELECT COUNT(*)
-              FROM book_author
-              GROUP BY author_id
-              ORDER BY COUNT(*) DESC
-              LIMIT 1
-          ) -4
-          ORDER BY num_of_books DESC`
+          ORDER BY num_of_books DESC
+          LIMIT 1`
       );
 
       json_res = [];

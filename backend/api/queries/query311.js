@@ -26,8 +26,6 @@ router.get("/:year/:month", async (req, res) => {
         [year, month, year, month]
       );
 
-      console.log(ans_list);
-
       json_res = [];
       for (elem of ans_list) {
         json_res.push({

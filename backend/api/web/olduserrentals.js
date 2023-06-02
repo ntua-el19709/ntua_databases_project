@@ -15,7 +15,7 @@ router.get("/:userID", async (req, res) => {
         FROM rental
         INNER JOIN book ON rental.school_id = book.school_id AND rental.isbn = book.isbn
         WHERE rental.user_id = ? AND rental.returned = true
-        ORDER BY rental.rental_id`,
+        ORDER BY rental.rental_datetime`,
         [req.params.userID]
       );
 

@@ -7,6 +7,7 @@ class Query323 extends Component {
       results: [],
       user: "",
       category: "",
+      schlID: this.props.schlID,
     };
   }
 
@@ -16,7 +17,7 @@ class Query323 extends Component {
     let category = this.state.category;
     if (category === "") category = "none";
     fetch(
-      `http://localhost:9103/libraries/queries/query323/${user}/${category}`
+      `http://localhost:9103/libraries/queries/query323/${user}/${category}/${this.state.schlID}`
     )
       .then((response) => response.json())
       .then((obj) => {

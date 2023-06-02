@@ -3,7 +3,7 @@ const apiutils = require("../../apiutils");
 const Parser = require("@json2csv/plainjs").Parser;
 const router = express.Router();
 
-router.get("/:user/:category", async (req, res) => {
+router.get("/:user/:category/:schlid", async (req, res) => {
   await apiutils.requestWrapper(
     true,
     req,
@@ -22,9 +22,10 @@ router.get("/:user/:category", async (req, res) => {
             JOIN review ON users.user_id = review.user_id
             JOIN book_category ON review.isbn = book_category.isbn AND review.school_id = book_category.school_id
             JOIN category ON book_category.category_id=category.category_id
-            WHERE users.username LIKE ? AND category.category_name LIKE ?
-            GROUP BY users.username, category.category_name`,
-        [user, category]
+            WHERE users.username LIKE ? AND category.category_name LIKE ? AND review.school_id = ?
+            GROUP BY users.username, category.category_name
+            ORDER BY avguser_rating DESC`,
+        [user, category, req.params.schlid]
       );
 
       const json_res = [];

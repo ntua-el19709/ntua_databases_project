@@ -16,7 +16,8 @@ router.get("/", async (req, res) => {
         INNER JOIN book_author ON author.author_id = book_author.author_id
         INNER JOIN book ON book_author.isbn = book.isbn AND book_author.school_id = book.school_id
         LEFT JOIN rental ON book.isbn = rental.isbn AND book.school_id = rental.school_id
-        WHERE rental.rental_id IS NULL`
+        GROUP BY author.author_fullname
+        HAVING COUNT(rental.rental_id) = 0;`
       );
 
       json_res = [];

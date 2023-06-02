@@ -3,7 +3,7 @@ const apiutils = require("../../apiutils");
 const Parser = require("@json2csv/plainjs").Parser;
 const router = express.Router();
 
-router.get("/:name/:surname/:delay_days", async (req, res) => {
+router.get("/:name/:surname/:delay_days/:schlid", async (req, res) => {
   await apiutils.requestWrapper(
     true,
     req,
@@ -20,14 +20,13 @@ router.get("/:name/:surname/:delay_days", async (req, res) => {
       ddays += 7;
 
       const ans_list = await conn.query(
-        `SELECT u.user_fullname, COUNT(*) AS num_books, DATEDIFF(CURDATE(), MAX(r.rental_datetime))-7 AS days_delayed
-          FROM users AS u
-          JOIN rental AS r ON u.user_id = r.user_id
-          WHERE r.returned = 0 AND u.user_fullname LIKE ?
-          GROUP BY u.user_fullname
-          HAVING COUNT(*) >= 1 AND DATEDIFF(CURDATE(), MAX(r.rental_datetime)) > ?
-          ORDER BY u.user_fullname`,
-        [name, ddays]
+        `SELECT COUNT(rental.rental_id) AS num_books,users.user_fullname, DATEDIFF(CURDATE(),MAX(rental.rental_datetime))-7 AS days_delayed
+          FROM rental
+          JOIN users ON rental.user_id = users.user_id
+          WHERE rental.school_id = ? AND users.user_fullname LIKE ? AND rental.returned = false AND users.user_id = rental.user_id AND TIMESTAMPDIFF(DAY, rental.rental_datetime, NOW()) > ?
+          GROUP BY users.user_id
+          ORDER BY users.user_fullname`,
+        [req.params.schlid, name, ddays]
       );
 
       json_res = [];

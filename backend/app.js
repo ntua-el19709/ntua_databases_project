@@ -60,6 +60,7 @@ const bookreviews = require("./api/web/bookreviews");
 const booklikert = require("./api/web/booklikert");
 const backup = require("./api/web/backup");
 const restore = require("./api/web/restore");
+const maxbooks = require("./api/web/maxbooks");
 //Queries
 const query311 = require("./api/queries/query311");
 const query312 = require("./api/queries/query312");
@@ -157,6 +158,7 @@ app.use(baseurl + "/web/bookreviews", bookreviews);
 app.use(baseurl + "/web/booklikert", booklikert);
 app.use(baseurl + "/web/backup", backup);
 app.use(baseurl + "/web/restore", restore);
+app.use(baseurl + "/web/maxbooks", maxbooks);
 //Queries
 app.use(baseurl + "/queries/query311", query311);
 app.use(baseurl + "/queries/query312", query312);

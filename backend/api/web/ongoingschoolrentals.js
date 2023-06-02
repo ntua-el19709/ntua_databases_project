@@ -15,7 +15,7 @@ router.get("/:schlid", async (req, res) => {
         FROM rental
         INNER JOIN users ON users.user_id = rental.user_id
         WHERE rental.school_id = ? AND rental.returned = false AND TIMESTAMPDIFF(DAY, rental.rental_datetime, NOW()) < 7
-        ORDER BY rental.rental_id`,
+        ORDER BY rental.rental_datetime`,
         [req.params.schlid]
       );
 

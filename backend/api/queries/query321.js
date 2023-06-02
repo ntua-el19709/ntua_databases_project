@@ -3,7 +3,7 @@ const apiutils = require("../../apiutils");
 const Parser = require("@json2csv/plainjs").Parser;
 const router = express.Router();
 
-router.get("/:title/:category/:author/:copies", async (req, res) => {
+router.get("/:title/:category/:author/:copies/:schlid", async (req, res) => {
   await apiutils.requestWrapper(
     true,
     req,
@@ -31,8 +31,9 @@ router.get("/:title/:category/:author/:copies", async (req, res) => {
             AND (c.category_name LIKE ?)
             AND (a.author_fullname LIKE ?)
             AND (b.copies LIKE ?)
+            AND b.school_id = ?
             ORDER BY b.title`,
-        [title, category, author, copies]
+        [title, category, author, copies, req.params.schlid]
       );
       json_res = [];
       book = { title: "", author_fullname: [] };

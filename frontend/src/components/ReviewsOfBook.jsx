@@ -77,7 +77,7 @@ class ReviewsOfBook extends Component {
   }
   addreview() {
     if (this.state.type !== "1")
-      // operator
+      // not operator
       return (
         <button onClick={() => this.props.gotomakereview()}>Add Review</button>
       );

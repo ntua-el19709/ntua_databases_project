@@ -161,9 +161,12 @@ class Queries extends Component {
     else if (this.state.query === "315") return <Query315 />;
     else if (this.state.query === "316") return <Query316 />;
     else if (this.state.query === "317") return <Query317 />;
-    else if (this.state.query === "321") return <Query321 />;
-    else if (this.state.query === "322") return <Query322 />;
-    else if (this.state.query === "323") return <Query323 />;
+    else if (this.state.query === "321")
+      return <Query321 schlID={this.state.schlID} />;
+    else if (this.state.query === "322")
+      return <Query322 schlID={this.state.schlID} />;
+    else if (this.state.query === "323")
+      return <Query323 schlID={this.state.schlID} />;
     else if (this.state.query === "331")
       return (
         <Query331

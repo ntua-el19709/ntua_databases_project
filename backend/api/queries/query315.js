@@ -17,35 +17,24 @@ router.get("/", async (req, res) => {
         FROM (
             SELECT users.user_fullname AS operator, COUNT(rental.rental_id) AS num_of_rents
             FROM rental
-            INNER JOIN users ON rental.user_id = users.user_id
             INNER JOIN operator ON rental.school_id = operator.school_id
-                                AND operator.user_id = users.user_id
+            INNER JOIN users ON operator.user_id = users.user_id
             WHERE TIMESTAMPDIFF(YEAR, rental.rental_datetime, NOW()) < 1
             GROUP BY operator.user_id
             ORDER BY num_of_rents DESC
-        ) AS Q4
-        WHERE Q4.num_of_rents IN (
+        ) AS Q2
+        WHERE Q2.num_of_rents IN (
             SELECT num_of_rents
             FROM (
-                SELECT num_of_rents, COUNT(Q2.user_id) AS num_of_ops
-                FROM users
-                INNER JOIN (
-                    SELECT operator, num_of_rents, user_id
-                    FROM (
-                        SELECT users.user_fullname AS operator, COUNT(rental.rental_id) AS num_of_rents, operator.user_id AS user_id
-                        FROM rental
-                        INNER JOIN users ON rental.user_id = users.user_id
-                        INNER JOIN operator ON rental.school_id = operator.school_id
-                                            AND operator.user_id = users.user_id
-                        WHERE TIMESTAMPDIFF(YEAR, rental.rental_datetime, NOW()) < 1
-                        GROUP BY operator.user_id
-                        ORDER BY num_of_rents DESC
-                    ) AS Q1
-                    WHERE Q1.num_of_rents > ?
-                ) AS Q2 ON users.user_id = Q2.user_id
-                GROUP BY Q2.num_of_rents
-            ) AS Q3
-            WHERE Q3.num_of_ops > ?
+                SELECT rental.school_id AS school, COUNT(rental.rental_id) AS num_of_rents
+                FROM rental
+                WHERE TIMESTAMPDIFF(YEAR, rental.rental_datetime, NOW()) < 1
+                GROUP BY school
+                HAVING num_of_rents > ?
+                ORDER BY num_of_rents DESC
+            ) AS Q1
+            GROUP BY Q1.num_of_rents
+            HAVING COUNT(Q1.school) > ?
         )
         ORDER BY num_of_rents DESC`,
         [min_no_of_rents, min_no_of_ops]

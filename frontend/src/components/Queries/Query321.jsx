@@ -9,6 +9,7 @@ class Query321 extends Component {
       category: "",
       author: "",
       copies: "",
+      schlID: this.props.schlID,
     };
   }
 
@@ -22,7 +23,7 @@ class Query321 extends Component {
     let copies = this.state.copies;
     if (copies === "") copies = "none";
     fetch(
-      `http://localhost:9103/libraries/queries/query321/${title}/${category}/${author}/${copies}`
+      `http://localhost:9103/libraries/queries/query321/${title}/${category}/${author}/${copies}/${this.state.schlID}`
     )
       .then((response) => response.json())
       .then((obj) => {
