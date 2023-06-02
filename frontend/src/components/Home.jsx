@@ -224,16 +224,6 @@ class Home extends Component {
     console.log(this.state);
   };
 
-  /*
-  changepassword = () => {
-    //pressed change password, go to Change Password page
-    this.setState({
-      ...this.state,
-      page: 15,
-    });
-    console.log(this.state);
-  };
-*/
   render() {
     return <div>{this.formatPage()}</div>;
   }

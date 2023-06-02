@@ -7,16 +7,8 @@ class Header extends Component {
   render() {
     return (
       <div>
-        <button
-          onClick={() => this.props.onHeaderLogInPress()}
-          className="btn btn-outline-primary m-2"
-        >
-          Log In
-        </button>
-        <button
-          onClick={() => this.props.onHeaderSignUpPress()}
-          className="btn btn-outline-primary m-2"
-        >
+        <button onClick={() => this.props.onHeaderLogInPress()}>Log In</button>
+        <button onClick={() => this.props.onHeaderSignUpPress()}>
           Sign Up
         </button>
       </div>
@@ -42,7 +34,6 @@ class Header extends Component {
               this.props.option.nextqID
             )
           }
-          className="btn btn-outline-primary m-2"
         >
           {this.props.option.opttxt}
         </button>
@@ -56,7 +47,6 @@ class Header extends Component {
               this.props.option.nextqID
             )
           }
-          className="btn btn-primary m-2"
         >
           {this.props.option.opttxt}
         </button>

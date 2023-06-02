@@ -32,8 +32,6 @@ class School extends Component {
     console.log(this.state.type);
   }
 
-  onEditSchool = () => {};
-
   render() {
     console.log("Now at School");
     return (

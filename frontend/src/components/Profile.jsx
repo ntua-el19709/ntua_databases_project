@@ -106,29 +106,6 @@ class Profile extends Component {
       </div>
     );
   }
-  editprofile() {
-    if (this.state.type !== "3") {
-      //TopOperator, Operator, Professor
-      return (
-        <div>
-          <button onClick={() => this.props.EditProfile()}>Edit Profile</button>
-        </div>
-      );
-    }
-  }
-
-  changepassword() {
-    if (this.state.type === "3") {
-      //student
-      return (
-        <div>
-          <button onClick={() => this.props.ChangePassword()}>
-            Change Password
-          </button>
-        </div>
-      );
-    }
-  }
 
   backuprestore() {
     if (this.state.type === "4") {
