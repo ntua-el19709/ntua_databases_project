@@ -33,7 +33,7 @@ class MakeReview extends Component {
     if (this.state.likert.length === 0) {
       this.setState({
         ...this.state,
-        message: `Book rate is blank!`,
+        message: `Select a book rating!`,
       });
       return 0;
     } else if (this.state.description.length === 0) {
@@ -70,14 +70,36 @@ class MakeReview extends Component {
             <td>{this.state.title}</td>
           </tr>
           <tr>
-            <th>Rate Book(1 to 5):</th>
+            <th>Rate Book:</th>
             <td>
-              <input
-                type="text"
-                onChange={(val) =>
-                  this.setState({ ...this.state, likert: val.target.value })
-                }
-              />
+              <form>
+                <dl
+                  onChange={(val) =>
+                    this.setState({ ...this.state, likert: val.target.value })
+                  }
+                >
+                  <dd>
+                    <input type="radio" name="choice" value="1" />
+                    <label>1</label>
+                  </dd>
+                  <dd>
+                    <input type="radio" name="choice" value="2" />
+                    <label>2</label>
+                  </dd>
+                  <dd>
+                    <input type="radio" name="choice" value="3" />
+                    <label>3</label>
+                  </dd>
+                  <dd>
+                    <input type="radio" name="choice" value="4" />
+                    <label>4</label>
+                  </dd>
+                  <dd>
+                    <input type="radio" name="choice" value="5" />
+                    <label>5</label>
+                  </dd>
+                </dl>
+              </form>
             </td>
           </tr>
           <tr>

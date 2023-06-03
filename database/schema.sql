@@ -23,10 +23,10 @@ CREATE TABLE book(
     title varchar(50) NOT NULL,
     publisher varchar(30) NOT NULL,
     pages integer(5) NOT NULL,
-    summary varchar(255),
+    summary varchar(255) NOT NULL,
     image binary(255),
-    lang varchar(30),
-    copies integer(3),
+    lang varchar(30) NOT NULL,
+    copies integer(3) NOT NULL,
         CONSTRAINT book_of_school FOREIGN KEY (school_id)
         REFERENCES school(school_id) ON DELETE CASCADE ON UPDATE CASCADE,
     PRIMARY KEY (isbn,school_id)
