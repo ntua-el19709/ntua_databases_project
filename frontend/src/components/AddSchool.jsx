@@ -65,8 +65,14 @@ class AddSchool extends Component {
           method: "POST",
           mode: "cors",
         }
-      ).then(() => {
-        this.setState({ ...this.state, message: "School Added!" });
+      ).then((response) => {
+        if (response.ok)
+          this.setState({ ...this.state, message: "School Added!" });
+        else
+          this.setState({
+            ...this.state,
+            message: "Something went wrong, please check school info!",
+          });
       });
     }
   };

@@ -119,26 +119,35 @@ class AddBook extends Component {
           method: "POST",
           mode: "cors",
         }
-      ).then(() => {
-        for (var i = 0; i < this.state.selectedauthors.length; i++) {
-          this.setState({ ...this.state, message: "Book Added!" });
-          fetch(
-            `http://localhost:9103/libraries/web/addauthorofbook/${this.state.ISBN}/${this.state.schlID}/${this.state.selectedauthors[i].authorID}`,
-            {
-              method: "POST",
-              mode: "cors",
-            }
-          );
-        }
-        for (var i = 0; i < this.state.selectedcats.length; i++) {
-          fetch(
-            `http://localhost:9103/libraries/web/addcategoryofbook/${this.state.ISBN}/${this.state.schlID}/${this.state.selectedcats[i].categoryID}`,
-            {
-              method: "POST",
-              mode: "cors",
-            }
-          );
-        }
+      ).then((response) => {
+        if (response.ok) {
+          this.setState({
+            ...this.state,
+            message: "Book Added!",
+          });
+          for (var i = 0; i < this.state.selectedauthors.length; i++) {
+            fetch(
+              `http://localhost:9103/libraries/web/addauthorofbook/${this.state.ISBN}/${this.state.schlID}/${this.state.selectedauthors[i].authorID}`,
+              {
+                method: "POST",
+                mode: "cors",
+              }
+            );
+          }
+          for (var i = 0; i < this.state.selectedcats.length; i++) {
+            fetch(
+              `http://localhost:9103/libraries/web/addcategoryofbook/${this.state.ISBN}/${this.state.schlID}/${this.state.selectedcats[i].categoryID}`,
+              {
+                method: "POST",
+                mode: "cors",
+              }
+            );
+          }
+        } else
+          this.setState({
+            ...this.state,
+            message: "Something went wrong, please check book info!",
+          });
       });
     }
   };

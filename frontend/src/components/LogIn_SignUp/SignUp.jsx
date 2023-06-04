@@ -90,7 +90,7 @@ class SignUp extends Component {
       });
       return 0;
     }
-    this.setState({ ...this.state, message: "Application Sent!" });
+
     return 1;
   }
 
@@ -106,31 +106,38 @@ class SignUp extends Component {
           method: "POST",
           mode: "cors",
         }
-      ).then(() => {
-        if (this.state.type === "1")
-          fetch(
-            `http://localhost:9103/libraries/web/addoperator/${this.state.username}/${this.state.schlid}`,
-            {
-              method: "POST",
-              mode: "cors",
-            }
-          );
-        else if (this.state.type === "2")
-          fetch(
-            `http://localhost:9103/libraries/web/addprofessor/${this.state.username}/${this.state.schlid}`,
-            {
-              method: "POST",
-              mode: "cors",
-            }
-          );
-        else if (this.state.type === "3")
-          fetch(
-            `http://localhost:9103/libraries/web/addstudent/${this.state.username}/${this.state.schlid}`,
-            {
-              method: "POST",
-              mode: "cors",
-            }
-          );
+      ).then((response) => {
+        if (response.ok) {
+          this.setState({ ...this.state, message: "Application Sent!" });
+          if (this.state.type === "1")
+            fetch(
+              `http://localhost:9103/libraries/web/addoperator/${this.state.username}/${this.state.schlid}`,
+              {
+                method: "POST",
+                mode: "cors",
+              }
+            );
+          else if (this.state.type === "2")
+            fetch(
+              `http://localhost:9103/libraries/web/addprofessor/${this.state.username}/${this.state.schlid}`,
+              {
+                method: "POST",
+                mode: "cors",
+              }
+            );
+          else if (this.state.type === "3")
+            fetch(
+              `http://localhost:9103/libraries/web/addstudent/${this.state.username}/${this.state.schlid}`,
+              {
+                method: "POST",
+                mode: "cors",
+              }
+            );
+        } else
+          this.setState({
+            ...this.state,
+            message: "Something went wrong, please check profile info!",
+          });
       });
     }
   };

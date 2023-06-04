@@ -128,8 +128,14 @@ class EditBook extends Component {
           method: "POST",
           mode: "cors",
         }
-      ).then(() => {
-        this.setState({ ...this.state, message: "Book Updated!" });
+      ).then((response) => {
+        if (response.ok)
+          this.setState({ ...this.state, message: "Book Updated!" });
+        else
+          this.setState({
+            ...this.state,
+            message: "Something went wrong, please check book info!",
+          });
       });
     }
   };

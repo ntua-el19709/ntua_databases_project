@@ -70,8 +70,14 @@ class EditProfile extends Component {
           method: "POST",
           mode: "cors",
         }
-      ).then(() => {
-        this.setState({ ...this.state, message: "Updated!" });
+      ).then((response) => {
+        if (response.ok)
+          this.setState({ ...this.state, message: "Profile Updated!" });
+        else
+          this.setState({
+            ...this.state,
+            message: "Something went wrong, please check profile info!",
+          });
       });
     }
   };
