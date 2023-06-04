@@ -5,6 +5,7 @@ const pool = mysql.createPool({
   user: "softenguser",
   database: "libraries",
   charset: "utf8mb4",
+  password: "password",
   connectionLimit: 100,
   multipleStatements: true,
 });
