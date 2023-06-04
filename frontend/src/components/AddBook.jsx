@@ -106,7 +106,6 @@ class AddBook extends Component {
       });
       return 0;
     }
-    this.setState({ ...this.state, message: "Book Added!" });
     return 1;
   }
 
@@ -122,6 +121,7 @@ class AddBook extends Component {
         }
       ).then(() => {
         for (var i = 0; i < this.state.selectedauthors.length; i++) {
+          this.setState({ ...this.state, message: "Book Added!" });
           fetch(
             `http://localhost:9103/libraries/web/addauthorofbook/${this.state.ISBN}/${this.state.schlID}/${this.state.selectedauthors[i].authorID}`,
             {

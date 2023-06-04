@@ -114,7 +114,7 @@ class EditBook extends Component {
       });
       return 0;
     }
-    this.setState({ ...this.state, message: "Book Updated!" });
+
     return 1;
   }
 
@@ -128,7 +128,9 @@ class EditBook extends Component {
           method: "POST",
           mode: "cors",
         }
-      );
+      ).then(() => {
+        this.setState({ ...this.state, message: "Book Updated!" });
+      });
     }
   };
   onAddAuthor = () => {

@@ -84,7 +84,9 @@ class EditSchool extends Component {
           method: "POST",
           mode: "cors",
         }
-      );
+      ).then(() => {
+        this.setState({ ...this.state, message: "School Updated!" });
+      });
     }
   };
 

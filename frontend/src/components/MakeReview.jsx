@@ -43,7 +43,7 @@ class MakeReview extends Component {
       });
       return 0;
     }
-    this.setState({ ...this.state, message: "Review Added!" });
+
     return 1;
   }
 
@@ -56,7 +56,9 @@ class MakeReview extends Component {
           method: "POST",
           mode: "cors",
         }
-      );
+      ).then(() => {
+        this.setState({ ...this.state, message: "Review Added!" });
+      });
     }
   };
 

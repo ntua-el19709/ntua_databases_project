@@ -79,7 +79,7 @@ class AddRental extends Component {
       });
       return 0;
     }
-    this.setState({ ...this.state, message: "Rental Added!", rmade: 1 });
+
     return 1;
   }
 
@@ -92,7 +92,9 @@ class AddRental extends Component {
           method: "POST",
           mode: "cors",
         }
-      );
+      ).then(() => {
+        this.setState({ ...this.state, message: "Rental Added!", rmade: 1 });
+      });
       let newcopiesnum = Number(this.state.available_copies);
       newcopiesnum = newcopiesnum - 1;
       let newcopies = newcopiesnum.toString();

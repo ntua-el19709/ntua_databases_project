@@ -56,7 +56,7 @@ class EditProfile extends Component {
       });
       return 0;
     }
-    this.setState({ ...this.state, message: "Updated!" });
+
     return 1;
   }
 
@@ -70,7 +70,9 @@ class EditProfile extends Component {
           method: "POST",
           mode: "cors",
         }
-      );
+      ).then(() => {
+        this.setState({ ...this.state, message: "Updated!" });
+      });
     }
   };
 
