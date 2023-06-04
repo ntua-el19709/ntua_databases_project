@@ -13,7 +13,8 @@ CREATE TABLE school(
     telephone integer(20) NOT NULL,
     email varchar(30) NOT NULL,
     principal_fullname varchar(30) NOT NULL,
-    PRIMARY KEY (school_id)
+    PRIMARY KEY (school_id),
+    CHECK (email NOT LIKE '% %' AND telephone>0)
 );
 CREATE INDEX school_index on school(school_id);
 
@@ -29,13 +30,24 @@ CREATE TABLE book(
     copies integer(3) NOT NULL,
         CONSTRAINT book_of_school FOREIGN KEY (school_id)
         REFERENCES school(school_id) ON DELETE CASCADE ON UPDATE CASCADE,
-    PRIMARY KEY (isbn,school_id)
+    PRIMARY KEY (isbn,school_id),
+    CHECK (pages>0 AND copies>=0 AND CHAR_LENGTH(isbn)=10 
+    AND (SUBSTRING(isbn,1,1) LIKE '0' OR SUBSTRING(isbn,1,1) LIKE '1' OR SUBSTRING(isbn,1,1) LIKE '2' OR SUBSTRING(isbn,1,1) LIKE '3' OR SUBSTRING(isbn,1,1) LIKE '4' OR SUBSTRING(isbn,1,1) LIKE '5' OR SUBSTRING(isbn,1,1) LIKE '6' OR SUBSTRING(isbn,1,1) LIKE '7' OR SUBSTRING(isbn,1,1) LIKE '8' OR SUBSTRING(isbn,1,1) LIKE '9')
+    AND (SUBSTRING(isbn,2,1) LIKE '0' OR SUBSTRING(isbn,2,1) LIKE '1' OR SUBSTRING(isbn,2,1) LIKE '2' OR SUBSTRING(isbn,2,1) LIKE '3' OR SUBSTRING(isbn,2,1) LIKE '4' OR SUBSTRING(isbn,2,1) LIKE '5' OR SUBSTRING(isbn,2,1) LIKE '6' OR SUBSTRING(isbn,2,1) LIKE '7' OR SUBSTRING(isbn,2,1) LIKE '8' OR SUBSTRING(isbn,2,1) LIKE '9') 
+    AND (SUBSTRING(isbn,3,1) LIKE '0' OR SUBSTRING(isbn,3,1) LIKE '1' OR SUBSTRING(isbn,3,1) LIKE '2' OR SUBSTRING(isbn,3,1) LIKE '3' OR SUBSTRING(isbn,3,1) LIKE '4' OR SUBSTRING(isbn,3,1) LIKE '5' OR SUBSTRING(isbn,3,1) LIKE '6' OR SUBSTRING(isbn,3,1) LIKE '7' OR SUBSTRING(isbn,3,1) LIKE '8' OR SUBSTRING(isbn,3,1) LIKE '9')
+    AND (SUBSTRING(isbn,4,1) LIKE '0' OR SUBSTRING(isbn,4,1) LIKE '1' OR SUBSTRING(isbn,4,1) LIKE '2' OR SUBSTRING(isbn,4,1) LIKE '3' OR SUBSTRING(isbn,4,1) LIKE '4' OR SUBSTRING(isbn,4,1) LIKE '5' OR SUBSTRING(isbn,4,1) LIKE '6' OR SUBSTRING(isbn,4,1) LIKE '7' OR SUBSTRING(isbn,4,1) LIKE '8' OR SUBSTRING(isbn,4,1) LIKE '9')
+    AND (SUBSTRING(isbn,5,1) LIKE '0' OR SUBSTRING(isbn,5,1) LIKE '1' OR SUBSTRING(isbn,5,1) LIKE '2' OR SUBSTRING(isbn,5,1) LIKE '3' OR SUBSTRING(isbn,5,1) LIKE '4' OR SUBSTRING(isbn,5,1) LIKE '5' OR SUBSTRING(isbn,5,1) LIKE '6' OR SUBSTRING(isbn,5,1) LIKE '7' OR SUBSTRING(isbn,5,1) LIKE '8' OR SUBSTRING(isbn,5,1) LIKE '9')
+    AND (SUBSTRING(isbn,6,1) LIKE '0' OR SUBSTRING(isbn,6,1) LIKE '1' OR SUBSTRING(isbn,6,1) LIKE '2' OR SUBSTRING(isbn,6,1) LIKE '3' OR SUBSTRING(isbn,6,1) LIKE '4' OR SUBSTRING(isbn,6,1) LIKE '5' OR SUBSTRING(isbn,6,1) LIKE '6' OR SUBSTRING(isbn,6,1) LIKE '7' OR SUBSTRING(isbn,6,1) LIKE '8' OR SUBSTRING(isbn,6,1) LIKE '9')
+    AND (SUBSTRING(isbn,7,1) LIKE '0' OR SUBSTRING(isbn,7,1) LIKE '1' OR SUBSTRING(isbn,7,1) LIKE '2' OR SUBSTRING(isbn,7,1) LIKE '3' OR SUBSTRING(isbn,7,1) LIKE '4' OR SUBSTRING(isbn,7,1) LIKE '5' OR SUBSTRING(isbn,7,1) LIKE '6' OR SUBSTRING(isbn,7,1) LIKE '7' OR SUBSTRING(isbn,7,1) LIKE '8' OR SUBSTRING(isbn,7,1) LIKE '9') 
+    AND (SUBSTRING(isbn,8,1) LIKE '0' OR SUBSTRING(isbn,8,1) LIKE '1' OR SUBSTRING(isbn,8,1) LIKE '2' OR SUBSTRING(isbn,8,1) LIKE '3' OR SUBSTRING(isbn,8,1) LIKE '4' OR SUBSTRING(isbn,8,1) LIKE '5' OR SUBSTRING(isbn,8,1) LIKE '6' OR SUBSTRING(isbn,8,1) LIKE '7' OR SUBSTRING(isbn,8,1) LIKE '8' OR SUBSTRING(isbn,8,1) LIKE '9')
+    AND (SUBSTRING(isbn,9,1) LIKE '0' OR SUBSTRING(isbn,9,1) LIKE '1' OR SUBSTRING(isbn,9,1) LIKE '2' OR SUBSTRING(isbn,9,1) LIKE '3' OR SUBSTRING(isbn,9,1) LIKE '4' OR SUBSTRING(isbn,9,1) LIKE '5' OR SUBSTRING(isbn,9,1) LIKE '6' OR SUBSTRING(isbn,9,1) LIKE '7' OR SUBSTRING(isbn,9,1) LIKE '8' OR SUBSTRING(isbn,9,1) LIKE '9')
+    AND (SUBSTRING(isbn,10,1) LIKE '0' OR SUBSTRING(isbn,10,1) LIKE '1' OR SUBSTRING(isbn,10,1) LIKE '2' OR SUBSTRING(isbn,10,1) LIKE '3' OR SUBSTRING(isbn,10,1) LIKE '4' OR SUBSTRING(isbn,10,1) LIKE '5' OR SUBSTRING(isbn,10,1) LIKE '6' OR SUBSTRING(isbn,10,1) LIKE '7' OR SUBSTRING(isbn,10,1) LIKE '8' OR SUBSTRING(isbn,10,1) LIKE '9' OR SUBSTRING(isbn,10,1) LIKE 'X'))
 );
 CREATE INDEX book_index on book(isbn,school_id);
 
 CREATE TABLE author(
 	author_id integer(10) NOT NULL auto_increment,
-    author_fullname varchar(30) NOT NULL,
+    author_fullname varchar(30) NOT NULL UNIQUE,
     PRIMARY KEY (author_id)
 );
 CREATE INDEX author_index on author(author_id);
@@ -54,7 +66,7 @@ CREATE INDEX book_author_index on book_author(author_id);
 
 CREATE TABLE category(
 	category_id integer(10) NOT NULL auto_increment,
-    category_name varchar(30) NOT NULL,
+    category_name varchar(30) NOT NULL UNIQUE,
     PRIMARY KEY (category_id)
 );
 CREATE INDEX category_index on category(category_id);
@@ -73,12 +85,13 @@ CREATE INDEX book_category_index on book_category(category_id);
 
 CREATE TABLE users(
 	user_id integer(10) NOT NULL auto_increment,
-    username varchar(30) NOT NULL,
+    username varchar(30) NOT NULL UNIQUE,
     passwrd varchar(30) NOT NULL,
     user_fullname varchar(30) NOT NULL,
     date_of_birth date NOT NULL,
     approved boolean NOT NULL,
-    PRIMARY KEY (user_id)
+    PRIMARY KEY (user_id),
+    CHECK (date_of_birth< date '2015-01-01')
 );
 CREATE INDEX users_index on users(user_id);
 
@@ -96,7 +109,7 @@ CREATE TABLE operator(
         REFERENCES users(user_id) ON  DELETE CASCADE ON UPDATE CASCADE,
         CONSTRAINT op_of_school FOREIGN KEY (school_id)
         REFERENCES school(school_id) ON  DELETE CASCADE ON UPDATE CASCADE,
-	PRIMARY KEY (user_id,school_id)
+	PRIMARY KEY (user_id)
 );
 CREATE INDEX operator_index on operator(user_id);
 
@@ -107,7 +120,7 @@ CREATE TABLE professor(
         REFERENCES users(user_id) ON  DELETE CASCADE ON UPDATE CASCADE,
         CONSTRAINT prof_of_school FOREIGN KEY (school_id)
         REFERENCES school(school_id) ON  DELETE CASCADE ON UPDATE CASCADE,
-	PRIMARY KEY (user_id,school_id)
+	PRIMARY KEY (user_id)
 );
 CREATE INDEX professor_index on professor(user_id);
 
@@ -118,7 +131,7 @@ CREATE TABLE student(
         REFERENCES users(user_id) ON  DELETE CASCADE ON UPDATE CASCADE,
         CONSTRAINT student_of_school FOREIGN KEY (school_id)
         REFERENCES school(school_id) ON  DELETE CASCADE ON UPDATE CASCADE,
-	PRIMARY KEY (user_id,school_id)
+	PRIMARY KEY (user_id)
 );
 CREATE INDEX student_index on student(user_id);
 
@@ -164,9 +177,11 @@ CREATE TABLE review(
         REFERENCES users(user_id) ON  DELETE CASCADE ON UPDATE CASCADE,
         CONSTRAINT book_reviewed FOREIGN KEY (isbn,school_id)
         REFERENCES book(isbn,school_id) ON  DELETE CASCADE ON UPDATE CASCADE,
-	PRIMARY KEY (review_id)
+	PRIMARY KEY (review_id),
+    CHECK (likert>=1 AND likert<=5)
 );
 CREATE INDEX review_index on review(review_id);
 
-insert into users (username,passwrd,user_fullname,date_of_birth,approved) values ('topoperator','password','TOP OPERATOR',DATE '2000-01-01',true);
+insert into users (username,passwrd,user_fullname,date_of_birth,approved)
+values ('topoperator','password','TOP OPERATOR',DATE '2000-01-01',true);
 insert into top_operator values ((select user_id from users where username = 'topoperator'));

@@ -18,12 +18,13 @@ router.get("/:name/:surname/:delay_days/:schlid", async (req, res) => {
       if (req.params.delay_days !== "none")
         ddays = Number(req.params.delay_days);
       ddays += 7;
-
       const ans_list = await conn.query(
-        `SELECT COUNT(rental.rental_id) AS num_books,users.user_fullname, DATEDIFF(CURDATE(),MAX(rental.rental_datetime))-7 AS days_delayed
+        `SELECT COUNT(rental.rental_id) AS num_books,users.user_fullname, DATEDIFF(CURDATE(),
+          MAX(rental.rental_datetime))-7 AS days_delayed
           FROM rental
           JOIN users ON rental.user_id = users.user_id
-          WHERE rental.school_id = ? AND users.user_fullname LIKE ? AND rental.returned = false AND users.user_id = rental.user_id AND TIMESTAMPDIFF(DAY, rental.rental_datetime, NOW()) > ?
+          WHERE rental.school_id = ? AND users.user_fullname LIKE ? AND rental.returned = false 
+          AND users.user_id = rental.user_id AND TIMESTAMPDIFF(DAY, rental.rental_datetime, NOW()) > ?
           GROUP BY users.user_id
           ORDER BY users.user_fullname`,
         [req.params.schlid, name, ddays]

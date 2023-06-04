@@ -10,12 +10,6 @@ router.get("/:catID", async (req, res) => {
     res,
     "Query 3.1.2 executed succesfully!",
     async (conn) => {
-      let year = "%";
-      if (req.params.year !== "none") year = req.params.year + year;
-      let month = "%";
-      if (req.params.month !== "none") month = req.params.month + month;
-      if (month[0] == "0") month = month[1];
-
       const ans_list = await conn.query(
         `SELECT author.author_fullname AS author, 0 AS professor
         FROM category
