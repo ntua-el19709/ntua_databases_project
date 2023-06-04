@@ -11,8 +11,12 @@ router.get("/:schlid", async (req, res) => {
     "Successful retrieval of unapproved reviews!",
     async (conn) => {
       const results = await conn.query(
-        `(SELECT * FROM review,book,users
-            WHERE review.school_id = ? AND review.school_id=book.school_id AND review.isbn=book.isbn AND review.user_id = users.user_id AND review.approved = false)`,
+        `SELECT review.*,users.username,book.title
+        FROM review
+        INNER JOIN book ON review.school_id = book.school_id AND review.isbn = book.isbn
+        INNER JOIN users ON review.user_id = users.user_id
+        WHERE review.school_id = ? AND review.approved = false
+        ORDER BY users.username`,
         [req.params.schlid]
       );
 

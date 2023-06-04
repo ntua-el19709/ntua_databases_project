@@ -8,7 +8,7 @@ router.post("/:isbn/:schlid/:category_id", async (req, res) => {
     req,
     res,
     "Category of book Added!",
-    async (conn1, conn2) => {
+    async (conn1) => {
       await conn1.query("INSERT INTO book_category VALUES (?,?, ?)", [
         req.params.isbn,
         req.params.schlid,

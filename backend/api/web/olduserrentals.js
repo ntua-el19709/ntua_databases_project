@@ -11,8 +11,11 @@ router.get("/:userID", async (req, res) => {
     "Successful retrieval of old user rentals!",
     async (conn) => {
       const results = await conn.query(
-        `SELECT * FROM rental,book
-            WHERE rental.user_id=? AND rental.returned=true AND book.school_id = rental.school_id AND book.isbn = rental.isbn`,
+        `SELECT rental.rental_id,book.title
+        FROM rental
+        INNER JOIN book ON rental.school_id = book.school_id AND rental.isbn = book.isbn
+        WHERE rental.user_id = ? AND rental.returned = true
+        ORDER BY rental.rental_datetime`,
         [req.params.userID]
       );
 

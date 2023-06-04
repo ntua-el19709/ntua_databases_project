@@ -1,0 +1,14 @@
+DELETE FROM book_author;
+DELETE FROM author;
+DELETE FROM book_category;
+DELETE FROM category;
+DELETE FROM rental;
+DELETE FROM reservation;
+DELETE FROM review;
+DELETE FROM book;
+DELETE FROM professor;
+DELETE FROM student;
+DELETE FROM top_operator;
+DELETE FROM operator;
+DELETE FROM users;
+DELETE FROM school;

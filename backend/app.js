@@ -2,8 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 
 /* ROUTES and how to import routes */
-const allusers = require("./api/allusers");
 const allschools = require("./api/web/allschools");
+const allschoolswithoutop = require("./api/web/allschoolswithoutop");
 const validate = require("./api/web/validate");
 const findtype = require("./api/web/findtype");
 const check = require("./api/web/check");
@@ -23,13 +23,17 @@ const addstudent = require("./api/web/addstudent");
 const userinfo = require("./api/web/userinfo");
 const newschool = require("./api/web/newschool");
 const changeschool = require("./api/web/changeschool");
+const deleteschool = require("./api/web/deleteschool");
+const deleteusersofschool = require("./api/web/deleteusersofschool");
 const schlinfo = require("./api/web/schlinfo");
 const addauthor = require("./api/web/addauthor");
 const allauthors = require("./api/web/allauthors");
 const addauthorofbook = require("./api/web/addauthorofbook");
+const deleteauthorofbook = require("./api/web/deleteauthorofbook");
 const addcategory = require("./api/web/addcategory");
 const allcategories = require("./api/web/allcategories");
 const addcategoryofbook = require("./api/web/addcategoryofbook");
+const deletecategoryofbook = require("./api/web/deletecategoryofbook");
 const newbook = require("./api/web/newbook");
 const allbooks = require("./api/web/allbooks");
 const bookinfo = require("./api/web/bookinfo");
@@ -55,6 +59,22 @@ const deletereview = require("./api/web/deletereview");
 const notapprovedreviews = require("./api/web/notapprovedreviews");
 const bookreviews = require("./api/web/bookreviews");
 const booklikert = require("./api/web/booklikert");
+const backup = require("./api/web/backup");
+const restore = require("./api/web/restore");
+const maxbooks = require("./api/web/maxbooks");
+//Queries
+const query311 = require("./api/queries/query311");
+const query312 = require("./api/queries/query312");
+const query313 = require("./api/queries/query313");
+const query314 = require("./api/queries/query314");
+const query315 = require("./api/queries/query315");
+const query316 = require("./api/queries/query316");
+const query317 = require("./api/queries/query317");
+const query321 = require("./api/queries/query321");
+const query322 = require("./api/queries/query322");
+const query323 = require("./api/queries/query323");
+const query331 = require("./api/queries/query331");
+const query332 = require("./api/queries/query332");
 //const { controleer } = require("./api/web/skotinos_arxontas");
 /* end of ROUTES and how to import routes */
 
@@ -81,8 +101,8 @@ app.use((req, res, next) => {
 // /* Routes used by our project */
 const baseurl = "/libraries";
 //app.route(`${baseurl}/demo`).get(controleer);
-app.use(baseurl + "/allusers", allusers);
 app.use(baseurl + "/web/allschools", allschools);
+app.use(baseurl + "/web/allschoolswithoutop", allschoolswithoutop);
 app.use(baseurl + "/web/validate", validate);
 app.use(baseurl + "/web/findtype", findtype);
 app.use(baseurl + "/web/check", check);
@@ -102,13 +122,17 @@ app.use(baseurl + "/web/addstudent", addstudent);
 app.use(baseurl + "/web/userinfo", userinfo);
 app.use(baseurl + "/web/newschool", newschool);
 app.use(baseurl + "/web/changeschool", changeschool);
+app.use(baseurl + "/web/deleteschool", deleteschool);
+app.use(baseurl + "/web/deleteusersofschool", deleteusersofschool);
 app.use(baseurl + "/web/schlinfo", schlinfo);
 app.use(baseurl + "/web/addauthor", addauthor);
 app.use(baseurl + "/web/allauthors", allauthors);
 app.use(baseurl + "/web/addauthorofbook", addauthorofbook);
+app.use(baseurl + "/web/deleteauthorofbook", deleteauthorofbook);
 app.use(baseurl + "/web/addcategory", addcategory);
 app.use(baseurl + "/web/allcategories", allcategories);
 app.use(baseurl + "/web/addcategoryofbook", addcategoryofbook);
+app.use(baseurl + "/web/deletecategoryofbook", deletecategoryofbook);
 app.use(baseurl + "/web/newbook", newbook);
 app.use(baseurl + "/web/allbooks", allbooks);
 app.use(baseurl + "/web/bookinfo", bookinfo);
@@ -134,6 +158,22 @@ app.use(baseurl + "/web/deletereview", deletereview);
 app.use(baseurl + "/web/notapprovedreviews", notapprovedreviews);
 app.use(baseurl + "/web/bookreviews", bookreviews);
 app.use(baseurl + "/web/booklikert", booklikert);
+app.use(baseurl + "/web/backup", backup);
+app.use(baseurl + "/web/restore", restore);
+app.use(baseurl + "/web/maxbooks", maxbooks);
+//Queries
+app.use(baseurl + "/queries/query311", query311);
+app.use(baseurl + "/queries/query312", query312);
+app.use(baseurl + "/queries/query313", query313);
+app.use(baseurl + "/queries/query314", query314);
+app.use(baseurl + "/queries/query315", query315);
+app.use(baseurl + "/queries/query316", query316);
+app.use(baseurl + "/queries/query317", query317);
+app.use(baseurl + "/queries/query321", query321);
+app.use(baseurl + "/queries/query322", query322);
+app.use(baseurl + "/queries/query323", query323);
+app.use(baseurl + "/queries/query331", query331);
+app.use(baseurl + "/queries/query332", query332);
 // /*End of routes used by our project */
 
 // In case of an endpoint does not exist

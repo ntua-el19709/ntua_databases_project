@@ -70,7 +70,6 @@ class EditSchool extends Component {
       });
       return 0;
     }
-    this.setState({ ...this.state, message: "School Updated!" });
     return 1;
   }
 
@@ -84,7 +83,15 @@ class EditSchool extends Component {
           method: "POST",
           mode: "cors",
         }
-      );
+      ).then((response) => {
+        if (response.ok)
+          this.setState({ ...this.state, message: "School Updated!" });
+        else
+          this.setState({
+            ...this.state,
+            message: "Something went wrong, please check school info!",
+          });
+      });
     }
   };
 

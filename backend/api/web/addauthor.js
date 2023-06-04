@@ -8,7 +8,7 @@ router.post("/:fullname", async (req, res) => {
     req,
     res,
     "Author added!",
-    async (conn1, conn2) => {
+    async (conn1) => {
       await conn1.query("INSERT INTO author (author_fullname) VALUES (?)", [
         req.params.fullname,
       ]);

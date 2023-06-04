@@ -11,8 +11,11 @@ router.get("/", async (req, res) => {
     "Successful retrieval of approved operators!",
     async (conn) => {
       const results = await conn.query(
-        `SELECT * FROM users,operator
-            WHERE users.user_id = operator.user_id AND users.approved=true`
+        `SELECT users.user_id, users.username
+        FROM users
+        JOIN operator ON users.user_id = operator.user_id
+        WHERE users.approved = true
+        ORDER BY users.username`
       );
 
       let json_q = {

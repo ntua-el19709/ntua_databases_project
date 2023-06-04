@@ -11,8 +11,11 @@ router.get("/:userID", async (req, res) => {
     "Successful retrieval of ongoing user rentals!",
     async (conn) => {
       const results = await conn.query(
-        `SELECT * FROM rental,book
-            WHERE rental.user_id=? AND rental.returned=false AND book.school_id = rental.school_id AND book.isbn = rental.isbn AND TIMESTAMPDIFF(DAY,rental.rental_datetime,NOW()) <7 `,
+        `SELECT rental.rental_id,book.title
+        FROM rental
+        INNER JOIN book ON book.school_id = rental.school_id AND book.isbn = rental.isbn
+        WHERE rental.user_id = ? AND rental.returned = false AND TIMESTAMPDIFF(DAY, rental.rental_datetime, NOW()) < 7
+        ORDER BY rental.rental_datetime`,
         [req.params.userID]
       );
 

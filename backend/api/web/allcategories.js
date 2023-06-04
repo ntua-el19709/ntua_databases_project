@@ -10,7 +10,9 @@ router.get("/", async (req, res) => {
     res,
     "Successful retrieval of all categories!",
     async (conn) => {
-      const ans_list = await conn.query("SELECT * FROM category");
+      const ans_list = await conn.query(
+        "SELECT * FROM category ORDER BY category_name"
+      );
 
       json_res = [];
       for (elem of ans_list) {

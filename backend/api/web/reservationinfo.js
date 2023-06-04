@@ -11,8 +11,11 @@ router.get("/:resID", async (req, res) => {
     "Successful retrieval of reservation!",
     async (conn) => {
       const results = await conn.query(
-        `SELECT * FROM reservation,book,users
-            WHERE reservation.reservation_id = ? AND reservation.isbn=book.isbn AND reservation.school_id=book.school_id AND reservation.user_id=users.user_id`,
+        `SELECT *
+        FROM reservation
+        INNER JOIN book ON reservation.isbn = book.isbn AND reservation.school_id = book.school_id
+        INNER JOIN users ON reservation.user_id = users.user_id
+        WHERE reservation.reservation_id = ?`,
         [req.params.resID]
       );
 
@@ -21,6 +24,8 @@ router.get("/:resID", async (req, res) => {
         username: results[0].username,
         book: results[0].title,
         placed_at: results[0].reservation_datetime,
+        isbn: results[0].isbn,
+        userID: results[0].user_id,
       };
 
       if (req.query.format == "csv") {

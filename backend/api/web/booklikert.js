@@ -11,8 +11,10 @@ router.get("/:schlid/:isbn", async (req, res) => {
     "Successful retrieval of book reviews!",
     async (conn) => {
       const results = await conn.query(
-        `(SELECT * FROM review,book
-            WHERE review.school_id = ? AND review.isbn=? AND review.school_id=book.school_id AND review.isbn=book.isbn AND review.approved=true)`,
+        `SELECT review.likert
+        FROM review
+        JOIN book ON review.school_id = book.school_id AND review.isbn = book.isbn
+        WHERE review.school_id = ? AND review.isbn = ? AND review.approved = true;`,
         [req.params.schlid, req.params.isbn]
       );
       let title = "No Reviews";

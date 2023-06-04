@@ -12,6 +12,7 @@ class School extends Component {
       email: "",
       principal: "",
       message: "",
+      notdeleted: 1,
     };
   }
 
@@ -32,7 +33,29 @@ class School extends Component {
     console.log(this.state.type);
   }
 
-  onEditSchool = () => {};
+  DeleteSchool = () => {
+    fetch(
+      `http://localhost:9103/libraries/web/deleteusersofschool/${this.state.schlID}`,
+      {
+        method: "POST",
+        mode: "cors",
+      }
+    ).then(() => {
+      fetch(
+        `http://localhost:9103/libraries/web/deleteschool/${this.state.schlID}`,
+        {
+          method: "POST",
+          mode: "cors",
+        }
+      ).then(() => {
+        this.setState({
+          ...this.state,
+          notdeleted: 0,
+          message: "School Deleted",
+        });
+      });
+    });
+  };
 
   render() {
     console.log("Now at School");
@@ -64,9 +87,15 @@ class School extends Component {
             <td>{this.state.principal}</td>
           </tr>
         </table>
-        <button onClick={() => this.props.editschool(this.state.schlID)}>
+        <button
+          onClick={() => {
+            if (this.state.notdeleted === 1)
+              this.props.editschool(this.state.schlID);
+          }}
+        >
           Edit School
         </button>
+        <button onClick={this.DeleteSchool}>Delete School</button>
         <div>{this.state.message}</div>
         <button onClick={() => this.props.gotoschools()}>{"<-"}</button>
       </div>

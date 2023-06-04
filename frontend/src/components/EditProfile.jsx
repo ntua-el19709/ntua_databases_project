@@ -13,7 +13,9 @@ class EditProfile extends Component {
       type: this.props.type,
       message: "",
       uniquemessage: "",
+      dob: "",
     };
+    console.log(this.state.type);
   }
 
   componentDidMount() {
@@ -27,6 +29,7 @@ class EditProfile extends Component {
           year: obj.dob.substring(0, 4),
           month: obj.dob.substring(5, 7),
           day: obj.dob.substring(8, 10),
+          dob: obj.dob,
         });
       });
     console.log(this.state);
@@ -53,7 +56,7 @@ class EditProfile extends Component {
       });
       return 0;
     }
-    this.setState({ ...this.state, message: "Updated!" });
+
     return 1;
   }
 
@@ -67,7 +70,15 @@ class EditProfile extends Component {
           method: "POST",
           mode: "cors",
         }
-      );
+      ).then((response) => {
+        if (response.ok)
+          this.setState({ ...this.state, message: "Profile Updated!" });
+        else
+          this.setState({
+            ...this.state,
+            message: "Something went wrong, please check profile info!",
+          });
+      });
     }
   };
 
@@ -78,11 +89,11 @@ class EditProfile extends Component {
         <table>
           <tr>
             <th>Full Name:</th>
+
             <td>{this.allowfullname()}</td>
           </tr>
           <tr>
             <th>Date of Birth:</th>
-
             <td>{this.allowdob()}</td>
           </tr>
           <tr>
@@ -110,6 +121,7 @@ class EditProfile extends Component {
       </div>
     );
   }
+
   allowfullname() {
     if (this.state.type === "3") return this.state.fullname; //student
     else

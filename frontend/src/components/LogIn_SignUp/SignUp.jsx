@@ -90,7 +90,7 @@ class SignUp extends Component {
       });
       return 0;
     }
-    this.setState({ ...this.state, message: "Application Sent!" });
+
     return 1;
   }
 
@@ -106,31 +106,38 @@ class SignUp extends Component {
           method: "POST",
           mode: "cors",
         }
-      ).then(() => {
-        if (this.state.type === "1")
-          fetch(
-            `http://localhost:9103/libraries/web/addoperator/${this.state.username}/${this.state.schlid}`,
-            {
-              method: "POST",
-              mode: "cors",
-            }
-          );
-        else if (this.state.type === "2")
-          fetch(
-            `http://localhost:9103/libraries/web/addprofessor/${this.state.username}/${this.state.schlid}`,
-            {
-              method: "POST",
-              mode: "cors",
-            }
-          );
-        else if (this.state.type === "3")
-          fetch(
-            `http://localhost:9103/libraries/web/addstudent/${this.state.username}/${this.state.schlid}`,
-            {
-              method: "POST",
-              mode: "cors",
-            }
-          );
+      ).then((response) => {
+        if (response.ok) {
+          this.setState({ ...this.state, message: "Application Sent!" });
+          if (this.state.type === "1")
+            fetch(
+              `http://localhost:9103/libraries/web/addoperator/${this.state.username}/${this.state.schlid}`,
+              {
+                method: "POST",
+                mode: "cors",
+              }
+            );
+          else if (this.state.type === "2")
+            fetch(
+              `http://localhost:9103/libraries/web/addprofessor/${this.state.username}/${this.state.schlid}`,
+              {
+                method: "POST",
+                mode: "cors",
+              }
+            );
+          else if (this.state.type === "3")
+            fetch(
+              `http://localhost:9103/libraries/web/addstudent/${this.state.username}/${this.state.schlid}`,
+              {
+                method: "POST",
+                mode: "cors",
+              }
+            );
+        } else
+          this.setState({
+            ...this.state,
+            message: "Something went wrong, please check profile info!",
+          });
       });
     }
   };
@@ -151,10 +158,38 @@ class SignUp extends Component {
   };
 
   selectType = (val) => {
-    this.setState({
-      ...this.state,
-      type: val.target.value, //1 for operator, 2 for professor, 3 for student
-    });
+    this.setState(
+      {
+        ...this.state,
+        type: val.target.value, //1 for operator, 2 for professor, 3 for student
+      },
+      () => {
+        if (this.state.type === "1")
+          fetch(`http://localhost:9103/libraries/web/allschoolswithoutop`)
+            .then((response) => response.json())
+            .then((obj) => {
+              this.setState({
+                ...this.state,
+                schools: obj.map((school) => {
+                  //option.selected = 0;
+                  return school;
+                }),
+              });
+            });
+        else
+          fetch(`http://localhost:9103/libraries/web/allschools`)
+            .then((response) => response.json())
+            .then((obj) => {
+              this.setState({
+                ...this.state,
+                schools: obj.map((school) => {
+                  //option.selected = 0;
+                  return school;
+                }),
+              });
+            });
+      }
+    );
   };
 
   selectSchool = (val) => {
