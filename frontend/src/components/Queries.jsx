@@ -12,6 +12,7 @@ import Query322 from "./Queries/Query322";
 import Query323 from "./Queries/Query323";
 import Query331 from "./Queries/Query331";
 import Query332 from "./Queries/Query332";
+import styles from "../CSS/mystyle.module.css";
 
 class Queries extends Component {
   constructor(props) {
@@ -124,32 +125,80 @@ class Queries extends Component {
     if (this.state.type === "4")
       //top operator
       return (
-        <div>
-          <button onClick={this.query311}>Query 3.1.1</button>
-          <button onClick={this.query312}>Query 3.1.2</button>
-          <button onClick={this.query313}>Query 3.1.3</button>
-          <button onClick={this.query314}>Query 3.1.4</button>
-          <button onClick={this.query315}>Query 3.1.5</button>
-          <button onClick={this.query316}>Query 3.1.6</button>
-          <button onClick={this.query317}>Query 3.1.7</button>
-        </div>
+        <ul className={styles.navbar2}>
+          <li>
+            <button className={styles.navbut2} onClick={this.query311}>
+              Query 3.1.1
+            </button>
+          </li>
+          <li>
+            <button className={styles.navbut2} onClick={this.query312}>
+              Query 3.1.2
+            </button>
+          </li>
+          <li>
+            <button className={styles.navbut2} onClick={this.query313}>
+              Query 3.1.3
+            </button>
+          </li>
+          <li>
+            <button className={styles.navbut2} onClick={this.query314}>
+              Query 3.1.4
+            </button>
+          </li>
+          <li>
+            <button className={styles.navbut2} onClick={this.query315}>
+              Query 3.1.5
+            </button>
+          </li>
+          <li>
+            <button className={styles.navbut2} onClick={this.query316}>
+              Query 3.1.6
+            </button>
+          </li>
+          <li>
+            <button className={styles.navbut2} onClick={this.query317}>
+              Query 3.1.7
+            </button>
+          </li>
+        </ul>
       );
     else if (this.state.type === "1")
       //operator
       return (
-        <div>
-          <button onClick={this.query321}>Query 3.2.1</button>
-          <button onClick={this.query322}>Query 3.2.2</button>
-          <button onClick={this.query323}>Query 3.2.3</button>
-        </div>
+        <ul className={styles.navbar2}>
+          <li>
+            <button className={styles.navbut2} onClick={this.query321}>
+              Query 3.2.1
+            </button>
+          </li>
+          <li>
+            <button className={styles.navbut2} onClick={this.query322}>
+              Query 3.2.2
+            </button>
+          </li>
+          <li>
+            <button className={styles.navbut2} onClick={this.query323}>
+              Query 3.2.3
+            </button>
+          </li>
+        </ul>
       );
     //student or professor
     else
       return (
-        <div>
-          <button onClick={this.query331}>Query 3.3.1</button>
-          <button onClick={this.query332}>Query 3.3.2</button>
-        </div>
+        <ul className={styles.navbar2}>
+          <li>
+            <button className={styles.navbut2} onClick={this.query331}>
+              Query 3.3.1
+            </button>
+          </li>
+          <li>
+            <button className={styles.navbut2} onClick={this.query332}>
+              Query 3.3.2
+            </button>
+          </li>
+        </ul>
       );
   }
   query() {

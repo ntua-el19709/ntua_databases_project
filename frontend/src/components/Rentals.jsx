@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Menu from "./Menu";
+import styles from "../CSS/mystyle.module.css";
 
 class Rentals extends Component {
   constructor(props) {
@@ -219,36 +220,36 @@ class Rentals extends Component {
           queries={() => this.props.gotoqueries()}
         />
         {this.filteruser()}
-        <div>Late Rentals:</div>
-        <ul>
+        <div className={styles.resren1}>Late Rentals:</div>
+        <ul className={styles.late}>
           {this.state.laterentals.map((rental) => (
-            <li key={rental.renID}>
+            <li
+              key={rental.renID}
+              onClick={() => this.props.gotorental(rental.renID)}
+            >
               {this.rentalinfo(rental)}
-              <button onClick={() => this.props.gotorental(rental.renID)}>
-                {"->"}
-              </button>
             </li>
           ))}
         </ul>
-        <div>Ongoing Rentals:</div>
-        <ul>
+        <div className={styles.resren1}>Ongoing Rentals:</div>
+        <ul className={styles.ongoing}>
           {this.state.ongoingrentals.map((rental) => (
-            <li key={rental.renID}>
+            <li
+              key={rental.renID}
+              onClick={() => this.props.gotorental(rental.renID)}
+            >
               {this.rentalinfo(rental)}
-              <button onClick={() => this.props.gotorental(rental.renID)}>
-                {"->"}
-              </button>
             </li>
           ))}
         </ul>
-        <div>Old Rentals:</div>
-        <ul>
+        <div className={styles.resren1}>Old Rentals:</div>
+        <ul className={styles.old}>
           {this.state.oldrentals.map((rental) => (
-            <li key={rental.renID}>
+            <li
+              key={rental.renID}
+              onClick={() => this.props.gotorental(rental.renID)}
+            >
               {this.rentalinfo(rental)}
-              <button onClick={() => this.props.gotorental(rental.renID)}>
-                {"->"}
-              </button>
             </li>
           ))}
         </ul>

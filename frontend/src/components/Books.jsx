@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Menu from "./Menu";
+import styles from "../CSS/mystyle.module.css";
 
 class Books extends Component {
   constructor(props) {
@@ -40,14 +41,11 @@ class Books extends Component {
           queries={() => this.props.gotoqueries()}
         />
         {this.AddBook()}
-        <div>All Books:</div>
-        <ul>
+        <div className={styles.resren1}>All Books:</div>
+        <ul className={styles.old}>
           {this.state.books.map((book) => (
-            <li key={book.ISBN}>
+            <li key={book.ISBN} onClick={() => this.props.gotobook(book.isbn)}>
               {book.title}
-              <button onClick={() => this.props.gotobook(book.isbn)}>
-                {"->"}
-              </button>
             </li>
           ))}
         </ul>

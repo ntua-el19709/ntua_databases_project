@@ -82,7 +82,7 @@ class LogIn extends Component {
         </div>
         <br></br>
         <div>
-          <table className={styles.Login}>
+          <table>
             <tr>
               <th>Username:</th>
               <td>
