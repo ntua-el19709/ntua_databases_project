@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Header from "./Header";
+import styles from "../../CSS/mystyle.module.css";
 
 class LogIn extends Component {
   constructor(props) {
@@ -73,26 +74,31 @@ class LogIn extends Component {
     console.log("Now at LogIn");
     return (
       <div>
-        <Header
-          onHeaderLogInPress={() => this.props.headerLogInPress()}
-          onHeaderSignUpPress={() => this.props.headerSignUpPress()}
-        />
-        <table>
-          <tr>
-            <th>Username:</th>
-            <td>
-              <input type="text" onChange={this.onUsernameChange} />
-            </td>
-          </tr>
-          <tr>
-            <th>Password:</th>
-            <td>
-              <input type="text" onChange={this.onPasswordChange} />
-            </td>
-          </tr>
-        </table>
-        <button onClick={this.onLogIn}>{"->"}</button>
-        <div>{this.state.message}</div>
+        <div>
+          <Header
+            onHeaderLogInPress={() => this.props.headerLogInPress()}
+            onHeaderSignUpPress={() => this.props.headerSignUpPress()}
+          />
+        </div>
+        <br></br>
+        <div>
+          <table className={styles.Login}>
+            <tr>
+              <th>Username:</th>
+              <td>
+                <input type="text" onChange={this.onUsernameChange} />
+              </td>
+            </tr>
+            <tr>
+              <th>Password:</th>
+              <td>
+                <input type="password" onChange={this.onPasswordChange} />
+              </td>
+            </tr>
+          </table>
+          <button onClick={this.onLogIn}>{"->"}</button>
+          <div>{this.state.message}</div>
+        </div>
       </div>
     );
   }
