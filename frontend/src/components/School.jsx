@@ -1,4 +1,8 @@
 import React, { Component } from "react";
+import styles from "../CSS/mystyle.module.css";
+import delet from "../icons/delete.png";
+import pencil from "../icons/pencil.png";
+import back from "../icons/back.png";
 
 class School extends Component {
   constructor(props) {
@@ -60,7 +64,7 @@ class School extends Component {
   render() {
     console.log("Now at School");
     return (
-      <div>
+      <div className={styles.school}>
         <table>
           <tr>
             <th>Name of School:</th>
@@ -87,17 +91,31 @@ class School extends Component {
             <td>{this.state.principal}</td>
           </tr>
         </table>
-        <button
-          onClick={() => {
-            if (this.state.notdeleted === 1)
-              this.props.editschool(this.state.schlID);
-          }}
-        >
-          Edit School
-        </button>
-        <button onClick={this.DeleteSchool}>Delete School</button>
-        <div>{this.state.message}</div>
-        <button onClick={() => this.props.gotoschools()}>{"<-"}</button>
+        <span title="Edit School">
+          <button
+            onClick={() => {
+              if (this.state.notdeleted === 1)
+                this.props.editschool(this.state.schlID);
+            }}
+            className={styles.iconbut2}
+          >
+            <img src={pencil} alt="Edit School" />
+          </button>
+        </span>
+        <span title="Delete School">
+          <button onClick={this.DeleteSchool} className={styles.iconbut2}>
+            <img src={delet} alt="Delete School" />
+          </button>
+        </span>
+        <span title="Back">
+          <button
+            onClick={() => this.props.gotoschools()}
+            className={styles.iconbut2}
+          >
+            <img src={back} alt="Back" />
+          </button>
+        </span>
+        <div className={styles.mess}>{this.state.message}</div>
       </div>
     );
   }

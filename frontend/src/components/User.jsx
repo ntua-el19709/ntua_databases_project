@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import styles from "../CSS/mystyle.module.css";
 
 class User extends Component {
   constructor(props) {
@@ -90,7 +91,7 @@ class User extends Component {
   render() {
     console.log("Now at User");
     return (
-      <div>
+      <div className={styles.school}>
         <table>
           <tr>
             <th>Full Name:</th>

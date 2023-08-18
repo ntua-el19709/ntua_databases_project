@@ -128,3 +128,72 @@ ul.ongoing li:hover {
   opacity: 1;
   border: 1px solid darkgreen;
 }
+
+.iconbut {
+  background-color: white;
+  border: none;
+  margin: 12px 0px 0px 40px;
+  color: black;
+  padding: 10px 10px;
+  text-align: center;
+  font-size: 16px;
+}
+.iconbut:hover {
+  background-color: rgb(247, 242, 242);
+}
+.iconbut2 {
+  background-color: lightblue;
+  border: none;
+  margin: 0px 5px 10px 5px;
+  color: black;
+  padding: 10px 10px;
+  text-align: center;
+  font-size: 16px;
+}
+.iconbut2:hover {
+  background-color: rgb(143, 204, 224);
+}
+
+.school {
+  background-color: lightblue;
+  padding: 20px 20px;
+  margin: 50px;
+  margin-left: 150px;
+  margin-right: 150px;
+  border: 2px solid black;
+  text-align: center;
+}
+
+.school table {
+  padding: 20px 30px;
+  text-align: center;
+  margin: 4px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 16px;
+}
+.school th {
+  padding: 5px 5px;
+  text-align: right;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 16px;
+}
+
+.school td {
+  padding: 5px 5px;
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 16px;
+}
+
+.mess {
+  color: red;
+  font-size: 16px;
+}
+
+.mess2 {
+  color: blue;
+  font-size: 16px;
+}

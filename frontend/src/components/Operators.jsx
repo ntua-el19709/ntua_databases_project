@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Menu from "./Menu";
+import styles from "../CSS/mystyle.module.css";
 
 class Operators extends Component {
   constructor(props) {
@@ -47,33 +48,29 @@ class Operators extends Component {
           operators={() => this.props.gotooperators()}
           queries={() => this.props.gotoqueries()}
         />
-        <div>Not Approved Operators:</div>
-        <ul>
+        <div className={styles.resren1}>Not Approved Operators:</div>
+        <ul className={styles.late}>
           {this.state.napoperators.map((operator) => (
-            <li key={operator.userID}>
+            <li
+              key={operator.userID}
+              onClick={() =>
+                this.props.gotooperator(operator.username, operator.userID)
+              }
+            >
               {operator.username}
-              <button
-                onClick={() =>
-                  this.props.gotooperator(operator.username, operator.userID)
-                }
-              >
-                {"->"}
-              </button>
             </li>
           ))}
         </ul>
-        <div>Approved Operators:</div>
-        <ul>
+        <div className={styles.resren1}>Approved Operators:</div>
+        <ul className={styles.ongoing}>
           {this.state.apoperators.map((operator) => (
-            <li key={operator.userID}>
+            <li
+              key={operator.userID}
+              onClick={() =>
+                this.props.gotooperator(operator.username, operator.userID)
+              }
+            >
               {operator.username}
-              <button
-                onClick={() =>
-                  this.props.gotooperator(operator.username, operator.userID)
-                }
-              >
-                {"->"}
-              </button>
             </li>
           ))}
         </ul>
