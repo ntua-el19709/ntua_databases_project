@@ -1,5 +1,10 @@
 import React, { Component } from "react";
 import styles from "../CSS/mystyle.module.css";
+import back from "../icons/back.png";
+import delet from "../icons/delete.png";
+import tick from "../icons/tick.png";
+import exx from "../icons/exx.png";
+import print from "../icons/print.png";
 
 class User extends Component {
   constructor(props) {
@@ -121,25 +126,54 @@ class User extends Component {
           </tr>
         </table>
         {this.approveornot()}
-        <button onClick={this.DeleteUser}>Delete User</button>
+        <span title="Delete User">
+          <button onClick={this.DeleteUser} className={styles.iconbut2}>
+            <img src={delet} alt="Delete User" />
+          </button>
+        </span>
         {this.printcard()}
-        <div>{this.state.message}</div>
-        <button onClick={() => this.props.gotousers()}>{"<-"}</button>
+        <span title="Back">
+          <button
+            onClick={() => this.props.gotousers()}
+            className={styles.iconbut2}
+          >
+            <img src={back} alt="Back" />
+          </button>
+        </span>
+        <div className={styles.mess}>{this.state.message}</div>
       </div>
     );
   }
   approveornot() {
     if (this.state.approved === 0) {
-      return <button onClick={this.ApproveUser}>Approve User</button>;
+      return (
+        <span title="Approve User">
+          <button onClick={this.ApproveUser} className={styles.iconbut2}>
+            <img src={tick} alt="Approve User" />
+          </button>
+        </span>
+      );
     } else if (this.state.approved === 1) {
-      return <button onClick={this.UnapproveUser}>Unapprove User</button>;
+      return (
+        <span title="Unapprove User">
+          <button onClick={this.UnapproveUser} className={styles.iconbut2}>
+            <img src={exx} alt="Unapprove User" />
+          </button>
+        </span>
+      );
     }
     return;
   }
   printcard() {
     if (this.state.type === "1")
       //operator
-      return <button>Print Card</button>;
+      return (
+        <span title="Print Card">
+          <button className={styles.iconbut2}>
+            <img src={print} alt="Print Card" />
+          </button>
+        </span>
+      );
   }
 }
 
