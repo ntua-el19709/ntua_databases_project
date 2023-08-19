@@ -188,6 +188,15 @@ ul.ongoing li:hover {
   font-size: 16px;
 }
 
+.school select {
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5px 5px;
+  border: none;
+  border-radius: 4px;
+}
+
 .mess {
   color: red;
   font-size: 16px;

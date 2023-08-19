@@ -151,18 +151,22 @@ class Profile extends Component {
     } else {
       return (
         <div>
-          <button
-            onClick={() => this.props.EditProfile()}
-            className={styles.iconbut2}
-          >
-            <img src={pencil} alt="Edit Profile" />
-          </button>
-          <button
-            onClick={() => this.props.LoggedOut()}
-            className={styles.iconbut2}
-          >
-            <img src={logout} alt="Log Out" />
-          </button>
+          <span title="Edit Profile">
+            <button
+              onClick={() => this.props.EditProfile()}
+              className={styles.iconbut2}
+            >
+              <img src={pencil} alt="Edit Profile" />
+            </button>
+          </span>
+          <span title="Log Out">
+            <button
+              onClick={() => this.props.LoggedOut()}
+              className={styles.iconbut2}
+            >
+              <img src={logout} alt="Log Out" />
+            </button>
+          </span>
         </div>
       );
     }

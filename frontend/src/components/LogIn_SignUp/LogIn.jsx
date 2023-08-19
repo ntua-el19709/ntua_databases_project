@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Header from "./Header";
 import styles from "../../CSS/mystyle.module.css";
+import login from "../../icons/login.png";
 
 class LogIn extends Component {
   constructor(props) {
@@ -81,7 +82,7 @@ class LogIn extends Component {
           />
         </div>
         <br></br>
-        <div>
+        <div className={styles.school}>
           <table>
             <tr>
               <th>Username:</th>
@@ -96,8 +97,12 @@ class LogIn extends Component {
               </td>
             </tr>
           </table>
-          <button onClick={this.onLogIn}>{"->"}</button>
-          <div>{this.state.message}</div>
+          <span title="Log In">
+            <button onClick={this.onLogIn} className={styles.iconbut2}>
+              <img src={login} alt="Log In" />
+            </button>
+          </span>
+          <div className={styles.mess}>{this.state.message}</div>
         </div>
       </div>
     );

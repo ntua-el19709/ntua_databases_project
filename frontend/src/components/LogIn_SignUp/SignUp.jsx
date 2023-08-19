@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import Header from "./Header";
+import styles from "../../CSS/mystyle.module.css";
+import signup from "../../icons/signup.png";
 
 class SignUp extends Component {
   constructor(props) {
@@ -207,106 +209,110 @@ class SignUp extends Component {
           onHeaderLogInPress={() => this.props.headerLogInPress()}
           onHeaderSignUpPress={() => this.props.headerSignUpPress()}
         />
-        <table>
-          <tr>
-            <th>Sign up as:</th>
-            <td>
-              <form>
-                <dl onChange={this.selectType}>
-                  <dd>
-                    <input type="radio" name="choice" value="1" />
-                    <label>Operator</label>
-                  </dd>
-                  <dd>
-                    <input type="radio" name="choice" value="2" />
-                    <label>Professor</label>
-                  </dd>
-                  <dd>
-                    <input type="radio" name="choice" value="3" />
-                    <label>Student</label>
-                  </dd>
-                </dl>
-              </form>
-            </td>
-          </tr>
-          <tr>
-            <th>School Unit:</th>
-            <td>
-              <form>
-                <select
-                  multiple
-                  name="School Unit"
-                  onChange={this.selectSchool}
-                >
-                  {this.state.schools.map((school) => (
-                    <option value={school.schoolID}>{school.schoolname}</option>
-                  ))}
-                </select>
-              </form>
-            </td>
-          </tr>
-          <tr>
-            <th>Full Name:</th>
-            <td>
-              <input
-                type="text"
-                onChange={(val) =>
-                  this.setState({ ...this.state, fullname: val.target.value })
-                }
-              />
-            </td>
-          </tr>
-          <tr>
-            <th>Date of Birth:</th>
-            <td>
-              <input
-                type="text"
-                size="4"
-                placeholder="YYYY"
-                onChange={(val) =>
-                  this.setState({ ...this.state, year: val.target.value })
-                }
-              />
-              -
-              <input
-                type="text"
-                size="2"
-                placeholder="MM"
-                onChange={(val) =>
-                  this.setState({ ...this.state, month: val.target.value })
-                }
-              />
-              -
-              <input
-                type="text"
-                size="2"
-                placeholder="DD"
-                onChange={(val) =>
-                  this.setState({ ...this.state, day: val.target.value })
-                }
-              />
-            </td>
-          </tr>
-          <tr>
-            <th>Username:</th>
-            <td>
-              <input type="text" onChange={this.onUsernameChange} />
-            </td>
-          </tr>
-          <tr>
-            <th>Password:</th>
-            <td>
-              <input
-                type="text"
-                onChange={(val) =>
-                  this.setState({ ...this.state, password: val.target.value })
-                }
-              />
-            </td>
-          </tr>
-        </table>
-        <button onClick={this.onSignUp}>{"->"}</button>
-        <div>{this.state.message}</div>
+        <div className={styles.school}>
+          <table>
+            <tr>
+              <th>Sign up as:</th>
+              <td>
+                <form>
+                  <dl onChange={this.selectType}>
+                    <dd>
+                      <input type="radio" name="choice" value="1" />
+                      <label>Operator</label>
+                    </dd>
+                    <dd>
+                      <input type="radio" name="choice" value="2" />
+                      <label>Professor</label>
+                    </dd>
+                    <dd>
+                      <input type="radio" name="choice" value="3" />
+                      <label>Student</label>
+                    </dd>
+                  </dl>
+                </form>
+              </td>
+            </tr>
+            <tr>
+              <th>School Unit:</th>
+              <td>
+                <form>
+                  <select name="School Unit" onChange={this.selectSchool}>
+                    {this.state.schools.map((school) => (
+                      <option value={school.schoolID}>
+                        {school.schoolname}
+                      </option>
+                    ))}
+                  </select>
+                </form>
+              </td>
+            </tr>
+            <tr>
+              <th>Full Name:</th>
+              <td>
+                <input
+                  type="text"
+                  onChange={(val) =>
+                    this.setState({ ...this.state, fullname: val.target.value })
+                  }
+                />
+              </td>
+            </tr>
+            <tr>
+              <th>Date of Birth:</th>
+              <td>
+                <input
+                  type="text"
+                  size="4"
+                  placeholder="YYYY"
+                  onChange={(val) =>
+                    this.setState({ ...this.state, year: val.target.value })
+                  }
+                />
+                -
+                <input
+                  type="text"
+                  size="2"
+                  placeholder="MM"
+                  onChange={(val) =>
+                    this.setState({ ...this.state, month: val.target.value })
+                  }
+                />
+                -
+                <input
+                  type="text"
+                  size="2"
+                  placeholder="DD"
+                  onChange={(val) =>
+                    this.setState({ ...this.state, day: val.target.value })
+                  }
+                />
+              </td>
+            </tr>
+            <tr>
+              <th>Username:</th>
+              <td>
+                <input type="text" onChange={this.onUsernameChange} />
+              </td>
+            </tr>
+            <tr>
+              <th>Password:</th>
+              <td>
+                <input
+                  type="text"
+                  onChange={(val) =>
+                    this.setState({ ...this.state, password: val.target.value })
+                  }
+                />
+              </td>
+            </tr>
+          </table>
+          <span title="Sign Up">
+            <button onClick={this.onSignUp} className={styles.iconbut2}>
+              <img src={signup} alt="Sign Up" />
+            </button>
+          </span>
+          <div className={styles.mess}>{this.state.message}</div>
+        </div>
       </div>
     );
   }
