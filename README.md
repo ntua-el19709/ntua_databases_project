@@ -4,6 +4,12 @@
 
 The semester project of the course "Databases" of NTUA - 2022-2023.<br>Team: 54<br>Members: el19709, el20608
 
+## Description
+
+---
+
+This is a complete application for the libraries of schools. It has 4 types of users, and all types of possibilities like similar applications (e.g. adding new books, reviewing books, signing up). The complete description is in the file `project-description.pdf`, and our solution is presented in the file `Databases_team54.pdf` (both files are in greek).
+
 ## Required Tools
 
 ---
