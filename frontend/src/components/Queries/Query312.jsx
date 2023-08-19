@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import styles from "../../CSS/mystyle.module.css";
 
 class Query312 extends Component {
   constructor(props) {
@@ -61,7 +62,7 @@ class Query312 extends Component {
   render() {
     console.log("Now at Query312");
     return (
-      <div>
+      <div className={styles.school}>
         <h2>Query 3.1.2</h2>
         <p>
           Για δεδομένη κατηγορία βιβλίων, ποιοι συγγραφείς ανήκουν σε αυτήν και

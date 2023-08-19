@@ -1,4 +1,9 @@
 import React, { Component } from "react";
+import styles from "../CSS/mystyle.module.css";
+import back from "../icons/back.png";
+import delet from "../icons/delete.png";
+import tick from "../icons/tick.png";
+import exx from "../icons/exx.png";
 
 class Operator extends Component {
   constructor(props) {
@@ -87,7 +92,7 @@ class Operator extends Component {
   render() {
     console.log("Now at Operator");
     return (
-      <div>
+      <div className={styles.school}>
         <table>
           <tr>
             <th>Full Name:</th>
@@ -117,18 +122,39 @@ class Operator extends Component {
           </tr>
         </table>
         {this.approveornot()}
-        <button onClick={this.DeleteOperator}>Delete Operator</button>
-        <div>{this.state.message}</div>
-        <button onClick={() => this.props.gotooperators()}>{"<-"}</button>
+        <span title="Delete Operator">
+          <button onClick={this.DeleteOperator} className={styles.iconbut2}>
+            <img src={delet} alt="Delete Operator" />
+          </button>
+        </span>
+        <span title="Back">
+          <button
+            onClick={() => this.props.gotooperators()}
+            className={styles.iconbut2}
+          >
+            <img src={back} alt="Back" />
+          </button>
+        </span>
+        <div className={styles.mess}>{this.state.message}</div>
       </div>
     );
   }
   approveornot() {
     if (this.state.approved === 0) {
-      return <button onClick={this.ApproveOperator}>Approve Operator</button>;
+      return (
+        <span title="Approve Opertor">
+          <button onClick={this.ApproveOperator} className={styles.iconbut2}>
+            <img src={tick} alt="Approve Operator" />
+          </button>
+        </span>
+      );
     } else if (this.state.approved === 1) {
       return (
-        <button onClick={this.UnapproveOperator}>Unapprove Operator</button>
+        <span title="Unapprove Operator">
+          <button onClick={this.UnapproveOperator} className={styles.iconbut2}>
+            <img src={exx} alt="Unapprove Operator" />
+          </button>
+        </span>
       );
     }
     return;

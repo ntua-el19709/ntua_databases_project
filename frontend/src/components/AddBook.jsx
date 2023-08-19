@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import styles from "../CSS/mystyle.module.css";
+import add from "../icons/add.png";
+import back from "../icons/back.png";
 
 class AddBook extends Component {
   constructor(props) {
@@ -134,7 +137,7 @@ class AddBook extends Component {
               }
             );
           }
-          for (var i = 0; i < this.state.selectedcats.length; i++) {
+          for (i = 0; i < this.state.selectedcats.length; i++) {
             fetch(
               `http://localhost:9103/libraries/web/addcategoryofbook/${this.state.ISBN}/${this.state.schlID}/${this.state.selectedcats[i].categoryID}`,
               {
@@ -241,7 +244,7 @@ class AddBook extends Component {
   render() {
     console.log("Now at AddBook");
     return (
-      <div>
+      <div className={styles.school}>
         <table>
           <tr>
             <th>ISBN:</th>
@@ -268,7 +271,7 @@ class AddBook extends Component {
           <tr>
             <th>{"Author(s):"}</th>
             <td>
-              <select multiple name="Authors" onChange={this.selectAuthor}>
+              <select name="Authors" onChange={this.selectAuthor}>
                 {this.state.allauthors.map((author) => (
                   <option value={[author.authorID, author.author_fullname]}>
                     {author.author_fullname}
@@ -303,7 +306,7 @@ class AddBook extends Component {
           <tr>
             <th>{"Category(/ies):"}</th>
             <td>
-              <select multiple name="Categories" onChange={this.selectCategory}>
+              <select name="Categories" onChange={this.selectCategory}>
                 {this.state.allcategories.map((category) => (
                   <option value={[category.categoryID, category.category]}>
                     {category.category}
@@ -394,9 +397,20 @@ class AddBook extends Component {
             </td>
           </tr>
         </table>
-        <button onClick={this.onAddBook}>Add Book</button>
-        <div>{this.state.message}</div>
-        <button onClick={() => this.props.gotobooks()}>{"<-"}</button>
+        <span title="Add Book">
+          <button onClick={this.onAddBook} className={styles.iconbut2}>
+            <img src={add} alt="Add Book" />
+          </button>
+        </span>
+        <span title="Back">
+          <button
+            onClick={() => this.props.gotobooks()}
+            className={styles.iconbut2}
+          >
+            <img src={back} alt="Back" />
+          </button>
+        </span>
+        <div className={styles.mess}>{this.state.message}</div>
       </div>
     );
   }

@@ -1,4 +1,9 @@
 import React, { Component } from "react";
+import styles from "../CSS/mystyle.module.css";
+import back from "../icons/back.png";
+import star1 from "../icons/borderstar.png";
+import star2 from "../icons/filledstar.png";
+import review from "../icons/review.png";
 
 class ReviewsOfBook extends Component {
   constructor(props) {
@@ -9,6 +14,7 @@ class ReviewsOfBook extends Component {
       userID: this.props.userID,
       username: this.props.username,
       schlID: this.props.schlID,
+      title: this.props.title,
       type: this.props.type,
       likert: "0",
     };
@@ -41,31 +47,35 @@ class ReviewsOfBook extends Component {
 
   render() {
     console.log("Now at Reviews of Book");
+
     return (
-      <div>
-        <button onClick={() => this.props.gotobook(this.state.isbn)}>
-          {"<-"}
-        </button>
+      <div className={styles.school}>
+        <h2>{this.state.title}</h2>
+        {this.likertstars(this.state.likert)}
         {this.addreview()}
-        <br></br>
-        Rating: {this.state.likert}/5
-        <br></br>
-        Reviews:
+        <span title="Back">
+          <button
+            style={{ marginTop: "10px" }}
+            onClick={() => this.props.gotobook(this.state.isbn)}
+            className={styles.iconbut2}
+          >
+            <img src={back} alt="Back" />
+          </button>
+        </span>
+        <div className={styles.resren1}>Reviews:</div>
         <ul>
           {this.state.reviews.map((review) => (
             <li key={review.reviewID}>
               <table>
                 <tr>
-                  <th>By:</th>
-                  <td>{review.username}</td>
+                  <td>
+                    <h3>{review.username}</h3>
+                  </td>
+                  <td>{this.likertstars(review.likert)}</td>
                 </tr>
                 <tr>
-                  <th>Rating:</th>
-                  <td>{review.likert}</td>
-                </tr>
-                <tr>
-                  <th>Description:</th>
-                  <td> {review.description}</td>
+                  <td></td>
+                  <td>{review.description}</td>
                 </tr>
               </table>
             </li>
@@ -78,8 +88,53 @@ class ReviewsOfBook extends Component {
     if (this.state.type !== "1")
       // not operator
       return (
-        <button onClick={() => this.props.gotomakereview()}>Add Review</button>
+        <span title="Make Review">
+          <button
+            style={{ marginTop: "10px" }}
+            onClick={() => this.props.gotomakereview()}
+            className={styles.iconbut2}
+          >
+            <img src={review} alt="Add Review" />
+          </button>
+        </span>
       );
+  }
+  likertstars(rate) {
+    var pixels = 160 - rate * 32;
+    return (
+      <div className={styles.likert}>
+        <div className={styles.container}>
+          <img src={star2} className={styles.layer1} alt="filled1" />
+          <img src={star1} className={styles.layer3} alt="border1" />
+        </div>
+        <div className={styles.container}>
+          <img src={star2} className={styles.layer1} alt="filled2" />
+          <img src={star1} className={styles.layer3} alt="border2" />
+        </div>
+        <div className={styles.container}>
+          <img src={star2} className={styles.layer1} alt="filled3" />
+          <img src={star1} className={styles.layer3} alt="border3" />
+        </div>
+        <div className={styles.container}>
+          <img src={star2} className={styles.layer1} alt="filled4" />
+          <img src={star1} className={styles.layer3} alt="border4" />
+        </div>
+        <div className={styles.container}>
+          <img src={star2} className={styles.layer1} alt="filled5" />
+          <img src={star1} className={styles.layer3} alt="border5" />
+        </div>
+        <div
+          style={{
+            width: `${pixels}px`,
+            height: "32px",
+            backgroundColor: "lightblue",
+            zIndex: "2",
+            position: "absolute",
+            right: "0",
+          }}
+        />
+      </div>
+    );
   }
 }
 

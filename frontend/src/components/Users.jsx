@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Menu from "./Menu";
+import styles from "../CSS/mystyle.module.css";
 
 class Users extends Component {
   constructor(props) {
@@ -55,29 +56,25 @@ class Users extends Component {
           reviews={() => this.props.gotoreviews()}
           queries={() => this.props.gotoqueries()}
         />
-        <div>Not Approved Users:</div>
-        <ul>
+        <div className={styles.resren1}>Not Approved Users:</div>
+        <ul className={styles.late}>
           {this.state.napusers.map((user) => (
-            <li key={user.userID}>
+            <li
+              key={user.userID}
+              onClick={() => this.props.gotouser(user.username, user.userID)}
+            >
               {user.username}
-              <button
-                onClick={() => this.props.gotouser(user.username, user.userID)}
-              >
-                {"->"}
-              </button>
             </li>
           ))}
         </ul>
-        <div>Approved Users:</div>
-        <ul>
+        <div className={styles.resren1}>Approved Users:</div>
+        <ul className={styles.ongoing}>
           {this.state.apusers.map((user) => (
-            <li key={user.userID}>
+            <li
+              key={user.userID}
+              onClick={() => this.props.gotouser(user.username, user.userID)}
+            >
               {user.username}
-              <button
-                onClick={() => this.props.gotouser(user.username, user.userID)}
-              >
-                {"->"}
-              </button>
             </li>
           ))}
         </ul>

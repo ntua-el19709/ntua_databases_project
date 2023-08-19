@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import styles from "../../CSS/mystyle.module.css";
 
 class Query313 extends Component {
   constructor(props) {
@@ -25,7 +26,7 @@ class Query313 extends Component {
   render() {
     console.log("Now at Query313");
     return (
-      <div>
+      <div className={styles.school}>
         <h2>Query 3.1.3</h2>
         <p>
           Βρείτε τους νέους εκπαιδευτικούς {"(ηλικία < 40 ετών)"} που έχουν

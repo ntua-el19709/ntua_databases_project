@@ -1,5 +1,10 @@
 import React, { Component } from "react";
 import Menu from "./Menu";
+import styles from "../CSS/mystyle.module.css";
+import pencil from "../icons/pencil.png";
+import logout from "../icons/logout.png";
+import restore from "../icons/restore.png";
+import backup from "../icons/backup.png";
 
 class Profile extends Component {
   constructor(props) {
@@ -78,31 +83,32 @@ class Profile extends Component {
           reviews={() => this.props.gotoreviews()}
           queries={() => this.props.gotoqueries()}
         />
-        <table>
-          <tr>
-            <th>Full Name:</th>
-            <td>{this.state.fullname}</td>
-          </tr>
-          <tr>
-            <th>Date of Birth:</th>
-            <td>{this.state.dob.substring(0, 10)}</td>
-          </tr>
-          <tr>
-            <th>Username:</th>
-            <td>
-              <td>{this.state.username}</td>
-            </td>
-          </tr>
-          <tr>
-            <th>Password:</th>
-            <td>
-              <td>{this.state.password}</td>
-            </td>
-          </tr>
-        </table>
-        <button onClick={() => this.props.EditProfile()}>Edit Profile</button>
-        {this.backuprestore()}
-        <button onClick={() => this.props.LoggedOut()}>Log Out</button>
+        <div className={styles.school}>
+          <table>
+            <tr>
+              <th>Full Name:</th>
+              <td>{this.state.fullname}</td>
+            </tr>
+            <tr>
+              <th>Date of Birth:</th>
+              <td>{this.state.dob.substring(0, 10)}</td>
+            </tr>
+            <tr>
+              <th>Username:</th>
+              <td>
+                <td>{this.state.username}</td>
+              </td>
+            </tr>
+            <tr>
+              <th>Password:</th>
+              <td>
+                <td>{this.state.password}</td>
+              </td>
+            </tr>
+          </table>
+
+          {this.backuprestore()}
+        </div>
       </div>
     );
   }
@@ -112,10 +118,55 @@ class Profile extends Component {
       //topoperator
       return (
         <div>
-          <button onClick={this.BackUp}>Back Up</button>
-          <button onClick={this.Restore}>Restore</button>
+          <span title="Edit Profile">
+            <button
+              onClick={() => this.props.EditProfile()}
+              className={styles.iconbut2}
+            >
+              <img src={pencil} alt="Edit Profile" />
+            </button>
+          </span>
+          <span title="Back Up">
+            <button onClick={this.BackUp} className={styles.iconbut2}>
+              <img src={backup} alt="Back Up" />
+            </button>
+          </span>
+          <span title="Restore">
+            <button onClick={this.Restore} className={styles.iconbut2}>
+              <img src={restore} alt="Restore" />
+            </button>
+          </span>
+          <span title="Log Out">
+            <button
+              onClick={() => this.props.LoggedOut()}
+              className={styles.iconbut2}
+            >
+              <img src={logout} alt="Log Out" />
+            </button>
+          </span>
           <br></br>
-          {this.state.message}
+          <div className={styles.mess2}>{this.state.message}</div>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <span title="Edit Profile">
+            <button
+              onClick={() => this.props.EditProfile()}
+              className={styles.iconbut2}
+            >
+              <img src={pencil} alt="Edit Profile" />
+            </button>
+          </span>
+          <span title="Log Out">
+            <button
+              onClick={() => this.props.LoggedOut()}
+              className={styles.iconbut2}
+            >
+              <img src={logout} alt="Log Out" />
+            </button>
+          </span>
         </div>
       );
     }

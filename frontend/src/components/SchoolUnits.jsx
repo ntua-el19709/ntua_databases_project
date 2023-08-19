@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import Menu from "./Menu";
+import styles from "../CSS/mystyle.module.css";
+import add from "../icons/add.png";
 
 class SchoolUnits extends Component {
   constructor(props) {
@@ -35,15 +37,23 @@ class SchoolUnits extends Component {
           operators={() => this.props.gotooperators()}
           queries={() => this.props.gotoqueries()}
         />
-        <button onClick={() => this.props.addschool()}>Add School Unit</button>
-        <div>All School Units:</div>
-        <ul>
+        <div className={styles.resren1}>All School Units:</div>
+        <span title="Add School">
+          <button
+            onClick={() => this.props.addschool()}
+            className={styles.iconbut}
+          >
+            <img src={add} alt="Add School" />
+          </button>
+        </span>
+
+        <ul className={styles.old}>
           {this.state.schools.map((school) => (
-            <li key={school.schoolID}>
+            <li
+              key={school.schoolID}
+              onClick={() => this.props.gotoschool(school.schoolID)}
+            >
               {school.schoolname}
-              <button onClick={() => this.props.gotoschool(school.schoolID)}>
-                {"->"}
-              </button>
             </li>
           ))}
         </ul>

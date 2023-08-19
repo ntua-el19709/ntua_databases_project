@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import Menu from "./Menu";
+import styles from "../CSS/mystyle.module.css";
+import exx from "../icons/exx.png";
 
 class Reservations extends Component {
   constructor(props) {
@@ -122,17 +124,15 @@ class Reservations extends Component {
         />
         {this.filteruser()}
         {this.restext()}
-        <ul>
+        <ul className={styles.old}>
           {this.state.reservations.map((reservation) => (
-            <li key={reservation.reservationID}>
+            <li
+              key={reservation.reservationID}
+              onClick={() =>
+                this.props.gotoreservation(reservation.reservationID)
+              }
+            >
               {this.resinfo(reservation)}
-              <button
-                onClick={() =>
-                  this.props.gotoreservation(reservation.reservationID)
-                }
-              >
-                {"->"}
-              </button>
             </li>
           ))}
         </ul>
@@ -161,26 +161,35 @@ class Reservations extends Component {
     if (this.state.type === "1")
       //operator
       return (
-        <table>
-          <tr>
-            <th>Filter by username:</th>
-            <td>
-              <form>
-                <select multiple name="username" onChange={this.selectUser}>
-                  {this.state.users.map((user) => (
-                    <option value={user.userID}>{user.username}</option>
-                  ))}
-                </select>
-              </form>
-              <button onClick={this.clear}>Clear</button>
-            </td>
-          </tr>
-        </table>
+        <div className={styles.filter}>
+          <table>
+            <tr>
+              <th>Filter by username:</th>
+              <td>
+                <form>
+                  <select name="username" onChange={this.selectUser}>
+                    {this.state.users.map((user) => (
+                      <option value={user.userID}>{user.username}</option>
+                    ))}
+                  </select>
+                </form>
+              </td>
+              <td>
+                <span title="Clear">
+                  <button onClick={this.clear} className={styles.iconbut2}>
+                    <img src={exx} alt="Clear" />
+                  </button>
+                </span>
+              </td>
+            </tr>
+          </table>
+        </div>
       );
   }
   restext() {
-    if (this.state.type === "1") return <div>Reservations:</div>;
-    else return <div>My Reservations:</div>;
+    if (this.state.type === "1")
+      return <div className={styles.resren1}>Reservations:</div>;
+    else return <div className={styles.resren1}>My Reservations:</div>;
   }
 }
 

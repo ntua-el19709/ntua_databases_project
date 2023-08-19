@@ -1,0 +1,314 @@
+ul.navbar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+.navbar li {
+  float: left;
+}
+
+.navbut {
+  background-color: #333;
+  border: none;
+  margin: 0;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+}
+.navbut:hover {
+  background-color: black;
+}
+.navbut:focus {
+  background-color: rgb(0, 185, 0);
+}
+
+ul.navbar2 {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: gray;
+}
+
+.navbar2 li {
+  float: left;
+}
+
+.navbut2 {
+  background-color: gray;
+  border: none;
+  margin: 0;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+.navbut2:hover {
+  background-color: #333;
+}
+.navbut2:focus {
+  background-color: rgb(76, 228, 76);
+}
+
+.resren1 {
+  background-color: rgb(247, 242, 242);
+  border: none;
+  margin: 0;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  font-size: 16px;
+}
+
+ul.resren {
+  list-style-type: none;
+}
+
+ul.late {
+  list-style-type: none;
+}
+
+ul.late li {
+  background-color: red;
+  opacity: 0.8;
+  border: none;
+  margin: 0;
+  color: white;
+  padding: 10px 20px;
+  display: block;
+  font-size: 16px;
+}
+ul.late li:hover {
+  opacity: 1;
+  border: 1px solid darkred;
+}
+
+ul.old {
+  list-style-type: none;
+}
+
+ul.old li {
+  background-color: lightblue;
+  opacity: 0.8;
+  border: none;
+  margin: 0;
+  color: white;
+  padding: 10px 20px;
+  display: block;
+  font-size: 16px;
+}
+ul.old li:hover {
+  opacity: 1;
+  border: 1px solid blue;
+}
+
+ul.ongoing {
+  list-style-type: none;
+}
+
+ul.ongoing li {
+  background-color: green;
+  opacity: 0.8;
+  border: none;
+  margin: 0;
+  color: white;
+  padding: 10px 20px;
+  display: block;
+  font-size: 16px;
+}
+ul.ongoing li:hover {
+  opacity: 1;
+  border: 1px solid darkgreen;
+}
+
+.iconbut {
+  background-color: white;
+  border: none;
+  margin: 12px 0px 0px 40px;
+  color: black;
+  padding: 10px 10px;
+  text-align: center;
+  font-size: 16px;
+}
+.iconbut:hover {
+  background-color: rgb(247, 242, 242);
+}
+.iconbut2 {
+  background-color: lightblue;
+  border: none;
+  margin: 0px 5px 10px 5px;
+  color: black;
+  padding: 10px 10px;
+  text-align: center;
+  font-size: 16px;
+}
+.iconbut2:hover {
+  background-color: rgb(143, 204, 224);
+}
+.button3 {
+  background-color: lightblue;
+  border: none;
+  color: blue;
+  text-align: center;
+}
+.button3:hover {
+  background-color: rgb(143, 204, 224);
+}
+
+.school {
+  background-color: lightblue;
+  padding: 20px 20px;
+  margin: 50px;
+  margin-left: 150px;
+  margin-right: 150px;
+  border: 2px solid black;
+  text-align: center;
+  align-items: center;
+}
+
+.school table {
+  padding: 20px 30px;
+  text-align: center;
+  margin: 4px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 16px;
+}
+.school th {
+  padding: 5px 5px;
+  text-align: right;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 16px;
+}
+
+.school td {
+  padding: 5px 5px;
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 16px;
+}
+
+.school select {
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5px 5px;
+  border: none;
+  border-radius: 4px;
+}
+
+.school ul {
+  list-style-type: none;
+}
+
+.filter {
+  background-color: lightblue;
+  margin: 20px;
+  margin-left: 150px;
+  margin-right: 150px;
+  border: 2px solid black;
+  text-align: center;
+}
+
+.filter table {
+  text-align: center;
+  margin: 4px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 16px;
+}
+.filter th {
+  padding: 5px 5px;
+  text-align: right;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 16px;
+}
+
+.filter td {
+  padding: 5px 5px;
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 16px;
+}
+
+.filter select {
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5px 5px;
+  border: none;
+  border-radius: 4px;
+}
+
+.mess {
+  color: red;
+  font-size: 16px;
+}
+
+.mess2 {
+  color: blue;
+  font-size: 16px;
+  text-align: center;
+}
+
+.likert {
+  margin: 0;
+  position: relative;
+  top: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 160px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+}
+.container {
+  position: relative;
+  padding: 0px;
+  margin: 0;
+  top: 0px;
+  width: 32px;
+  height: 32px;
+}
+img.layer1 {
+  z-index: 1;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+img.layer3 {
+  z-index: 3;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+.radiostars {
+  display: flex;
+  align-items: center;
+}
+
+.radiostars input[type="radio"] {
+  border: 0px;
+  width: 100%;
+  height: 0px;
+  opacity: 0;
+}
+
+.radiostars label {
+  cursor: pointer;
+  line-height: 1em;
+  text-align: center;
+}

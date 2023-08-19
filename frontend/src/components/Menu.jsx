@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import styles from "../CSS/mystyle.module.css";
 class Menu extends Component {
   constructor(props) {
     super(props);
@@ -16,40 +16,147 @@ class Menu extends Component {
     if (this.state.type === "4")
       //topoperator
       return (
-        <div>
-          <button onClick={() => this.props.profile()}>Profile</button>
-          <button onClick={() => this.props.schools()}>School Units</button>
-          <button onClick={() => this.props.operators()}>Operators</button>
-          <button onClick={() => this.props.queries()}>Queries</button>
-        </div>
+        <ul className={styles.navbar}>
+          <li>
+            <button
+              className={styles.navbut}
+              onClick={() => this.props.profile()}
+            >
+              Profile
+            </button>
+          </li>
+          <li>
+            <button
+              className={styles.navbut}
+              onClick={() => this.props.schools()}
+            >
+              School Units
+            </button>
+          </li>
+          <li>
+            <button
+              className={styles.navbut}
+              onClick={() => this.props.operators()}
+            >
+              Operators
+            </button>
+          </li>
+          <li>
+            <button
+              className={styles.navbut}
+              onClick={() => this.props.queries()}
+            >
+              Queries
+            </button>
+          </li>
+        </ul>
       );
     else if (this.state.type === "1")
       //operator
       return (
-        <div>
-          <button onClick={() => this.props.profile()}>Profile</button>
-          <button onClick={() => this.props.books()}>Books</button>
-          <button onClick={() => this.props.users()}>Users</button>
-          <button onClick={() => this.props.reservations()}>
-            Reservations
-          </button>
-          <button onClick={() => this.props.rentals()}>Rentals</button>
-
-          <button onClick={() => this.props.reviews()}>Reviews</button>
-          <button onClick={() => this.props.queries()}>Queries</button>
-        </div>
+        <ul className={styles.navbar}>
+          <li>
+            <button
+              className={styles.navbut}
+              onClick={() => this.props.profile()}
+            >
+              Profile
+            </button>
+          </li>
+          <li>
+            <button
+              className={styles.navbut}
+              onClick={() => this.props.books()}
+            >
+              Books
+            </button>
+          </li>
+          <li>
+            <button
+              className={styles.navbut}
+              onClick={() => this.props.users()}
+            >
+              Users
+            </button>
+          </li>
+          <li>
+            <button
+              className={styles.navbut}
+              onClick={() => this.props.reservations()}
+            >
+              Reservations
+            </button>
+          </li>
+          <li>
+            <button
+              className={styles.navbut}
+              onClick={() => this.props.rentals()}
+            >
+              Rentals
+            </button>
+          </li>
+          <li>
+            <button
+              className={styles.navbut}
+              onClick={() => this.props.reviews()}
+            >
+              Reviews
+            </button>
+          </li>
+          <li>
+            <button
+              className={styles.navbut}
+              onClick={() => this.props.queries()}
+            >
+              Queries
+            </button>
+          </li>
+        </ul>
       );
     else
       return (
-        <div>
-          <button onClick={() => this.props.profile()}>Profile</button>
-          <button onClick={() => this.props.books()}>Books</button>
-          <button onClick={() => this.props.reservations()}>
-            Reservations
-          </button>
-          <button onClick={() => this.props.rentals()}>Rentals</button>
-          <button onClick={() => this.props.queries()}>Queries</button>
-        </div>
+        <ul className={styles.navbar}>
+          <li>
+            <button
+              className={styles.navbut}
+              onClick={() => this.props.profile()}
+            >
+              Profile
+            </button>
+          </li>
+          <li>
+            <button
+              className={styles.navbut}
+              onClick={() => this.props.books()}
+            >
+              Books
+            </button>
+          </li>
+          <li>
+            <button
+              className={styles.navbut}
+              onClick={() => this.props.reservations()}
+            >
+              Reservations
+            </button>
+          </li>
+          <li>
+            <button
+              className={styles.navbut}
+              onClick={() => this.props.rentals()}
+            >
+              Rentals
+            </button>
+          </li>
+          <li>
+            <button
+              className={styles.navbut}
+              onClick={() => this.props.queries()}
+            >
+              Queries
+            </button>
+          </li>
+        </ul>
       );
   }
 }

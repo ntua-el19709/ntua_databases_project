@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import styles from "../CSS/mystyle.module.css";
+import back from "../icons/back.png";
+import update from "../icons/update.png";
 
 class EditProfile extends Component {
   constructor(props) {
@@ -85,7 +88,7 @@ class EditProfile extends Component {
   render() {
     console.log("Now at EditProfile");
     return (
-      <div>
+      <div className={styles.school}>
         <table>
           <tr>
             <th>Full Name:</th>
@@ -113,11 +116,20 @@ class EditProfile extends Component {
             </td>
           </tr>
         </table>
-        <button onClick={this.onUpdateProfile}>Update</button>
-        <div>{this.state.message}</div>
-        <button onClick={() => this.props.gotoprofile(this.state.username)}>
-          {"<-"}
-        </button>
+        <span title="Update">
+          <button onClick={this.onUpdateProfile} className={styles.iconbut2}>
+            <img src={update} alt="Update" />
+          </button>
+        </span>
+        <span title="Back">
+          <button
+            onClick={() => this.props.gotoprofile(this.state.username)}
+            className={styles.iconbut2}
+          >
+            <img src={back} alt="Back" />
+          </button>
+        </span>
+        <div className={styles.mess}>{this.state.message}</div>
       </div>
     );
   }
