@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import styles from "../CSS/mystyle.module.css";
+import back from "../icons/back.png";
+import retur from "../icons/return.png";
 
 class Rental extends Component {
   constructor(props) {
@@ -91,7 +94,7 @@ class Rental extends Component {
   render() {
     console.log("Now at Rental");
     return (
-      <div>
+      <div className={styles.school}>
         <table>
           <tr>
             <th>Username:</th>
@@ -113,15 +116,28 @@ class Rental extends Component {
           </tr>
         </table>
         {this.returnbook()}
-        <div>{this.state.message}</div>
-        <button onClick={() => this.props.gotorentals()}>{"<-"}</button>
+        <span title="Back">
+          <button
+            onClick={() => this.props.gotorentals()}
+            className={styles.iconbut2}
+          >
+            <img src={back} alt="Back" />
+          </button>
+        </span>
+        <div className={styles.mess2}>{this.state.message}</div>
       </div>
     );
   }
   returnbook() {
     if (this.state.type === "1" && this.state.returned === 0)
       //operator
-      return <button onClick={this.returnRental}>Return Book</button>;
+      return (
+        <span title="Return Book">
+          <button onClick={this.returnRental} className={styles.iconbut2}>
+            <img src={retur} alt="Return Book" />
+          </button>
+        </span>
+      );
   }
 }
 
