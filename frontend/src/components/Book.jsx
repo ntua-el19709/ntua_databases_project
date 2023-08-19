@@ -5,6 +5,7 @@ import back from "../icons/back.png";
 import delet from "../icons/delete.png";
 import edit from "../icons/pencil.png";
 import rent from "../icons/rent.png";
+import reserve from "../icons/reserve.png";
 
 class Book extends Component {
   constructor(props) {
@@ -317,7 +318,11 @@ class Book extends Component {
     if (this.state.type !== "1")
       return (
         <div>
-          <button onClick={this.ReserveBook}>Reserve Book</button>
+          <span title="Reserve Book">
+            <button onClick={this.ReserveBook} className={styles.iconbut2}>
+              <img src={reserve} alt="Reserve Book" />
+            </button>
+          </span>
           <span title="Back">
             <button
               onClick={() => this.props.gotobooks()}
@@ -328,17 +333,6 @@ class Book extends Component {
           </span>
         </div>
       );
-  }
-
-  MakeReview() {
-    if (this.state.type !== "1") {
-      //student or professor
-      return (
-        <div>
-          <button onClick={() => this.props.makereview()}>Review</button>
-        </div>
-      );
-    }
   }
 }
 

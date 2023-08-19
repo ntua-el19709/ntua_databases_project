@@ -1,4 +1,8 @@
 import React, { Component } from "react";
+import styles from "../CSS/mystyle.module.css";
+import back from "../icons/back.png";
+import delet from "../icons/delete.png";
+import rent from "../icons/rent.png";
 
 class Reservation extends Component {
   constructor(props) {
@@ -191,7 +195,7 @@ class Reservation extends Component {
   render() {
     console.log("Now at Reservation");
     return (
-      <div>
+      <div className={styles.school}>
         <table>
           <tr>
             <th>Username:</th>
@@ -213,9 +217,20 @@ class Reservation extends Component {
           </tr>
         </table>
         {this.rentbook()}
-        <button onClick={this.DeleteReservation}>Delete Reservation</button>
-        <div>{this.state.message}</div>
-        <button onClick={() => this.props.gotoreservations()}>{"<-"}</button>
+        <span title="Delete Reservation">
+          <button onClick={this.DeleteReservation} className={styles.iconbut2}>
+            <img src={delet} alt="Delete RReservation" />
+          </button>
+        </span>
+        <span title="Back">
+          <button
+            onClick={() => this.props.gotoreservations()}
+            className={styles.iconbut2}
+          >
+            <img src={back} alt="Back" />
+          </button>
+        </span>
+        <div className={styles.mess}>{this.state.message}</div>
       </div>
     );
   }
@@ -223,7 +238,13 @@ class Reservation extends Component {
   rentbook() {
     if (this.state.type === "1" && this.state.rented === 0)
       //operator
-      return <button onClick={this.RentBook}>Rent Book</button>;
+      return (
+        <span title="Rent Book">
+          <button onClick={this.RentBook} className={styles.iconbut2}>
+            <img src={rent} alt="Rent Book" />
+          </button>
+        </span>
+      );
   }
 }
 
