@@ -202,7 +202,12 @@ class Queries extends Component {
       );
   }
   query() {
-    if (this.state.query === "Select Query") return <h2>Select Query</h2>;
+    if (this.state.query === "Select Query")
+      return (
+        <div className={styles.school}>
+          <h2>Select Query</h2>
+        </div>
+      );
     else if (this.state.query === "311") return <Query311 />;
     else if (this.state.query === "312") return <Query312 />;
     else if (this.state.query === "313") return <Query313 />;
