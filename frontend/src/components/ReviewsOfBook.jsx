@@ -3,6 +3,7 @@ import styles from "../CSS/mystyle.module.css";
 import back from "../icons/back.png";
 import star1 from "../icons/borderstar.png";
 import star2 from "../icons/filledstar.png";
+import review from "../icons/review.png";
 
 class ReviewsOfBook extends Component {
   constructor(props) {
@@ -50,10 +51,11 @@ class ReviewsOfBook extends Component {
     return (
       <div className={styles.school}>
         <h2>{this.state.title}</h2>
-        {this.addreview()}
         {this.likertstars(this.state.likert)}
+        {this.addreview()}
         <span title="Back">
           <button
+            style={{ marginTop: "10px" }}
             onClick={() => this.props.gotobook(this.state.isbn)}
             className={styles.iconbut2}
           >
@@ -86,7 +88,15 @@ class ReviewsOfBook extends Component {
     if (this.state.type !== "1")
       // not operator
       return (
-        <button onClick={() => this.props.gotomakereview()}>Add Review</button>
+        <span title="Make Review">
+          <button
+            style={{ marginTop: "10px" }}
+            onClick={() => this.props.gotomakereview()}
+            className={styles.iconbut2}
+          >
+            <img src={review} alt="Add Review" />
+          </button>
+        </span>
       );
   }
   likertstars(rate) {

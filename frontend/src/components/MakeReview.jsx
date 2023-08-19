@@ -1,4 +1,9 @@
 import React, { Component } from "react";
+import styles from "../CSS/mystyle.module.css";
+import back from "../icons/back.png";
+import star1 from "../icons/borderstar.png";
+import star2 from "../icons/filledstar.png";
+import review from "../icons/review.png";
 
 class MakeReview extends Component {
   constructor(props) {
@@ -9,7 +14,7 @@ class MakeReview extends Component {
       isbn: this.props.isbn,
       schlID: this.props.schlID,
       title: "",
-      likert: "",
+      likert: "0",
       description: "",
       message: "",
     };
@@ -30,7 +35,7 @@ class MakeReview extends Component {
   }
 
   check() {
-    if (this.state.likert.length === 0) {
+    if (this.state.likert === "0") {
       this.setState({
         ...this.state,
         message: `Select a book rating!`,
@@ -65,45 +70,67 @@ class MakeReview extends Component {
   render() {
     console.log("Now at MakeReview");
     return (
-      <div>
+      <div className={styles.school}>
+        <h2>{this.state.title}</h2>
+        <div className={styles.likert}>
+          <form
+            className={styles.radiostars}
+            onChange={(val) =>
+              this.setState({ ...this.state, likert: val.target.value })
+            }
+          >
+            <label>
+              <input type="radio" name="choice" value="1" />
+              <div className={styles.container}>
+                <img src={star2} className={styles.layer1} alt="filled2" />
+                <img src={star1} className={styles.layer3} alt="border2" />
+              </div>
+            </label>
+
+            <label>
+              <input type="radio" name="choice" value="2" />
+              <div className={styles.container}>
+                <img src={star2} className={styles.layer1} alt="filled2" />
+                <img src={star1} className={styles.layer3} alt="border2" />
+              </div>
+            </label>
+            <label>
+              <input type="radio" name="choice" value="3" />
+              <div className={styles.container}>
+                <img src={star2} className={styles.layer1} alt="filled2" />
+                <img src={star1} className={styles.layer3} alt="border2" />
+              </div>
+            </label>
+
+            <label>
+              <input type="radio" name="choice" value="4" />
+              <div className={styles.container}>
+                <img src={star2} className={styles.layer1} alt="filled2" />
+                <img src={star1} className={styles.layer3} alt="border2" />
+              </div>
+            </label>
+
+            <label>
+              <input type="radio" name="choice" value="5" />
+              <div className={styles.container}>
+                <img src={star2} className={styles.layer1} alt="filled2" />
+                <img src={star1} className={styles.layer3} alt="border2" />
+                <div
+                  style={{
+                    width: `${this.getpixels()}px`,
+                    height: "32px",
+                    backgroundColor: "lightblue",
+                    zIndex: "2",
+                    position: "absolute",
+                    right: "0",
+                  }}
+                />
+              </div>
+            </label>
+          </form>
+        </div>
+
         <table>
-          <tr>
-            <th>Book:</th>
-            <td>{this.state.title}</td>
-          </tr>
-          <tr>
-            <th>Rate Book:</th>
-            <td>
-              <form>
-                <dl
-                  onChange={(val) =>
-                    this.setState({ ...this.state, likert: val.target.value })
-                  }
-                >
-                  <dd>
-                    <input type="radio" name="choice" value="1" />
-                    <label>1</label>
-                  </dd>
-                  <dd>
-                    <input type="radio" name="choice" value="2" />
-                    <label>2</label>
-                  </dd>
-                  <dd>
-                    <input type="radio" name="choice" value="3" />
-                    <label>3</label>
-                  </dd>
-                  <dd>
-                    <input type="radio" name="choice" value="4" />
-                    <label>4</label>
-                  </dd>
-                  <dd>
-                    <input type="radio" name="choice" value="5" />
-                    <label>5</label>
-                  </dd>
-                </dl>
-              </form>
-            </td>
-          </tr>
           <tr>
             <th>Description:</th>
             <td>
@@ -119,11 +146,28 @@ class MakeReview extends Component {
             </td>
           </tr>
         </table>
-        <button onClick={this.onMakeReview}>Make Review</button>
-        <div>{this.state.message}</div>
-        <button onClick={() => this.props.gotoreviewsofbook()}>{"<-"}</button>
+        <span title="Make Review">
+          <button onClick={this.onMakeReview} className={styles.iconbut2}>
+            <img src={review} alt="Make Review" />
+          </button>
+        </span>
+        <span title="Back">
+          <button
+            onClick={() => this.props.gotoreviewsofbook(this.state.title)}
+            className={styles.iconbut2}
+          >
+            <img src={back} alt="Back" />
+          </button>
+        </span>
+        <div className={styles.mess}>{this.state.message}</div>
       </div>
     );
+  }
+
+  getpixels() {
+    var rate = Number(this.state.likert);
+    var pixels = 160 - rate * 32;
+    return pixels;
   }
 }
 

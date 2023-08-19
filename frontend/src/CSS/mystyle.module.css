@@ -171,6 +171,7 @@ ul.ongoing li:hover {
   margin-right: 150px;
   border: 2px solid black;
   text-align: center;
+  align-items: center;
 }
 
 .school table {
@@ -292,4 +293,22 @@ img.layer3 {
   position: absolute;
   top: 0px;
   left: 0px;
+}
+
+.radiostars {
+  display: flex;
+  align-items: center;
+}
+
+.radiostars input[type="radio"] {
+  border: 0px;
+  width: 100%;
+  height: 0px;
+  opacity: 0;
+}
+
+.radiostars label {
+  cursor: pointer;
+  line-height: 1em;
+  text-align: center;
 }

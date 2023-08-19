@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Menu from "./Menu";
+import styles from "../CSS/mystyle.module.css";
 
 class Reviews extends Component {
   constructor(props) {
@@ -42,14 +43,14 @@ class Reviews extends Component {
           reviews={() => this.props.gotoreviews()}
           queries={() => this.props.gotoqueries()}
         />
-        Submitted Reviews:
-        <ul>
+        <div className={styles.resren1}>Submitted Reviews:</div>
+        <ul className={styles.old}>
           {this.state.reviews.map((review) => (
-            <li key={review.reviewID}>
+            <li
+              key={review.reviewID}
+              onClick={() => this.props.gotoreview(review)}
+            >
               {"Review no " + review.reviewID + " made by " + review.username}
-              <button onClick={() => this.props.gotoreview(review)}>
-                {"->"}
-              </button>
             </li>
           ))}
         </ul>
