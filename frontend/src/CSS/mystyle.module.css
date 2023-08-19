@@ -259,4 +259,37 @@ ul.ongoing li:hover {
 .mess2 {
   color: blue;
   font-size: 16px;
+  text-align: center;
+}
+
+.likert {
+  margin: 0;
+  position: relative;
+  top: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 160px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+}
+.container {
+  position: relative;
+  padding: 0px;
+  margin: 0;
+  top: 0px;
+  width: 32px;
+  height: 32px;
+}
+img.layer1 {
+  z-index: 1;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+img.layer3 {
+  z-index: 3;
+  position: absolute;
+  top: 0px;
+  left: 0px;
 }

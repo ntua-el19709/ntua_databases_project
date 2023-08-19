@@ -164,9 +164,10 @@ class Home extends Component {
       page: 22, //Reviews page
     });
   };
-  goToReviewsOfBook = () => {
+  goToReviewsOfBook = (title) => {
     this.setState({
       ...this.state,
+      title: title,
       page: 23, // Reviews of book page
     });
   };
@@ -515,6 +516,7 @@ class Home extends Component {
           gotousers={this.goToUsers}
           gotoreviews={this.goToReviews}
           isbn={this.state.isbn}
+          title={this.state.title}
           userId={this.state.userID}
           gotobook={this.goToBook}
           gotomakereview={this.goToMakeReview}

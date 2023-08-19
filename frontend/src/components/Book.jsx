@@ -202,7 +202,7 @@ class Book extends Component {
               {this.state.title}
               <span title="See Reviews">
                 <button
-                  onClick={() => this.props.gotoreviewsofbook()}
+                  onClick={() => this.props.gotoreviewsofbook(this.state.title)}
                   className={styles.button3}
                 >
                   Reviews
