@@ -1,4 +1,10 @@
 import React, { Component } from "react";
+import styles from "../CSS/mystyle.module.css";
+import add from "../icons/add.png";
+import back from "../icons/back.png";
+import delet from "../icons/delete.png";
+import edit from "../icons/pencil.png";
+import rent from "../icons/rent.png";
 
 class Book extends Component {
   constructor(props) {
@@ -183,7 +189,7 @@ class Book extends Component {
   render() {
     console.log("Now at Book");
     return (
-      <div>
+      <div className={styles.school}>
         <table>
           <tr>
             <th>ISBN:</th>
@@ -191,7 +197,17 @@ class Book extends Component {
           </tr>
           <tr>
             <th>Title:</th>
-            <td>{this.state.title}</td>
+            <td>
+              {this.state.title}
+              <span title="See Reviews">
+                <button
+                  onClick={() => this.props.gotoreviewsofbook()}
+                  className={styles.button3}
+                >
+                  Reviews
+                </button>
+              </span>
+            </td>
           </tr>
           <tr>
             <th>{"Author(s)"}:</th>
@@ -231,16 +247,30 @@ class Book extends Component {
           </tr>
           <tr>
             <th>Available_copies:</th>
-            <td>{this.state.available_copies}</td>
+            <td>
+              {this.state.available_copies}
+              {this.opButtons1()}
+            </td>
           </tr>
         </table>
         {this.opButtons()}
         {this.reserveBook()}
-        <button onClick={() => this.props.gotoreviewsofbook()}>Reviews</button>
-        <div>{this.state.message}</div>
-        <button onClick={() => this.props.gotobooks()}>{"<-"}</button>
+        <div className={styles.mess}>{this.state.message}</div>
       </div>
     );
+  }
+
+  opButtons1() {
+    if (this.state.type === "1") {
+      //operator
+      return (
+        <span title="Add Copy">
+          <button onClick={this.addCopy} className={styles.iconbut2}>
+            <img src={add} alt="Add Copy" />
+          </button>
+        </span>
+      );
+    }
   }
 
   opButtons() {
@@ -248,10 +278,36 @@ class Book extends Component {
       //operator
       return (
         <div>
-          <button onClick={this.addCopy}>Add Copy</button>
-          <button onClick={() => this.props.gotoeditbook()}>Edit Book</button>
-          <button onClick={this.DeleteBook}>Delete Book</button>
-          <button onClick={() => this.props.addrental()}>Rent Book</button>
+          <span title="Edit Book">
+            <button
+              onClick={() => this.props.gotoeditbook()}
+              className={styles.iconbut2}
+            >
+              <img src={edit} alt="Edit Book" />
+            </button>
+          </span>
+          <span title="Delete Book">
+            <button onClick={this.DeleteBook} className={styles.iconbut2}>
+              <img src={delet} alt="Delete Book" />
+            </button>
+          </span>
+          <span title="Rent Book">
+            <button
+              onClick={() => this.props.addrental()}
+              className={styles.iconbut2}
+            >
+              <img src={rent} alt="Rent Book" />
+            </button>
+          </span>
+
+          <span title="Back">
+            <button
+              onClick={() => this.props.gotobooks()}
+              className={styles.iconbut2}
+            >
+              <img src={back} alt="Back" />
+            </button>
+          </span>
         </div>
       );
     }
@@ -259,7 +315,19 @@ class Book extends Component {
 
   reserveBook() {
     if (this.state.type !== "1")
-      return <button onClick={this.ReserveBook}>Reserve Book</button>;
+      return (
+        <div>
+          <button onClick={this.ReserveBook}>Reserve Book</button>
+          <span title="Back">
+            <button
+              onClick={() => this.props.gotobooks()}
+              className={styles.iconbut2}
+            >
+              <img src={back} alt="Back" />
+            </button>
+          </span>
+        </div>
+      );
   }
 
   MakeReview() {

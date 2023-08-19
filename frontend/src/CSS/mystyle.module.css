@@ -153,6 +153,15 @@ ul.ongoing li:hover {
 .iconbut2:hover {
   background-color: rgb(143, 204, 224);
 }
+.button3 {
+  background-color: lightblue;
+  border: none;
+  color: blue;
+  text-align: center;
+}
+.button3:hover {
+  background-color: rgb(143, 204, 224);
+}
 
 .school {
   background-color: lightblue;

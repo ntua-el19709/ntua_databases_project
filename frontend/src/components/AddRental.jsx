@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import styles from "../CSS/mystyle.module.css";
+import rent from "../icons/rent.png";
+import back from "../icons/back.png";
 
 class AddRental extends Component {
   constructor(props) {
@@ -170,7 +173,7 @@ class AddRental extends Component {
   render() {
     console.log("Now at AddRental");
     return (
-      <div>
+      <div className={styles.school}>
         <table>
           <tr>
             <th>Book:</th>
@@ -180,7 +183,7 @@ class AddRental extends Component {
             <th>Rent to:</th>
             <td>
               <form>
-                <select multiple name="username" onChange={this.selectuser}>
+                <select name="username" onChange={this.selectuser}>
                   {this.state.users.map((user) => (
                     <option value={[user.userID, user.username]}>
                       {user.username}
@@ -192,16 +195,27 @@ class AddRental extends Component {
           </tr>
         </table>
         {this.addrental()}
-        <div>{this.state.message}</div>
-        <button onClick={() => this.props.gotobook(this.state.isbn)}>
-          {"<-"}
-        </button>
+        <span title="Back">
+          <button
+            onClick={() => this.props.gotobook(this.state.isbn)}
+            className={styles.iconbut2}
+          >
+            <img src={back} alt="Back" />
+          </button>
+        </span>
+        <div className={styles.mess}>{this.state.message}</div>
       </div>
     );
   }
   addrental() {
     if (this.state.rmade === 0)
-      return <button onClick={this.onAddRental}>Add Rental</button>;
+      return (
+        <span title="Rent Book">
+          <button onClick={this.onAddRental} className={styles.iconbut2}>
+            <img src={rent} alt="Rent book" />
+          </button>
+        </span>
+      );
   }
 }
 

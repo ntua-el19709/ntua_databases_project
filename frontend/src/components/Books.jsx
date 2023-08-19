@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Menu from "./Menu";
 import styles from "../CSS/mystyle.module.css";
+import add from "../icons/add.png";
 
 class Books extends Component {
   constructor(props) {
@@ -40,8 +41,9 @@ class Books extends Component {
           reviews={() => this.props.gotoreviews()}
           queries={() => this.props.gotoqueries()}
         />
-        {this.AddBook()}
+
         <div className={styles.resren1}>All Books:</div>
+        {this.AddBook()}
         <ul className={styles.old}>
           {this.state.books.map((book) => (
             <li key={book.ISBN} onClick={() => this.props.gotobook(book.isbn)}>
@@ -57,7 +59,14 @@ class Books extends Component {
       //operator
       return (
         <div>
-          <button onClick={() => this.props.addbook()}>Add Book</button>
+          <span title="Add Book">
+            <button
+              onClick={() => this.props.addbook()}
+              className={styles.iconbut}
+            >
+              <img src={add} alt="Add Book" />
+            </button>
+          </span>
         </div>
       );
     }

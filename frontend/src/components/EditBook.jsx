@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import styles from "../CSS/mystyle.module.css";
+import update from "../icons/update.png";
+import back from "../icons/back.png";
 
 class EditBook extends Component {
   constructor(props) {
@@ -283,7 +286,7 @@ class EditBook extends Component {
   render() {
     console.log("Now at EditBook");
     return (
-      <div>
+      <div className={styles.school}>
         <table>
           <tr>
             <th>ISBN:</th>
@@ -304,7 +307,7 @@ class EditBook extends Component {
           <tr>
             <th>Author(s):</th>
             <td>
-              <select multiple name="Authors" onChange={this.selectAuthor}>
+              <select name="Authors" onChange={this.selectAuthor}>
                 {this.state.allauthors.map((author) => (
                   <option value={[author.authorID, author.author_fullname]}>
                     {author.author_fullname}
@@ -344,7 +347,7 @@ class EditBook extends Component {
           <tr>
             <th>Category(/ies):</th>
             <td>
-              <select multiple name="Categories" onChange={this.selectCategory}>
+              <select name="Categories" onChange={this.selectCategory}>
                 {this.state.allcategories.map((category) => (
                   <option value={[category.categoryID, category.category]}>
                     {category.category}
@@ -448,11 +451,20 @@ class EditBook extends Component {
             </td>
           </tr>
         </table>
-        <button onClick={this.onUpdateBook}>Update</button>
-        <div>{this.state.message}</div>
-        <button onClick={() => this.props.gotobook(this.state.ISBN)}>
-          {"<-"}
-        </button>
+        <span title="Update Book">
+          <button onClick={this.onUpdateBook} className={styles.iconbut2}>
+            <img src={update} alt="Update Book" />
+          </button>
+        </span>
+        <span title="Back">
+          <button
+            onClick={() => this.props.gotobook(this.state.ISBN)}
+            className={styles.iconbut2}
+          >
+            <img src={back} alt="Back" />
+          </button>
+        </span>
+        <div className={styles.mess}>{this.state.message}</div>
       </div>
     );
   }
